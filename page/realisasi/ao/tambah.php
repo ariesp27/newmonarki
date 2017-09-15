@@ -1,21 +1,41 @@
 <?php
-
+    $a = "abcdefghijklmnopqrstuvwxyz";
+	$b = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	$c = "1234567890";
+	$d = $a."".$b."".$c;
+	$number = substr((str_shuffle($d)), 0, 10);
+    
     if(isset($_POST["submit"]))
     {
         
         $a      = mysql_real_escape_string(strip_tags($_POST["nilaikontrak"]));
         $b      = mysql_real_escape_string(strip_tags($_POST["namavendor"])); 
-        $c      = tglformataction($_POST["tglkontrak"]);;
-        $d      = mysql_real_escape_string(strip_tags($_POST["status"]));
-        $filerks  = $_FILES["fileToUpload"]["name"];
-        $newfilerks     = time() . '_' . rand(100, 999) . '.' . end(explode(".",$filerks));
-        $file_tmp_rks = $_FILES["fileToUpload"]["tmp_name"];
-        copy($file_tmp_rks,"foto/".$newfilerks);
+        $c      = tglformataction($_POST["tglkontrak"]);
+        $e      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
+        $o      = mysql_real_escape_string(strip_tags($_POST["hrgsatuanmaterial"]));
+        $p      = mysql_real_escape_string(strip_tags($_POST["volumematerial"]));
+        $q      = mysql_real_escape_string(strip_tags($_POST["hrgsatuanjasa"]));
+        $r      = mysql_real_escape_string(strip_tags($_POST["volumejasa"]));
+        $s      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
         
-        mysql_query("INSERT INTO realisasi (koderealisasi, nilaikontrak, namavendor, tglkontrak, status, fileToUpload) VALUES 
-        ('','$a','$b','$c','$d','$filerks')");
-        header("location:index.php?realisasi-ao&suksestambah");
+        mysql_query("INSERT INTO realisasi (koderealisasi, nilaikontrak, namavendor, tglkontrak, randomid,
+        status) VALUES 
+        ('','$a','$b','$c','$e','9')");
+        
+        mysql_query ("INSERT INTO newdetailanggaran (kodedetail, hrgsatuanmaterial, volumematerial, hrgsatuanjasa, 
+        volumejasa, randomid, status) VALUES ('','$o','$p','$q','$r','$s','9')");
+        header("location:index.php?realisasi&suksestambah");
+       
     }
+$idA = mysql_real_escape_string(trim($_GET["tambah-realisasi-ai"]));
+$sqlA= mysql_query("SELECT 
+newdetailanggaran.*, 
+headeranggaran.*
+FROM newdetailanggaran
+INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
+WHERE status = '8' AND newdetailanggaran.randomid = '$idA'") or die (mysql_error());
+if(mysql_num_rows($sqlA)==0);
+$rowA = mysql_fetch_array($sqlA);
 ?>
 
 <script type="text/javascript">
@@ -44,7 +64,7 @@
         <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Tambah Realisasi AO</h2>
+                        <h2>Tambah Realisasi AI</h2>
                     </div>
                 </div>
                 <!-- /. ROW  -->
@@ -62,16 +82,16 @@
                 <hr />
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Form Tambah Realisasi AO
+                        Form Tambah Realisasi AI
                     </div> 
                     <table class="table table-striped text-center" >
                     <form id="validate-me-plz" name="form1" enctype="multipart/form-data" role="form" action="" method="post">
-                        
+                    <input type="hidden" name="kodedetail" value="<?php echo $idA; ?>" />
                                                     <div class="form-group">
-                                                        <div class="row"> 
+                                                        <div class="row">
                                                             <div class="col-md-6"> <br />
-                                                                    <div class="col-md-4"><label>Nilai Kontrak</label></div> 
-                                                                    <div class="col-md-8"> 
+                                                                    <div class="col-md-4"><label>Nilai Kontrak</label></div>
+                                                                    <div class="col-md-8">
                                                                         <input type="text"   name='nilaikontrak' class="form-control"  data-msg-required="Mohon masukkan nilai kontrak" placeholder="masukkan nilai kontrak" />
                                                                     </div>
                                                             </div>
@@ -100,17 +120,66 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="form-group">    
+                                                <div class="form-group">
                                                     <div class="row">
-                                                        <div class="col-md-6">
-                                                        <div class="col-md-4"><label>Uplod Doc</label></div>
+                                                    <div class="col-md-9">
                                                         <div class="col-md-8">
-                                                            <input type="file" name="fileToUpload" id="fileToUpload"/>
-                                                        </div>
-                                                            <!-- <label> &nbsp;&nbsp;&nbsp;&nbsp;Size gambar Max. 5MB</label> -->
+                                                            <input class="form-control" name="volumejasa" type="hidden"  data-rule-required="true" value="<?php echo $rowA["volumejasa"]; ?>" data-msg-required="Mohon masukkan volume jasa." placeholder="masukkan volume jasa" />
                                                         </div>
                                                     </div>
+                                                    </div>
                                                 </div>
+                                
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" name="volumematerial" type="hidden"  data-rule-required="true" value="<?php echo $rowA["volumematerial"]; ?>" data-msg-required="Mohon masukkan volume material." placeholder="masukkan voluem material" />
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                       
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" name="hrgsatuanmaterial" type="hidden"  data-rule-required="true" value="<?php echo $rowA["hrgsatuanmaterial"]; ?>" data-msg-required="Mohon masukkan harga satuan material." placeholder="masukkan harga satuan material" />
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" name="hrgsatuanjasa" type="hidden"  data-rule-required="true" value="<?php echo $rowA["hrgsatuanjasa"]; ?>" data-msg-required="Mohon masukkan harga satuan jasa." placeholder="masukkan harga satuan jasa" />
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" name="status" hidden="" type="hidden"  data-rule-required="true" value="<?php echo $rowA["status"]; ?>" data-msg-required="Mohon masukkan status." placeholder="masukkan status" />
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>  
+                                                
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" name="randomid" type="hidden"  data-rule-required="true" value="<?php echo $rowA["randomid"]; ?>" />
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                            
                                             <div class="row">
                                             <div class="col-md-1"></div>
                                                 <button type="submit" name="submit" class="btn btn-large btn-success">Simpan</button>
@@ -160,7 +229,7 @@
         },
         messages: {
             alamat: {
-                required: "Mohon masukkan data AO"
+                required: "Mohon masukkan data AI"
             }
         }
     });

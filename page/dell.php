@@ -134,9 +134,9 @@ else if(isset($_GET["del-eva-rabao"])){
     mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idD'") or die(mysql_error());
     header("location:../index.php?monitor-eva-rabao&sukseshapus");
 }
-else if(isset($_GET["delete-realisasi"])){
-    $idD = mysql_real_escape_string(trim($_GET["delete-realisasi"]));
-    $idE = mysql_real_escape_string(trim($_GET["del-redetail"]));
+else if(isset($_GET["delete-realisasi-ai"])){
+    $idD = mysql_real_escape_string(trim($_GET["delete-realisasi-ai"]));
+    $idE = mysql_real_escape_string(trim($_GET["delete-ang"]));
 
     mysql_query("DELETE FROM realisasi WHERE koderealisasi ='$idD'") or die(mysql_error());
     mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idE'") or die(mysql_error());
@@ -144,11 +144,12 @@ else if(isset($_GET["delete-realisasi"])){
 }
 else if(isset($_GET["delete-realisasi-ao"])){
     $idD = mysql_real_escape_string(trim($_GET["delete-realisasi-ao"]));
-    $idE = mysql_real_escape_string(trim($_GET["del-redetail-ao"]));
+    $idE = mysql_real_escape_string(trim($_GET["delete-ango"]));
 
     mysql_query("DELETE FROM realisasi WHERE koderealisasi ='$idD'") or die(mysql_error());
     mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idE'") or die(mysql_error());
-    header("location:../index.php?realisasi-ao&sukseshapus");
+    header("location:../index.php?realisasi&sukseshapus");
+}
 
 
 

@@ -2,22 +2,19 @@
 
 if(isset($_POST["submit"])){
         
-        $a    = mysql_real_escape_string(strip_tags($_POST["kode"]));
+        $a    = mysql_real_escape_string(strip_tags($_POST["koderealisasi"]));
         $b    = mysql_real_escape_string(strip_tags($_POST["nilaikontrak"]));
         $c    = mysql_real_escape_string(strip_tags($_POST["namavendor"]));
         $d    = tglformataction($_POST["tglkontrak"]);
+        $e      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
+        
+         mysql_query("UPDATE realisasi SET nilaikontrak='$b', namavendor='$c', tglkontrak='$d' WHERE randomid='$e'");
+         header("location:index.php?realisasi&suksesedit");
 
- mysql_query("UPDATE realisasi SET nilaikontrak='$b', namavendor='$c', tglkontrak='$d' WHERE koderealisasi='$a'");
- header("location:index.php?realisasi&suksesedit");
     }
-    
-     
-
-    //$sql = mysql_query("SELECT anggarandetail.*, realisasi.* FROM anggarandetail  LEFT JOIN realisasi ON anggarandetail.kodeangdetail WHERE jenis = 'AI' AND anggarandetail.status = '1'") or die (mysql_error());
-
-$idA = (int)mysql_real_escape_string(trim($_GET["update-realisasi-ai"]));
-$sqlA = mysql_query("SELECT * FROM realisasi WHERE koderealisasi = '$idA'") or die (mysql_error());
-if(mysql_num_rows($sqlA)==0) header("location:index.php?realisasi");
+$idA = mysql_real_escape_string(trim($_GET["update-realisasi-ai"]));
+$sqlA= mysql_query("SELECT * FROM realisasi WHERE randomid = '$idA'") or die (mysql_error());
+if(mysql_num_rows($sqlA)==0);
 $rowA = mysql_fetch_array($sqlA);
 ?>
  <script type="text/javascript">
@@ -61,7 +58,7 @@ $rowA = mysql_fetch_array($sqlA);
             <div class="panel-body">
                             <div class="row">
                                 <form id="validate-me-plz" name="form1" enctype="multipart/form-data" role="form" action="" method="post">
-                                <input type="hidden" name="kode" value="<?php echo $idA; ?>" />
+                                <input type="hidden" name="koderealisasi" value="<?php echo $idA; ?>" />
                                     <div class="col-lg-6">
                                         
                                         <div class="form-group">
@@ -86,6 +83,28 @@ $rowA = mysql_fetch_array($sqlA);
                                                 <div class="col-md-7">
                                                     <input  type="text" onKeyPress="return isNumberKeyTgl(event)" class="form-control" id="datepicker" name="tglkontrak" value="<?php if($rowA["tglkontrak"]=="0000-00-00"){}else{ echo format_tgl($rowA["tglkontrak"]); } ?>" data-rule-required="true" data-rule-date="true" data-msg-date="format yang benar dd/mm/yyyy" data-msg-required="mohon masukkan data tanggal kontrak." placeholder="masukkan tanggal kontrak" />
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <!--
+                                         <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-4"><label>Upload File</label></div>
+                                                <div class="col-md-7">
+                                                <img src="<?php echo $rowA["fileToUpload"] == "" ? "images/foto/no-images.png" : "foto/".$rowA["fileToUpload"] ?>" width="88" class="img-responsive img-rounded" />
+                                                <br />
+                                                <input type="file" name="uploadfile" id="uploadfile"/>
+                                                <input type="hidden" name="uploadfile1" id="uploadfile1"/>
+                                             </div>
+                                            </div>
+                                        </div>
+                                        -->
+                                        <div class="form-group">
+                                            <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="col-md-8">
+                                                    <input class="form-control" name="randomid" type="hidden"  data-rule-required="true" value="<?php echo $rowA["randomid"]; ?>" />
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
                         <div class="row">
@@ -117,7 +136,6 @@ $rowA = mysql_fetch_array($sqlA);
     });
 </script>
 
-<script type="text/javascript" src="assets/validasi/jquery.validate.min.js"></script>
 <script type="text/javascript">
 $('#fileToUpload').filestyle();
  $('#fileToUpload').change(function(){

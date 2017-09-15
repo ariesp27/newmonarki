@@ -80,8 +80,9 @@ $( "" ).click(function( eventObject ) {
 
              <li class="dropdown">
                     <a  title="Panel Pengaturan Akun" class="dropdown-toggle putih" data-toggle="dropdown" href="#">
-                        <strong style="padding: 2px 0;"><?php echo $_SESSION["nama"];?></strong> &nbsp; <i class="fa fa-caret-down"></i>
+                        <strong style="padding: 2px 0;"><?php echo $_SESSION["nama"];?></strong> &nbsp;
                     </a>
+                    <!--
                     <ul class="dropdown-menu dropdown-user">
                         <li>
                             <a href="index.php?password"><i class="fa fa-cogs"></i> Ganti Password</a>
@@ -90,6 +91,7 @@ $( "" ).click(function( eventObject ) {
                             <a href="#" class="logoutK"><i class="fa fa-power-off"></i> Log out</a>
                         </li>
                     </ul>
+                    -->
                     <!-- /.dropdown-user -->
                 </li>
              <li class="dropdown">

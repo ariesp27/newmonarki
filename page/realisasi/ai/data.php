@@ -1,23 +1,23 @@
 <?php
-$sql = mysql_query("SELECT
-newdetailanggaran.*,
-headeranggaran.*,
-realisasi.*
-FROM
-newdetailanggaran 
-LEFT JOIN realisasi ON newdetailanggaran.randomid = realisasi.randomid
-INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-WHERE jenis = 'AI' AND newdetailanggaran.status = '8'");
+$sql = mysql_query("
+SELECT
+    ((volumejasa*hrgsatuanjasa)+(volumematerial*hrgsatuanmaterial)) 'rab',
+    headeranggaran.*,
+    newdetailanggaran.*,
+    realisasi.*,
+    newdetailanggaran.randomid
+    FROM
+    newdetailanggaran 
+    LEFT JOIN realisasi ON newdetailanggaran.randomid = realisasi.randomid
+    INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
+    WHERE jenis = 'AI' AND 
+    newdetailanggaran.status = 8 AND 
+    newdetailanggaran.tglapprove != ''
+    order by newdetailanggaran.status asc;
+");
 
-$sqlA = mysql_query("SELECT
-newdetailanggaran.*,
-headeranggaran.*,
-realisasi.*
-FROM
-newdetailanggaran 
-INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-LEFT JOIN realisasi ON newdetailanggaran.randomid = realisasi.randomid
-WHERE jenis = 'AI' AND newdetailanggaran.status = '4'")
+
+
 ?>
 
 <div id="wrapper">
@@ -85,42 +85,65 @@ WHERE jenis = 'AI' AND newdetailanggaran.status = '4'")
 
                             				$no=1;
                                             
-                                            while($rowA=mysql_fetch_array($sqlA))
-                                            while($row=mysql_fetch_array($sql))
-                            				
-                            				{
+                            				while($rowA=mysql_fetch_array($sql)) {
+                                            //$row=mysql_fetch_array($sqlA) 
                             				    
                             				?>
                             					<tr>
                                                     <td><?php echo $no; ?></td>
-                                                    <td><?php echo $row['uraiankegiatan'];?></td>
+                                                    <td><?php echo $rowA['uraiankegiatan'];?></td>
                                                     <td>
                                                         Penetapan : <?php 
-                                                        $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
-                                                        WHERE status = '4' AND randomid = '".$rowA['randomid']."'"));
-                                                        echo $rowA["volumejasa"] * $rowA["hrgsatuanjasa"] + $rowA["volumematerial"] * $rowA["hrgsatuanmaterial"]; ?>
+                                                       
+                                                        $penetapan = mysql_fetch_array(mysql_query("
+                                                            SELECT
+                                                            ((volumejasa*hrgsatuanjasa)+(volumematerial*hrgsatuanmaterial)) 'penetapan',
+                                                            newdetailanggaran.*
+                                                            FROM
+                                                            newdetailanggaran 
+                                                            INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
+                                                            WHERE headeranggaran.jenis = 'AI' AND 
+                                                            newdetailanggaran.status = 4 AND                                                             
+                                                            newdetailanggaran.randomid = '".$rowA['randomid']."' AND
+                                                            newdetailanggaran.tglapprove != ''
+                                                        "));
+                                                            echo $penetapan['penetapan'];
+                                                        ?>
                                                         <br />
+                                                        RAB : <?php  echo "$rowA[rab]"; ?>
                                                         
-                                                        RAB : <?php
-                                                        $rab = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
-                                                        WHERE status IN ('5','6','7','8') AND randomid = '".$rowA['randomid']."'"));
-                                                        echo $row["volumejasa"]*$row["volumematerial"]*$row["hrgsatuanjasa; ?>
+                                                    <?php $sqlD = mysql_query ("SELECT * FROM realisasi where realisasi.randomid = '$rowA[randomid]'");?>
+                                                    <td>
+                                                        <?php 
+                                                        $kontrak = mysql_fetch_array(mysql_query("SELECT * FROM realisasi
+                                                        WHERE status = '9' AND randomid = '".$rowA['randomid']."'"));
+                                                        echo $kontrak['nilaikontrak']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php 
+                                                        $vendor = mysql_fetch_array(mysql_query("SELECT * FROM realisasi
+                                                        WHERE status = '9' AND randomid = '".$rowA['randomid']."'"));
+                                                        echo $vendor['namavendor']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php 
+                                                        $tgl = mysql_fetch_array(mysql_query("SELECT * FROM realisasi
+                                                        WHERE status = '9' AND randomid = '".$rowA['randomid']."'"));
+                                                        echo $tgl['tglkontrak']; ?>
                                                     </td>
                                                     <!--
-                                                    <td><?php echo $rowA["volumejasa"] * $rowA["hrgsatuanjasa"] + $rowA["volumematerial"] * $rowA["hrgsatuanmaterial"];?></td>
+                                                    <td><?php echo $rowA['nilaikontrak'];?></td> 
+                                                    <td><?php echo $rowA['namavendor'];?></td>
+                                                    <td><?php echo $rowA['tglkontrak'];?></td>
                                                     -->
-                                                    <?php $sqlD = mysql_query ("SELECT * FROM realisasi where realisasi.randomid = '$row[randomid]'");?>
-                                                    <td><?php echo $row['nilaikontrak'];?></td>
-                                                    <td><?php echo $row['namavendor'];?></td>
-                                                    <td><?php echo $row['tglkontrak'];?></td>
                                                     
                                                     <td class="center">
                                                         <!--
                                                          <a href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
                                                          -->
-                                                         <a href="index.php?tambah-realisasi-ai" type="button"><i class="fa fa-plus fa-2x"></i></a>
-                                                         <a href="index.php?update-realisasi-ai=<?php echo $row["koderealisasi"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
-                                                         <a href="#" id="delete-realisasi=<?php echo $row["koderealisasi"]?>&del-redetail=<?php echo $row["kodedetail"]?>" class="delete">
+                                                         <a href="index.php?tambah-realisasi-ai=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-plus fa-2x"></i></a>
+                                                         <a href="index.php?update-realisasi-ai=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+                                                         <a href="#" id="delete-realisasi-ai=<?php echo $row["kodedetail"]?>&delete-ang=<?php echo $row["kodeanggaran"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
                                                          </a>
                                                     </td>

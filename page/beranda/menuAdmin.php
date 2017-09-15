@@ -10,7 +10,7 @@
 
                 <img src="<?php echo $rowImg["images"] == "" ? "images/no-images.png" : "images/".$rowImg["images"] ?>" class="img-circle img-responsive center-block"  />
                 <br /><strong><?php echo $_SESSION["level"];?></strong>
-                <!-- <a href="index.php?password"><i class="fa fa-cogs"></i> Ganti Password</a> -->
+                <a href="#" class="logoutK"><i class="fa fa-power-off"></i> Log out</a>
             </div>
         </li>
         <li>
