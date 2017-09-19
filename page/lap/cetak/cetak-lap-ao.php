@@ -7,29 +7,26 @@
     header("Pragma: no-cache");
     header("Cache-control: private");
     header("Content-Type: application/vnd.ms-excel; name='excel'");
-    header("Content-disposition: attachment; filename=laporanAO.xls");
+    header("Content-disposition: attachment; filename=laporan_usulan_AO.xls");
+    
+    //$key     = $_GET['keycetak1'] ? $_GET['keycetak1'] : $_GET['keycetak1'];
+    //$key2     = $_GET['keycetak2'] ? $_GET['keycetak2'] : $_GET['keycetak2'];
 
-    $key     = $_GET['keycetak1'] ? $_GET['keycetak1'] : $_GET['keycetak1'];
-    $key2     = $_GET['keycetak2'] ? $_GET['keycetak2'] : $_GET['keycetak2'];
-
-    if (! $key=="" && !$key2==""){ $q = " anggarandetail.tartglmulai >= '$key' and date_sub(anggarandetail.tartglmulai, INTERVAL 1 day) <= '$key2'";  }
+    //if (! $key=="" && !$key2==""){ $q = " headeranggaran.tartglmulai >= '$key' and date_sub(headeranggaran.tartglmulai, INTERVAL 1 day) <= '$key2'";  }
 
     $sql=mysql_query("SELECT
-        anggarandetail.*,
-        fungsi.fungsi,
-        pos_anggaran.kode_posanggaran,
-        pos_anggaran.posanggaran,
-        fungsi.kodefungsi
+        headeranggaran.*,
+        newdetailanggaran.*
         FROM
-        anggarandetail
-        INNER JOIN fungsi ON anggarandetail.kodefungsi = fungsi.kodefungsi
-        INNER JOIN pos_anggaran ON anggarandetail.kode_posanggaran = pos_anggaran.kode_posanggaran WHERE jenis = 'AO'
+        newdetailanggaran
+        INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
+        WHERE jenis = 'AO' AND status IN ('0','1','2','3')
     ") or die (mysql_error());
 ?>
 
-<h2>Laporan AO</h2>
+<h2>Laporan Usulan AO</h2>
 <br /><br />
-<h3>History AO</h3>
+<h3>History Usulan AO</h3>
 <table border="1" >
     <thead>
         <tr>
@@ -37,11 +34,10 @@
             <th width="8%">Nomor PRK</th>
             <th width="14%">Nama Kegiatan</th>
             <th width="9%">Target Tgl Mulai</th>
-            <th width="10%">Tangal Pengajuan</th>
-            <th width="13%">Harga Material Sebelum</th>
-            <th width="13%">Harga Jasa Sebelum</th>
-            <th width="13%">Harga Material Sesudah</th>
-            <th width="13%">Harga Jasa Sesudah</th>
+            <th width="13%">Jasa (usulan)</th>
+            <th width="13%">Material (usulan)</th>
+            <th width="13%">Hrg. Satuan Material (usulan)</th>
+            <th width="13%">Hrg. Satuan Jasa (usulan)</th>
         </tr>
     </thead>
     <tbody>
@@ -54,13 +50,12 @@
         <tr>
             <td><?php echo $no; ?></td>
             <td><?php echo $row['noprk'];?></td>
-            <td><?php echo $row['namakegiatan'];?></td>
+            <td><?php echo $row['uraiankegiatan'];?></td>
             <td><?php echo $row['tartglmulai'];?></td>
-            <td><?php echo $row['datetime'];?></td>
-            <td><?php echo $row['harsatmatbelum'];?></td>
-            <td><?php echo $row['harsatjasbelum'];?></td>
-            <td><?php echo $row['harsatmatsudah'];?></td>
-            <td><?php echo $row['harsatjassudah'];?></td>
+            <td><?php echo $row['volumejasa'];?></td>
+            <td><?php echo $row['volumematerial'];?></td>
+            <td><?php echo $row['hrgsatuanjasa'];?></td>
+            <td><?php echo $row['hrgsatuanmaterial'];?></td>
         </tr>
         <?php $no++; } } else { ?>
         <tr><td colspan="9" class="text-center"><i>Tabel data AO kosong</i></td></tr>

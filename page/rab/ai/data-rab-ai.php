@@ -78,32 +78,32 @@ WHERE jenis = 'AI' AND status = '3'") or die (mysql_error());
                                                     <td><?php echo $row['uraiankegiatan'];?></td>
                                                     <td><?php echo $row['noprk'];?></td>
                                                     <td>
-                                                        Usulan : <?php echo $row['volumejasa']; ?>
+                                                        U : <?php echo $row['volumejasa']; ?>
                                                         <br />
                                                         
-                                                        Penetapan : <?php 
+                                                        P : <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
                                                         echo $penetapan['volumejasa']; ?>
                                                         <br />
                                                         
-                                                        RAB : <?php
+                                                        R : <?php
                                                         $rab = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status IN ('5','6','7','8') AND randomid = '".$row['randomid']."'"));
                                                         echo $rab['volumejasa']; ?>
                                                     </td>
                                                     
                                                     <td>
-                                                        Usulan : <?php echo $row['volumematerial']; ?>
+                                                        U : <?php echo $row['volumematerial']; ?>
                                                         <br />
                                                         
-                                                        Penetapan : <?php 
+                                                        P : <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
                                                         echo $penetapan['volumematerial']; ?>
                                                         <br />
                                                         
-                                                        RAB : <?php
+                                                        R : <?php
                                                         $rab = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status IN ('5','6','7','8') AND randomid = '".$row['randomid']."'"));
                                                         echo $rab['volumematerial']; ?>
@@ -113,59 +113,59 @@ WHERE jenis = 'AI' AND status = '3'") or die (mysql_error());
                                                     <td class="text-center"><?php echo $row['volumematerial'];?></td>
                                                     -->
                                                     <td>
-                                                        Usulan : <?php echo "Rp ".number_format($row['hrgsatuanmaterial'],0,'','.'); ?>
+                                                        U : <?php echo "Rp ".number_format($row['hrgsatuanmaterial'],0,'','.'); ?>
                                                         <br />
                                                         
-                                                        Penetapan : <?php 
+                                                        P : <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
                                                         echo "Rp ".number_format( $penetapan['hrgsatuanmaterial'],0,'','.'); ?>
                                                         <br />
                                                         
-                                                        RAB : <?php
+                                                        R : <?php
                                                         $rab = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status IN ('5','6','7','8') AND randomid = '".$row['randomid']."'"));
                                                         echo "Rp ".number_format( $rab['hrgsatuanmaterial'],0,'','.'); ?>
                                                     </td>
                                                     <td>
-                                                        Usulan : <?php echo "Rp ".number_format($row['hrgsatuanjasa'],0,'','.'); ?>
+                                                        U : <?php echo "Rp ".number_format($row['hrgsatuanjasa'],0,'','.'); ?>
                                                         <br />
                                                         
-                                                        Penetapan : <?php 
+                                                        P : <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
                                                         echo "Rp ".number_format( $penetapan['hrgsatuanjasa'],0,'','.'); ?>
                                                         <br />
                                                             
-                                                        RAB : <?php
+                                                        R : <?php
                                                         $rab = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status IN ('5','6','7','8') AND randomid = '".$row['randomid']."'"));
                                                         echo "Rp ".number_format( $rab['hrgsatuanmaterial'],0,'','.'); ?>
                                                     </td>
                                                     
                                                     <td>
-                                                        Usulan : <?php echo "Rp ".$row['volumematerial']*$row['hrgsatuanmaterial']; ?>
+                                                        U : <?php echo "Rp ".$row['volumematerial']*$row['hrgsatuanmaterial']; ?>
                                                         <br />
-                                                        Penetapan : <?php 
+                                                        P : <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
                                                         echo "Rp ".$penetapan['volumematerial']*$penetapan['hrgsatuanmaterial']; ?>
                                                         <br />
-                                                        RAB : <?php
+                                                        R : <?php
                                                         $rab = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status IN ('5','6','7','8') AND randomid = '".$row['randomid']."'"));
                                                         echo "Rp ".$rab['volumematerial']*$rab['hrgsatuanmaterial']; ?>
                                                     </td>
                                                     
                                                     <td>
-                                                        Usulan : <?php echo "Rp ".$row['volumejasa']*$row['hrgsatuanjasa']; ?>
+                                                        U : <?php echo "Rp ".$row['volumejasa']*$row['hrgsatuanjasa']; ?>
                                                         <br />
-                                                        Penetapan : <?php 
+                                                        P : <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
                                                         echo "Rp ".$penetapan['volumejasa']*$penetapan['hrgsatuanjasa']; ?>
                                                         <br />
-                                                        RAB : <?php
+                                                        R : <?php
                                                         $rab = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status IN ('5','6','7','8') AND randomid = '".$row['randomid']."'"));
                                                         echo "Rp ".$rab['volumejasa']*$rab['hrgsatuanjasa']; ?>
@@ -188,7 +188,7 @@ WHERE jenis = 'AI' AND status = '3'") or die (mysql_error());
                                                          <a href="index.php?tambah-rab-ai=<?php echo $row["kodedetail"]?>" type="button"><i class="fa fa-plus fa-2x"></i></a>
                                                          <a href="index.php?update-rab-ai=<?php echo $row["randomid"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
                                                          -->
-                                                         <a href="#" id="delete-rab-ai=<?php echo $row["kodedetail"]?>&delete-rab-ang=<?php echo $row["kodeanggaran"]?>" class="delete">
+                                                         <a href="#" id="delete-rab-ai=<?php echo $row["kodedetail"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
                                                          </a>
                                                     </td>

@@ -17,7 +17,7 @@ or die (mysql_error());
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Rekapan Anggaran Investasi</h2>
+                        <h2>Rekap Penetapan AI</h2>
                         <hr />
                     </div>
                 </div>
@@ -48,7 +48,7 @@ or die (mysql_error());
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             Tabel Rekapan Anggaran Investasi
+                             Tabel Rekap Penetapan AI
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -65,7 +65,9 @@ or die (mysql_error());
                                             <th width="6%">Hrg Satuan Jasa </th>
                                             <th width="4%">Jml. Biaya Material</th>
                                             <th width="3%">Jml. Biaya Jasa</th> 
+                                            <!--
                                             <th width="2%">Status</th> 
+                                            -->
                     						<th width="1%">Aksi</th>
                                			</tr>
                                     </thead>
@@ -79,30 +81,66 @@ or die (mysql_error());
                                                     <td><?php echo $no; ?></td>
                                                     <td><?php echo $row['uraiankegiatan'];?></td>
                                                     <td><?php echo $row['noprk'];?></td>
+                                                    <!--
                                                     <td><?php echo $row['volumejasa'];?></td>
                                                     <td><?php echo $row['volumematerial'];?></td>
-                                                    <td align="right">
-                                                        Usulan : <?php echo "Rp ".number_format($row['hrgsatuanmaterial'],0,'','.'); ?>
-                                                        <br />
-                                                        Penetapan : <?php 
+                                                    -->
+                                                    <td align="left">
+                                                        U : <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
-                                                        WHERE status = '4' AND randomid = '".$row['randomid']."'"));
+                                                        WHERE status = '3' AND randomid = '".$row['randomid']."'"));
+                                                        echo "Rp ".number_format( $penetapan['volumejasa'],0,'','.'); ?>
+                                                        <br />
+                                                        P : <?php echo "Rp ".number_format($row['volumejasa'],0,'','.'); ?>
+                                                    </td>
+                                                    <td align="left">
+                                                        U : <?php 
+                                                        $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
+                                                        WHERE status = '3' AND randomid = '".$row['randomid']."'"));
+                                                        echo "Rp ".number_format( $penetapan['volumematerial'],0,'','.'); ?>
+                                                        <br />
+                                                        P : <?php echo "Rp ".number_format($row['volumematerial'],0,'','.'); ?>
+                                                    </td>
+                                                    <td align="left">
+                                                        U : <?php 
+                                                        $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
+                                                        WHERE status = '3' AND randomid = '".$row['randomid']."'"));
                                                         echo "Rp ".number_format( $penetapan['hrgsatuanmaterial'],0,'','.'); ?>
-                                                    </td>
-                                                    <td align="right">
-                                                        Usulan : <?php echo "Rp ".number_format($row['hrgsatuanjasa'],0,'','.'); ?>
                                                         <br />
-                                                        Penetapan : <?php 
-                                                        $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
-                                                        WHERE status = '4' AND randomid = '".$row['randomid']."'"));
-                                                        echo "Rp ".number_format( $penetapan['hrgsatuanjasa'],0,'','.'); ?>
+                                                        P : <?php echo "Rp ".number_format($row['hrgsatuanmaterial'],0,'','.'); ?>
                                                     </td>
-                                                    <td><?php echo $row['volumematerial']*$row['hrgsatuanmaterial'];?></td>
-                                                    <td><?php echo $row['volumejasa']*$row['hrgsatuanjasa'];?></td>                          
+                                                    <td align="left">
+                                                        U : <?php 
+                                                        $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
+                                                        WHERE status = '3' AND randomid = '".$row['randomid']."'"));
+                                                        echo "Rp ".number_format( $penetapan['hrgsatuanjasa'],0,'','.'); ?>
+                                                        <br />
+                                                        P : <?php echo "Rp ".number_format($row['hrgsatuanjasa'],0,'','.'); ?>
+                                                    </td>
+                                                    <td align="left">
+                                                        U: <?php 
+                                                        $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
+                                                        WHERE status = '3' AND randomid = '".$row['randomid']."'"));
+                                                        echo "Rp ".$penetapan['volumematerial']*$penetapan['hrgsatuanmaterial']; ?>
+                                                        <br />
+                                                        P: <?php echo "Rp ".$row['volumematerial']*$row['hrgsatuanmaterial']; ?>
+                                                    </td>
+                                                    
+                                                    <td align="left">
+                                                        U: <?php 
+                                                        $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
+                                                        WHERE status = '3' AND randomid = '".$row['randomid']."'"));
+                                                        echo "Rp ".$penetapan['volumejasa']*$penetapan['hrgsatuanjasa']; ?>
+                                                        <br />
+                                                        P: <?php echo "Rp ".$row['volumejasa']*$row['hrgsatuanjasa']; ?>
+                                                    </td>
+                                                    <!--        
                                                     <td>
-                                                    <?php if ($row['status'] == '3') {echo "";}
-                                                    else if ($row['status'] == '4') {echo "Penetapan";}
-                                                    ?></td>
+                                                        <?php if ($row['status'] == '3') {echo "";}
+                                                        else if ($row['status'] == '4') {echo "Penetapan";}
+                                                        ?>
+                                                    </td>
+                                                    --> 
                                                     <td class="center">
                                                     
                                                         <?php if ($row['status'] == '3') {?>
@@ -118,7 +156,7 @@ or die (mysql_error());
                                                             type="button"><i class="fa fa-thumbs-o-up fa-2x"></i></a>
                                                         <?php } else{echo "";}?>
                                                         
-                                                         <a href="#" id="delete-penetapan-ai=<?php echo $row["kodedetail"]?>&delete-penetapan-ang=<?php echo $row["kodeanggaran"]?>" class="delete">
+                                                         <a href="#" id="delsdh-penetapan-ai=<?php echo $row["kodedetail"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
                                                          </a>
                                                     </td>

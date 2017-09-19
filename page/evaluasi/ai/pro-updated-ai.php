@@ -95,7 +95,7 @@ if(isset($_POST['kode'])) {
                                         <td align="center">
                                            <a href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
                                            <?php if ($permintaan['status'] == '1') {?><a href="#" class="evaluasi" id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal"><i class="fa fa-check square" aria-hidden="true"></i></a><?php } else{echo "";}?>
-                                           <a href="#" id="delete-evaluasi-ai=<?php echo $row["kodedetail"]?>&delete-evaluasi-ang=<?php echo $row["kodeanggaran"]?>" class="delete">
+                                           <a href="#" id="delete-evaluasi-ai=<?php echo $permintaan["kodedetail"]?>" class="delete">
                                             <i class="fa fa-trash-o fa-2x"></i>
                                            </a>
                                         </td>

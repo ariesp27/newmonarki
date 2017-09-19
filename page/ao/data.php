@@ -60,17 +60,17 @@ OR jenis = 'AO' AND status = '3'
                                 <table class="table table-striped table-bordered table-hover" id="datatabel">
                                     <thead>
                                         <tr>
-                                            <th width="2%">No</th>
-                                            <th width="4%">Uraian Kegiatan</th>
-                                            <th width="2%">Nomor PRK</th>
-                                            <th width="3%">Vol. Jasa</th>
-                                            <th width="3%">Vol. Material</th>
-                                            <th width="5%">Harga Satuan Meterial</th>
-                                            <th width="4%">Harga Satuan Jasa</th>
-                                            <th width="4%">Jml. Biaya Material</th>
-                                            <th width="3%">Jml. Biaya Jasa</th>
-                                            <th width="1%">Status</th>
-                    						<th width="1%">Aksi</th>
+                                            <th class="text-center" width="2%">No</th>
+                                            <th class="text-center" width="6%">Uraian Kegiatan</th>
+                                            <th class="text-center" width="2%">Nomor PRK</th>
+                                            <th class="text-center" width="1%">Vol. Jasa</th>
+                                            <th class="text-center" width="1%">Vol. Material</th>
+                                            <th class="text-center" width="3%">Hrg. Satuan Meterial</th>
+                                            <th class="text-center" width="2%">Hrg. Satuan Jasa</th>
+                                            <th class="text-center" width="3%">Jml. Biaya Material</th>
+                                            <th class="text-center" width="2%">Jml. Biaya Jasa</th>
+                                            <th class="text-center" width="1%">Status</th>
+                    						<th class="text-center" width="3%">Aksi</th>
                                			</tr>
                                     </thead>
                                     <tbody>
@@ -83,8 +83,8 @@ OR jenis = 'AO' AND status = '3'
                                                     <td><?php echo $no; ?></td>
                                                     <td><?php echo $row['uraiankegiatan'];?></td>
                                                     <td><?php echo $row['noprk'];?></td>
-                                                    <td><?php echo $row['volumejasa'];?></td>
-                                                    <td><?php echo $row['volumematerial'];?></td>
+                                                    <td class="text-center"><?php echo $row['volumejasa'];?></td>
+                                                    <td class="text-center"><?php echo $row['volumematerial'];?></td>
                                                     <td><?php echo $row['hrgsatuanmaterial'];?></td>
                                                     <td><?php echo $row['hrgsatuanjasa'];?></td>
                                                     <td><?php echo $row['volumematerial']*$row['hrgsatuanmaterial'];?></td>

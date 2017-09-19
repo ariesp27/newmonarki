@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 04 Sep 2017 pada 12.34
--- Versi Server: 10.1.19-MariaDB
--- PHP Version: 5.5.38
+-- Generation Time: 19 Sep 2017 pada 09.10
+-- Versi Server: 10.1.21-MariaDB
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -103,8 +103,21 @@ CREATE TABLE `disburst` (
   `sep` bigint(100) NOT NULL,
   `okt` bigint(100) NOT NULL,
   `nov` bigint(100) NOT NULL,
-  `des` bigint(100) NOT NULL
+  `des` bigint(100) NOT NULL,
+  `randomid` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `disburst`
+--
+
+INSERT INTO `disburst` (`kodedisburst`, `kodeanggaran`, `jan`, `feb`, `mar`, `apr`, `mei`, `jun`, `jul`, `agu`, `sep`, `okt`, `nov`, `des`, `randomid`) VALUES
+(3, 0, 2500, 3000, 3000, 3000, 3000, 3000, 2500, 2500, 2500, 2500, 2500, 2500, 'orGxL5ZgQ7'),
+(4, 0, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 'BKZYQ7ahEF'),
+(7, 0, 45500, 45500, 45500, 45500, 45500, 45500, 45500, 45500, 45500, 45500, 45500, 45500, 'am9j7X5Fyn'),
+(8, 0, 65000, 65000, 65000, 65000, 65000, 65000, 65000, 65000, 65000, 65000, 65000, 65000, 'ola6WNCcPb'),
+(12, 0, 160000, 160000, 160000, 160000, 160000, 160000, 160000, 160000, 160000, 160000, 160000, 160000, 'zSrJYDeUg4'),
+(16, 0, 8900, 8900, 8900, 8900, 8900, 8900, 8900, 8900, 8900, 8900, 8900, 8900, 'l1OtVTP64E');
 
 -- --------------------------------------------------------
 
@@ -154,10 +167,11 @@ CREATE TABLE `headeranggaran` (
 --
 
 INSERT INTO `headeranggaran` (`kodeanggaran`, `noprk`, `kode_posanggaran`, `kodefungsi`, `kodesatuan`, `uraiankegiatan`, `durasi`, `tartglmulai`, `prioritas`, `kko`, `kkf`, `jenis`, `randomid`, `image`, `kodeapp`) VALUES
-(8, '20170904', 1, 1, 4, 'Test penambahan pertama revisi', '1 tahun', '2017-10-10', 1, '1504516665_331.jpg', '1504516665_998.jpg', 'AI', '14MaY90Klp', '', 0),
-(9, '20170905', 2, 2, 9, 'Test penambahan kedua', '1 bulan', '2017-10-02', 1, '1504516067_448.jpg', '1504516067_893.jpg', 'AI', 'sD6BvAr820', '', 0),
-(10, '565', 1, 1, 17, 'Test penambahan AI keempat', '1 bulan', '2017-10-09', 1, '1504518560_548.', '1504518560_640.', 'AI', 's5U6JxvO9S', '', 0),
-(11, '700', 2, 2, 4, 'Test penambahan AO kedua revisi', '1 tahun', '2017-10-09', 2, '', '', 'AO', 'H0Ds4Zw6mk', '', 0);
+(55, '20170907', 1, 1, 4, 'Pengadaan notebook div ADM', '1 jam', '2017-10-02', 1, '', '', 'AI', 'orGxL5ZgQ7', '', 0),
+(56, '20170907', 2, 2, 1, 'Perbaikan gedung PLN TJBT', '1 jam', '2017-10-02', 1, '', '', 'AO', 'l1OtVTP64E', '', 0),
+(59, '20170908', 1, 1, 4, 'Pembelian alat kebersihan ', '1 jam', '2017-10-02', 1, '', '', 'AI', 'BKZYQ7ahEF', '', 0),
+(60, '20170909', 2, 2, 10, 'Pengadaan kendaraan dinas ', '1 jam', '2017-10-02', 1, '', '', 'AO', 'ola6WNCcPb', '', 0),
+(61, '123', 1, 1, 16, 'Pengadaan CCTV div HUMAS', '1 jam', '2017-10-02', 1, '1504963700_273.', '1504963700_101.', 'AI', 'am9j7X5Fyn', '', 0);
 
 -- --------------------------------------------------------
 
@@ -168,12 +182,12 @@ INSERT INTO `headeranggaran` (`kodeanggaran`, `noprk`, `kode_posanggaran`, `kode
 CREATE TABLE `newdetailanggaran` (
   `kodedetail` int(11) NOT NULL,
   `kodeanggaran` int(11) NOT NULL,
-  `hrgsatuanmaterial` bigint(100) NOT NULL,
-  `volumematerial` bigint(100) NOT NULL,
-  `status` int(11) NOT NULL,
-  `hrgsatuanjasa` bigint(100) NOT NULL,
   `volumejasa` bigint(100) NOT NULL,
+  `volumematerial` bigint(100) NOT NULL,
+  `hrgsatuanjasa` bigint(100) NOT NULL,
+  `hrgsatuanmaterial` bigint(100) NOT NULL,
   `alasan` text NOT NULL,
+  `status` int(11) NOT NULL,
   `tglapprove` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `randomid` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -182,11 +196,28 @@ CREATE TABLE `newdetailanggaran` (
 -- Dumping data untuk tabel `newdetailanggaran`
 --
 
-INSERT INTO `newdetailanggaran` (`kodedetail`, `kodeanggaran`, `hrgsatuanmaterial`, `volumematerial`, `status`, `hrgsatuanjasa`, `volumejasa`, `alasan`, `tglapprove`, `randomid`) VALUES
-(10, 8, 1500006, 50, 1, 1000006, 50, ' sudah approved', '2017-09-04 10:23:26', '14MaY90Klp'),
-(11, 9, 150000, 5, 1, 100000, 5, ' sudah approved', '2017-09-04 10:27:15', 'sD6BvAr820'),
-(13, 10, 150000, 5, 0, 100000, 5, '', NULL, 's5U6JxvO9S'),
-(14, 11, 1500008, 55, 1, 1000008, 55, ' sudah approved', '2017-09-04 10:31:02', 'H0Ds4Zw6mk');
+INSERT INTO `newdetailanggaran` (`kodedetail`, `kodeanggaran`, `volumejasa`, `volumematerial`, `hrgsatuanjasa`, `hrgsatuanmaterial`, `alasan`, `status`, `tglapprove`, `randomid`) VALUES
+(73, 0, 15, 15, 100000, 100000, ' sudah di evaluasi', 3, '2017-09-08 02:18:31', 'orGxL5ZgQ7'),
+(74, 0, 15, 15, 450000, 550000, ' Sudah di evaluasi', 3, '2017-09-07 03:02:19', 'l1OtVTP64E'),
+(75, 0, 15, 10, 250000, 300000, '', 4, '2017-09-15 02:16:22', 'orGxL5ZgQ7'),
+(76, 0, 15, 15, 460000, 510000, '', 4, '0000-00-00 00:00:00', 'l1OtVTP64E'),
+(81, 0, 12, 12, 210000, 250000, ' RAB ini sudah selesai di evaluasi', 8, '2017-09-15 02:16:26', 'orGxL5ZgQ7'),
+(84, 0, 5, 5, 150000, 250000, ' anggaran ini sudah di evaluasi', 3, '2017-09-08 06:42:43', 'BKZYQ7ahEF'),
+(89, 0, 4, 4, 133000, 211000, '', 4, '2017-09-19 02:10:55', 'BKZYQ7ahEF'),
+(92, 0, 15, 20, 500000, 750000, ' anggaran ini sudah di evaluasi', 3, '2017-09-09 07:38:55', 'ola6WNCcPb'),
+(93, 0, 15, 15, 1500000, 1200000, ' ', 3, '2017-09-18 09:38:41', 'am9j7X5Fyn'),
+(94, 0, 12, 12, 1250000, 1150000, '', 4, '2017-09-18 09:38:54', 'am9j7X5Fyn'),
+(95, 0, 15, 15, 450000, 650000, '', 4, '0000-00-00 00:00:00', 'ola6WNCcPb'),
+(97, 0, 8, 8, 950000, 950000, ' RAB ini sudah di evaluasi', 8, '2017-09-18 09:39:10', 'am9j7X5Fyn'),
+(98, 0, 10, 10, 350000, 650000, ' RAB ini sudah di evaluasi', 8, '2017-09-10 13:36:12', 'ola6WNCcPb'),
+(108, 0, 12, 12, 210000, 250000, '', 9, NULL, 'orGxL5ZgQ7'),
+(111, 0, 4, 4, 12150000, 5500000, '', 4, '2017-09-18 07:55:12', 'zSrJYDeUg4'),
+(113, 0, 4, 4, 12150000, 5500000, '', 5, '2017-09-18 07:55:12', 'zSrJYDeUg4'),
+(114, 0, 4, 4, 125000, 215000, ' rab ini sudah di evaluasi', 8, '2017-09-19 01:09:06', 'BKZYQ7ahEF'),
+(117, 0, 8, 8, 425000, 450000, ' rab ini sudah di evaluasi', 8, '2017-09-19 01:11:52', 'l1OtVTP64E'),
+(118, 0, 4, 4, 125000, 215000, '', 9, NULL, 'BKZYQ7ahEF'),
+(119, 0, 8, 8, 950000, 950000, '', 9, NULL, 'am9j7X5Fyn'),
+(121, 0, 8, 8, 425000, 450000, '', 9, NULL, 'l1OtVTP64E');
 
 -- --------------------------------------------------------
 
@@ -200,8 +231,20 @@ CREATE TABLE `pembayaran` (
   `tglpym` date DEFAULT NULL,
   `jmlpym` bigint(25) DEFAULT NULL,
   `tahap` bigint(25) DEFAULT NULL,
-  `tglinput` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+  `tglinput` date DEFAULT NULL,
+  `randomid` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`kodepym`, `koderealisasi`, `tglpym`, `jmlpym`, `tahap`, `tglinput`, `randomid`) VALUES
+(18, NULL, '2017-09-18', 125000, 1, '2017-09-14', 'orGxL5ZgQ7'),
+(19, NULL, '2017-09-18', 125000, 2, '2017-09-15', 'orGxL5ZgQ7'),
+(20, NULL, '2017-09-19', 200000, 3, '2017-09-16', 'orGxL5ZgQ7'),
+(21, NULL, '2017-09-19', 1160100, 1, '2017-09-19', 'BKZYQ7ahEF'),
+(22, NULL, '2017-09-19', 64500, 1, '2017-09-19', 'l1OtVTP64E');
 
 -- --------------------------------------------------------
 
@@ -230,21 +273,23 @@ INSERT INTO `pos_anggaran` (`kode_posanggaran`, `posanggaran`) VALUES
 
 CREATE TABLE `realisasi` (
   `koderealisasi` int(11) NOT NULL,
-  `kodeangdetail` int(11) NOT NULL,
+  `kodedetail` int(11) NOT NULL,
+  `nokontrak` varchar(25) NOT NULL,
   `nilaikontrak` bigint(25) NOT NULL,
   `namavendor` varchar(25) NOT NULL,
   `tglkontrak` date NOT NULL,
   `status` int(11) NOT NULL,
-  `fileToUpload` varchar(25) NOT NULL
+  `randomid` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `realisasi`
 --
 
-INSERT INTO `realisasi` (`koderealisasi`, `kodeangdetail`, `nilaikontrak`, `namavendor`, `tglkontrak`, `status`, `fileToUpload`) VALUES
-(4, 0, 0, '', '0000-00-00', 0, 'icon3.png'),
-(5, 0, 1, 'a', '2017-08-30', 0, 'icon1.png');
+INSERT INTO `realisasi` (`koderealisasi`, `kodedetail`, `nokontrak`, `nilaikontrak`, `namavendor`, `tglkontrak`, `status`, `randomid`) VALUES
+(5, 0, '54326', 4250000, 'PT. SKPM', '2017-09-15', 9, 'orGxL5ZgQ7'),
+(6, 0, '979', 1150000, 'PT. PMM', '2017-09-19', 9, 'BKZYQ7ahEF'),
+(7, 0, '474', 6450000, 'PT. KZL', '2017-09-19', 9, 'l1OtVTP64E');
 
 -- --------------------------------------------------------
 
@@ -291,7 +336,10 @@ INSERT INTO `satuan` (`kodesatuan`, `namasatuan`) VALUES
 
 CREATE TABLE `user_login` (
   `kodelogin` int(11) NOT NULL,
+  `kodegi` int(11) NOT NULL,
+  `kodeapp` int(11) NOT NULL,
   `nama` varchar(25) NOT NULL,
+  `kodeapd` int(11) NOT NULL,
   `email` varchar(25) NOT NULL,
   `username` varchar(25) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -304,11 +352,12 @@ CREATE TABLE `user_login` (
 -- Dumping data untuk tabel `user_login`
 --
 
-INSERT INTO `user_login` (`kodelogin`, `nama`, `email`, `username`, `password`, `level`, `jabatan`, `images`) VALUES
-(7, 'user', 'arie@tabs.co.id', 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'us', 'staff', ''),
-(8, 'admin', 'admin@tabs.co.id', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'sa', 'admin', ''),
-(9, 'MAPP', '-', 'mapp', '1916bbda7f6556bfa7250e122f1f0f2f', 'ma', 'manager', ''),
-(10, 'assmen haset', 'asshaset@pln.co.id', 'asshaset', 'e00d208dc86cd44ee18925b60e4e6b3b', 'ass', 'staff', '');
+INSERT INTO `user_login` (`kodelogin`, `kodegi`, `kodeapp`, `nama`, `kodeapd`, `email`, `username`, `password`, `level`, `jabatan`, `images`) VALUES
+(7, 0, 0, 'user', 0, 'arie@tabs.co.id', 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', 'staff', ''),
+(8, 0, 0, 'Admin', 0, 'admin@tabs.co.id', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'superadmin', 'admin', ''),
+(9, 0, 0, 'MAPP', 0, 'mapp@pln.co.id', 'mapp', '1916bbda7f6556bfa7250e122f1f0f2f', 'manager', 'manager', ''),
+(10, 0, 0, 'assmen enjin', 0, 'assenjin@pln.co.id', 'assenjin', '97cdf836f5f8ff8da2e6fae211945630', 'assman', 'staff', ''),
+(12, 0, 0, 'Kantor Induk', 0, 'ki@pln.co.id', 'ki', '988287f7a1eb966ffc4e19bdbdeec7c3', 'KI', 'kantor induk', '');
 
 --
 -- Indexes for dumped tables
@@ -387,7 +436,7 @@ ALTER TABLE `anggarandetail`
 -- AUTO_INCREMENT for table `disburst`
 --
 ALTER TABLE `disburst`
-  MODIFY `kodedisburst` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kodedisburst` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `fungsi`
 --
@@ -397,17 +446,17 @@ ALTER TABLE `fungsi`
 -- AUTO_INCREMENT for table `headeranggaran`
 --
 ALTER TABLE `headeranggaran`
-  MODIFY `kodeanggaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `kodeanggaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `newdetailanggaran`
 --
 ALTER TABLE `newdetailanggaran`
-  MODIFY `kodedetail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `kodedetail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `kodepym` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kodepym` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `pos_anggaran`
 --
@@ -417,7 +466,7 @@ ALTER TABLE `pos_anggaran`
 -- AUTO_INCREMENT for table `realisasi`
 --
 ALTER TABLE `realisasi`
-  MODIFY `koderealisasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `koderealisasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `satuan`
 --
@@ -427,7 +476,7 @@ ALTER TABLE `satuan`
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `kodelogin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `kodelogin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

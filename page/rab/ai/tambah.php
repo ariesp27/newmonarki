@@ -46,7 +46,7 @@
         header("location:index.php?data-rab-ai&suksestambah");
         
 }
-$idA = (int)mysql_real_escape_string(trim($_GET["tambah-rab-ai"]));
+$idA = mysql_real_escape_string(trim($_GET["tambah-rab-ai"]));
 $sqlA= mysql_query("SELECT 
 newdetailanggaran.*, 
 headeranggaran.*
@@ -54,8 +54,8 @@ FROM newdetailanggaran
 INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
 INNER JOIN fungsi ON headeranggaran.kodefungsi = fungsi.kodefungsi
 INNER JOIN pos_anggaran ON headeranggaran.kode_posanggaran = pos_anggaran.kode_posanggaran
-INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan WHERE status = '3' 
-AND kodedetail = '$idA'") or die (mysql_error());
+INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan 
+WHERE newdetailanggaran.status = '4' AND newdetailanggaran.randomid = '$idA'") or die (mysql_error());
 if(mysql_num_rows($sqlA)==0);
 $rowA = mysql_fetch_array($sqlA);
 ?>

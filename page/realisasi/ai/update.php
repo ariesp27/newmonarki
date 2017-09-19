@@ -3,12 +3,13 @@
 if(isset($_POST["submit"])){
         
         $a    = mysql_real_escape_string(strip_tags($_POST["koderealisasi"]));
+        $j    = mysql_real_escape_string(strip_tags($_POST["nokontrak"]));
         $b    = mysql_real_escape_string(strip_tags($_POST["nilaikontrak"]));
         $c    = mysql_real_escape_string(strip_tags($_POST["namavendor"]));
         $d    = tglformataction($_POST["tglkontrak"]);
         $e      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
         
-         mysql_query("UPDATE realisasi SET nilaikontrak='$b', namavendor='$c', tglkontrak='$d' WHERE randomid='$e'");
+         mysql_query("UPDATE realisasi SET nokontrak='$j', nilaikontrak='$b', namavendor='$c', tglkontrak='$d' WHERE randomid='$e'");
          header("location:index.php?realisasi&suksesedit");
 
     }
@@ -63,6 +64,15 @@ $rowA = mysql_fetch_array($sqlA);
                                         
                                         <div class="form-group">
                                             <div class="row">
+                                                <div class="col-md-4"><label>Nomor Kontrak</label></div>
+                                                <div class="col-md-7">
+                                                    <input class="form-control" name="nokontrak" type="text" data-rule-required="true" value="<?php echo $rowA["nokontrak"]; ?>" data-msg-required="Mohon masukkan nomor kontrak." placeholder="masukkan nomor kontrak" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="row">
                                                 <div class="col-md-4"><label>Nilai Kontrak</label></div>
                                                 <div class="col-md-7">
                                                     <input class="form-control" name="nilaikontrak" type="text" data-rule-required="true" value="<?php echo $rowA["nilaikontrak"]; ?>" data-msg-required="Mohon masukkan nilai kontrak." placeholder="masukkan nilai kontrak" />
@@ -111,7 +121,7 @@ $rowA = mysql_fetch_array($sqlA);
                             <div class="col-md-6"></div>
                             <div class="col-md-5">
                                 <button type="submit" name="submit" class="btn btn-large btn-success">Simpan</button>
-                                <a href="index.php?update-realisasi-ai" class="btn btn-large btn-warning">Kembali</a>
+                                <a href="index.php?realisasi" class="btn btn-large btn-warning">Kembali</a>
                             </div>
                             <div class="col-md-1"></div>
                         </div>

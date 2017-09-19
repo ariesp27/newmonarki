@@ -11,7 +11,7 @@ if(isset($_POST['kode'])) {
     $alasan    = $_POST['alasan'];
     
     mysql_query("UPDATE newdetailanggaran SET status='$status', tglapprove=now(), alasan='$alasan' WHERE kodedetail = '$kode'");
-	header("location: index.php?monitor-rab-ao");
+	header("location: index.php?monitor-rab-ai");
 }
 
 ?>
@@ -96,12 +96,12 @@ if(isset($_POST['kode'])) {
                                         
                                         <td hidden="status" align="center"><strong><?php echo strtoupper($permintaan["status"]); ?></strong></td>
                                         <td align="center">
-                                           <?php if ($permintaan['status'] == '5') {?><a href="#" class="detail" data-id="
-                                           <?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade">
-                                           <i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                                           <?php } else{echo "";}?>
+                                           <a href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade">
+                                               <i class="fa fa-search-plus" aria-hidden="true"></i>
+                                           </a>
+                                          
                                            <?php if ($permintaan['status'] == '5') {?><a href="#" class="approve" id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal"><i class="fa fa-sign-in" aria-hidden="true"></i></a><?php } else{echo "";}?>
-                                           <a href="#" id="del-apprab-ao=<?php echo $row["kodedetail"]?>&del-apprab-ango=<?php echo $row["kodeanggaran"]?>" class="delete">
+                                           <a href="#" id="del-apprab-ao=<?php echo $permintaan["kodedetail"]?>" class="delete">
                                             <i class="fa fa-trash-o fa-2x"></i>
                                            </a>
                                         </td>

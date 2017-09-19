@@ -7,7 +7,7 @@
     
     if(isset($_POST["submit"]))
     {
-        
+        $j      = mysql_real_escape_string(strip_tags($_POST["nokontrak"]));
         $a      = mysql_real_escape_string(strip_tags($_POST["nilaikontrak"]));
         $b      = mysql_real_escape_string(strip_tags($_POST["namavendor"])); 
         $c      = tglformataction($_POST["tglkontrak"]);
@@ -18,16 +18,16 @@
         $r      = mysql_real_escape_string(strip_tags($_POST["volumejasa"]));
         $s      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
         
-        mysql_query("INSERT INTO realisasi (koderealisasi, nilaikontrak, namavendor, tglkontrak, randomid,
+        mysql_query("INSERT INTO realisasi (koderealisasi, nokontrak, nilaikontrak, namavendor, tglkontrak, randomid,
         status) VALUES 
-        ('','$a','$b','$c','$e','9')");
+        ('','$j','$a','$b','$c','$e','9')");
         
         mysql_query ("INSERT INTO newdetailanggaran (kodedetail, hrgsatuanmaterial, volumematerial, hrgsatuanjasa, 
         volumejasa, randomid, status) VALUES ('','$o','$p','$q','$r','$s','9')");
-        header("location:index.php?realisasi&suksestambah");
+        header("location:index.php?realisasi-ao&suksestambah");
        
     }
-$idA = mysql_real_escape_string(trim($_GET["tambah-realisasi-ai"]));
+$idA = mysql_real_escape_string(trim($_GET["tambah-realisasi-ao"]));
 $sqlA= mysql_query("SELECT 
 newdetailanggaran.*, 
 headeranggaran.*
@@ -64,7 +64,7 @@ $rowA = mysql_fetch_array($sqlA);
         <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Tambah Realisasi AI</h2>
+                        <h2>Tambah Realisasi AO</h2>
                     </div>
                 </div>
                 <!-- /. ROW  -->
@@ -82,7 +82,7 @@ $rowA = mysql_fetch_array($sqlA);
                 <hr />
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Form Tambah Realisasi AI
+                        Form Tambah Realisasi AO
                     </div> 
                     <table class="table table-striped text-center" >
                     <form id="validate-me-plz" name="form1" enctype="multipart/form-data" role="form" action="" method="post">
@@ -90,6 +90,17 @@ $rowA = mysql_fetch_array($sqlA);
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-md-6"> <br />
+                                                                    <div class="col-md-4"><label>Nomor Kontrak</label></div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text"   name='nokontrak' class="form-control"  data-msg-required="Mohon masukkan nomor kontrak" placeholder="masukkan nomor kontrak" />
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                    
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
                                                                     <div class="col-md-4"><label>Nilai Kontrak</label></div>
                                                                     <div class="col-md-8">
                                                                         <input type="text"   name='nilaikontrak' class="form-control"  data-msg-required="Mohon masukkan nilai kontrak" placeholder="masukkan nilai kontrak" />
@@ -183,7 +194,7 @@ $rowA = mysql_fetch_array($sqlA);
                                             <div class="row">
                                             <div class="col-md-1"></div>
                                                 <button type="submit" name="submit" class="btn btn-large btn-success">Simpan</button>
-                                                <a href="index.php?realisasi" class="btn btn-large btn-warning">Kembali</a>
+                                                <a href="index.php?realisasi-ao" class="btn btn-large btn-warning">Kembali</a>
                                             </div>
                     </form>
                     </table>
@@ -229,7 +240,7 @@ $rowA = mysql_fetch_array($sqlA);
         },
         messages: {
             alamat: {
-                required: "Mohon masukkan data AI"
+                required: "Mohon masukkan data AO"
             }
         }
     });

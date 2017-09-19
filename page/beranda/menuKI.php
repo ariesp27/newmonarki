@@ -117,6 +117,19 @@
             </ul>
         </li>
         <li>
+            <a href="#"><i class="fa fa-map-o fa-2x"></i> Rekap Anggaran</a>
+            <ul>
+                    <li><a href="#" class="back">Main Menu</a></li>
+                    <li class="nav-label">Rekap Penetapan</li>
+                    <li>
+                        <a href="index.php?data-rekap-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
+                    </li>
+                    <li>
+                        <a href="index.php?data-rekap-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
+                    </li>
+            </ul>
+        </li>
+        <li>
             <a href="#"><i class="fa fa-file-text fa-2x" aria-hidden="true"></i> Laporan<span class=""></span></a>
                 <ul >
                     <li><a href="#" class="back">Main Menu</a></li>

@@ -104,7 +104,7 @@ if(isset($_POST['kode'])) {
                                            <?php } ?>
                                            <?php if ($permintaan['status'] == '6') {?><a href="#" class="evaluasi" id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal"><i class="fa fa-check square" aria-hidden="true"></i></a><?php } else{echo "";}?>
                                            
-                                           <a href="#" id="del-eva-rabao=<?php echo $row["kodedetail"]?>&del-eva-rabango=<?php echo $row["kodeanggaran"]?>" class="delete">
+                                           <a href="#" id="del-eva-rabao=<?php echo $permintaan["kodedetail"]?>" class="delete">
                                             <i class="fa fa-trash-o fa-2x"></i>
                                            </a>
                                         </td>

@@ -3,16 +3,17 @@
 if(isset($_POST["submit"])){
         
         $a    = mysql_real_escape_string(strip_tags($_POST["koderealisasi"]));
+        $j    = mysql_real_escape_string(strip_tags($_POST["nokontrak"]));
         $b    = mysql_real_escape_string(strip_tags($_POST["nilaikontrak"]));
         $c    = mysql_real_escape_string(strip_tags($_POST["namavendor"]));
         $d    = tglformataction($_POST["tglkontrak"]);
         $e      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
         
-         mysql_query("UPDATE realisasi SET nilaikontrak='$b', namavendor='$c', tglkontrak='$d' WHERE randomid='$e'");
-         header("location:index.php?realisasi&suksesedit");
+         mysql_query("UPDATE realisasi SET nokontrak='$j', nilaikontrak='$b', namavendor='$c', tglkontrak='$d' WHERE randomid='$e'");
+         header("location:index.php?realisasi-ao&suksesedit");
 
     }
-$idA = mysql_real_escape_string(trim($_GET["update-realisasi-ai"]));
+$idA = mysql_real_escape_string(trim($_GET["update-realisasi-ao"]));
 $sqlA= mysql_query("SELECT * FROM realisasi WHERE randomid = '$idA'") or die (mysql_error());
 if(mysql_num_rows($sqlA)==0);
 $rowA = mysql_fetch_array($sqlA);
@@ -43,7 +44,7 @@ $rowA = mysql_fetch_array($sqlA);
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Ubah Data Realisasi AI</h2>
+                        <h2>Ubah Data Realisasi AO</h2>
                     </div>
                 </div>
                  <!-- /. ROW  -->
@@ -53,13 +54,22 @@ $rowA = mysql_fetch_array($sqlA);
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Form Update Realisasi AI
+                Form Update Realisasi AO
             </div>
             <div class="panel-body">
                             <div class="row">
                                 <form id="validate-me-plz" name="form1" enctype="multipart/form-data" role="form" action="" method="post">
                                 <input type="hidden" name="koderealisasi" value="<?php echo $idA; ?>" />
                                     <div class="col-lg-6">
+                                        
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-4"><label>Nomor Kontrak</label></div>
+                                                <div class="col-md-7">
+                                                    <input class="form-control" name="nokontrak" type="text" data-rule-required="true" value="<?php echo $rowA["nokontrak"]; ?>" data-msg-required="Mohon masukkan nomor kontrak." placeholder="masukkan nomor kontrak" />
+                                                </div>
+                                            </div>
+                                        </div>
                                         
                                         <div class="form-group">
                                             <div class="row">
@@ -111,7 +121,7 @@ $rowA = mysql_fetch_array($sqlA);
                             <div class="col-md-6"></div>
                             <div class="col-md-5">
                                 <button type="submit" name="submit" class="btn btn-large btn-success">Simpan</button>
-                                <a href="index.php?update-realisasi-ai" class="btn btn-large btn-warning">Kembali</a>
+                                <a href="index.php?realisasi-ao" class="btn btn-large btn-warning">Kembali</a>
                             </div>
                             <div class="col-md-1"></div>
                         </div>

@@ -63,8 +63,8 @@ $( "" ).click(function( eventObject ) {
             <div class="navbar-header">
                 <button class="button-nav-toggle navbar-toggle"  >
                 <span class="icon">&#9776;</span> Menu</button>
-                <a class="navbar-brand" href="index.php?dashboard">
-                   <!-- <img class="img-responsive" src="images/kp3.png" />--><i>MONANGINOP</i>
+                <a href="index.php?dashboard">
+                    <img class="img-responsive" src="images/monarki.png" />
                 </a>
             </div>
 
@@ -115,11 +115,9 @@ $( "" ).click(function( eventObject ) {
             else if (isset($_GET["fungsi"])){include "page/fungsi/data.php";}
             else if (isset($_GET["tambah-fungsi"])){include "page/fungsi/tambah.php";}
             else if (isset($_GET["update-fungsi"])){include "page/fungsi/update.php";}
-            
             else if (isset($_GET["pos-anggaran"])){include "page/posanggaran/data.php";}
             else if (isset($_GET["tambah-pos-anggaran"])){include "page/posanggaran/tambah.php";}
             else if (isset($_GET["update-pos-anggaran"])){include "page/posanggaran/update.php";}
-            
             else if (isset($_GET["satuan"])){include "page/satuan/data.php";}
             else if (isset($_GET["tambah-satuan"])){include "page/satuan/tambah.php";}
             else if (isset($_GET["update-satuan"])){include "page/satuan/update.php";}
@@ -127,21 +125,18 @@ $( "" ).click(function( eventObject ) {
             else if (isset($_GET["ai"])){include "page/ai/data.php";}
             else if (isset($_GET["tambah-ai"])){include "page/ai/tambah.php";}
             else if (isset($_GET["update-ai"])){include "page/ai/update.php";}
-            
             else if (isset($_GET["ao"])){include "page/ao/data.php";}
             else if (isset($_GET["tambah-ao"])){include "page/ao/tambah.php";}
             else if (isset($_GET["update-ao"])){include "page/ao/update.php";}
             //proses approve mapp
             else if (isset($_GET["monitor-approve"])) require_once("page/request/pro-approve.php");
             else if (isset($_GET["form-monitorapprove"])) require_once("page/request/pro-approve-form.php");
-            
             else if (isset($_GET["monitor-approve-ao"])) require_once("page/request/pro-approve-ao.php");
             else if (isset($_GET["form-monitorapprove-ao"])) require_once("page/request/pro-approve-form-ao.php");
             //proses evaluasi assman
             else if (isset($_GET["monitor-evaluasi-ai"])){include "page/evaluasi/ai/pro-updated-ai.php";}
             else if (isset($_GET["form-monitorevaluasi-ai"])) require_once("page/evaluasi/ai/pro-updated-form-ai.php");
             else if (isset($_GET["detail-evaluasi-ai"])) require_once("page/evaluasi/ai/detail-ai.php");
-            
             else if (isset($_GET["monitor-evaluasi-ao"])){include "page/evaluasi/ao/pro-updated-ao.php";}
             else if (isset($_GET["form-monitorevaluasi-ao"])) require_once("page/evaluasi/ao/pro-updated-form-ao.php");
             else if (isset($_GET["detail-evaluasi-ao"])) require_once("page/evaluasi/ao/detail-ao.php");
@@ -149,7 +144,6 @@ $( "" ).click(function( eventObject ) {
             else if (isset($_GET["belum-penetapan-ai"])){include "page/penetapan/ai/belum-penetapan-ai.php";}
             else if (isset($_GET["penetapan-ai"])){include "page/penetapan/ai/penetapan.php";}
             else if (isset($_GET["sudah-penetapan-ai"])){include "page/penetapan/ai/sudah-penetapan-ai.php";}
-            
             else if (isset($_GET["belum-penetapan-ao"])){include "page/penetapan/ao/belum-penetapan-ao.php";}
             else if (isset($_GET["penetapan-ao"])){include "page/penetapan/ao/penetapan-ao.php";}
             else if (isset($_GET["sudah-penetapan-ao"])){include "page/penetapan/ao/sudah-penetapan-ao.php";}
@@ -158,7 +152,6 @@ $( "" ).click(function( eventObject ) {
             else if (isset($_GET["tambah-rab-ai"])){include "page/rab/ai/tambah.php";}
             else if (isset($_GET["update-rab-ai"])){include "page/rab/ai/update.php";}
             else if (isset($_GET["data-rab-ai"])){include "page/rab/ai/data-rab-ai.php";}
-            
             else if (isset($_GET["rab-ao"])){include "page/rab/ao/data-penetapan-ao.php";}
             else if (isset($_GET["tambah-rab-ao"])){include "page/rab/ao/tambah.php";}
             else if (isset($_GET["update-rab-ao"])){include "page/rab/ao/update.php";}
@@ -166,25 +159,43 @@ $( "" ).click(function( eventObject ) {
             //approve RAB mapp
             else if (isset($_GET["monitor-rab-ai"])) require_once("page/request/pro-approve-rab.php");
             else if (isset($_GET["approve-rab"])) require_once("page/request/form-app-rab.php");
-            
             else if (isset($_GET["monitor-rab-ao"])) require_once("page/request/pro-approve-rab-ao.php");
             else if (isset($_GET["approve-rabao"])) require_once("page/request/form-app-rabao.php");
             //evaluasi RAB assman
             else if (isset($_GET["monitor-eva-rabai"])){include "page/evaluasi/ai/pro-eva-rabai.php";}
             else if (isset($_GET["form-moneva-rabai"])) require_once("page/evaluasi/ai/form-eva-rabai.php");
             else if (isset($_GET["detail-eva-rabai"])) require_once("page/evaluasi/ai/detail-eva-rabai.php");
-            
             else if (isset($_GET["monitor-eva-rabao"])){include "page/evaluasi/ao/pro-eva-rabao.php";}
             else if (isset($_GET["form-moneva-rabao"])) require_once("page/evaluasi/ao/form-eva-rabao.php");
             else if (isset($_GET["detail-eva-rabao"])) require_once("page/evaluasi/ao/detail-eva-rabao.php");
+            //rekapan anggaran
+            else if (isset($_GET["data-rekap-ai"])){include "page/rekap/ai/rekap-ai.php";}
+            else if (isset($_GET["data-rekap-ao"])){include "page/rekap/ao/rekap-ao.php";}
             //input realisasi user
             else if (isset($_GET["realisasi"])){include "page/realisasi/ai/data.php";}
             else if (isset($_GET["tambah-realisasi-ai"])){include "page/realisasi/ai/tambah.php";}
             else if (isset($_GET["update-realisasi-ai"])){include "page/realisasi/ai/update.php";}
-            
             else if (isset($_GET["realisasi-ao"])){include "page/realisasi/ao/data.php";}
             else if (isset($_GET["tambah-realisasi-ao"])){include "page/realisasi/ao/tambah.php";}
             else if (isset($_GET["update-realisasi-ao"])){include "page/realisasi/ao/update.php";}
+            //input penyerapan user
+            else if (isset($_GET["penyerapan"])){include "page/penyerapan/ai/data.php";}
+            else if (isset($_GET["tambah-penyerapan-ai"])){include "page/penyerapan/ai/tab-serapan-ai.php";}
+            else if (isset($_GET["form-penyerapan-ai"])){include "page/penyerapan/ai/tambah.php";}
+            else if (isset($_GET["update-penyerapan-ai"])){include "page/penyerapan/ai/update.php";}
+            else if (isset($_GET["penyerapan-ao"])){include "page/penyerapan/ao/data.php";}
+            else if (isset($_GET["tambah-penyerapan-ao"])){include "page/penyerapan/ao/tab-serapan-ao.php";}
+            else if (isset($_GET["form-penyerapan-ao"])){include "page/penyerapan/ao/tambah.php";}
+            else if (isset($_GET["update-penyerapan-ao"])){include "page/penyerapan/ao/update.php";}
+            //laporan usulan
+            else if (isset($_GET["lap-ai"])){include "page/lap/lapai.php";}
+            else if (isset($_GET["lap-ao"])){include "page/lap/lapao.php";}
+            //laporan realisasi
+            else if (isset($_GET["lap-realisasi-ai"])){include "page/lap/lap-rea-ai.php";}
+            else if (isset($_GET["lap-realisasi-ao"])){include "page/lap/lap-rea-ao.php";}
+            //laporan penyerapan
+            else if (isset($_GET["lap-serapan-ai"])){include "page/lap/lap-ser-ai.php";}
+            else if (isset($_GET["lap-serapan-ao"])){include "page/lap/lap-ser-ao.php";}
             
             else if (isset($_GET["password"])){include "page/changepassnew.php";}
             
@@ -193,11 +204,6 @@ $( "" ).click(function( eventObject ) {
             else if (isset($_GET["tambah-listuser"])){include "page/tambah-listuser.php";}
             else if (isset($_GET["change-passuser"])){include "page/change-passuser.php";}
 
-            else if (isset($_GET["penyerapan"])){include "page/penyerapan/ai/data.php";}
-            
-            else if (isset($_GET["lap-ai"])){include "page/lap/lapai.php";}
-            else if (isset($_GET["lap-ao"])){include "page/lap/lapao.php";}
-            
             
             
             else{include "page/notfound.php";}

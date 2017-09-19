@@ -236,9 +236,8 @@ $rowA = mysql_fetch_array($sqlA);
                                         <div class="form-group">
                                             <div class="row">
                                             <div class="col-md-9">
-                                                <div class="col-md-4"><label>Status</label></div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" name="status" hidden="" type="text" disabled="" data-rule-required="true" value="<?php echo $rowA["status"]; ?>" data-msg-required="Mohon masukkan status." placeholder="masukkan status" />
+                                                    <input class="form-control" name="status" hidden="" type="hidden" disabled="" data-rule-required="true" value="<?php echo $rowA["status"]; ?>" data-msg-required="Mohon masukkan status." placeholder="masukkan status" />
                                                 </div>
                                             </div>
                                             </div>
@@ -325,7 +324,7 @@ $rowA = mysql_fetch_array($sqlA);
                                                 <div class="col-lg-6"></div>
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     <button type="submit" name="submit" class="btn btn-large btn-success">Simpan</button>
-                                                    <a href="index.php?sudah-penetapan-ai" class="btn btn-large btn-warning">Kembali</a>
+                                                    <a href="index.php?belum-penetapan-ai" class="btn btn-large btn-warning">Kembali</a>
                                             </div>
                                         
                                 

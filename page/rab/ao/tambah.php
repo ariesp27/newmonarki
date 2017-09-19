@@ -46,7 +46,7 @@
         header("location:index.php?data-rab-ao&suksestambah");
         
 }
-$idA = (int)mysql_real_escape_string(trim($_GET["tambah-rab-ao"]));
+$idA = mysql_real_escape_string(trim($_GET["tambah-rab-ao"]));
 $sqlA= mysql_query("SELECT 
 newdetailanggaran.*, 
 headeranggaran.*
@@ -54,8 +54,8 @@ FROM newdetailanggaran
 INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
 INNER JOIN fungsi ON headeranggaran.kodefungsi = fungsi.kodefungsi
 INNER JOIN pos_anggaran ON headeranggaran.kode_posanggaran = pos_anggaran.kode_posanggaran
-INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan WHERE status = '3' 
-AND kodedetail = '$idA'") or die (mysql_error());
+INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan 
+WHERE newdetailanggaran.status = '4' AND newdetailanggaran.randomid = '$idA'") or die (mysql_error());
 if(mysql_num_rows($sqlA)==0);
 $rowA = mysql_fetch_array($sqlA);
 ?>
@@ -327,30 +327,6 @@ $rowA = mysql_fetch_array($sqlA);
                                             </div>
                                             </div>
                                         </div>
-                                        
-                                        <!--
-                                        <div class="form-group">
-                                            <div class="row">
-                                            <div class="col-md-9">
-                                                <div class="col-md-4"><label>KKO</label></div>
-                                                <div class="col-md-8">
-                                                <img src="<?php echo $rowA["kko"] == "" ? "images/foto/no-images.png" : "foto/".$rowA["kko"] ?>" width="88" class="img-responsive img-rounded" />
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <div class="row">
-                                            <div class="col-md-9">
-                                                <div class="col-md-4"><label>KKF</label></div>
-                                                <div class="col-md-8">
-                                                <img src="<?php echo $rowA["kkf"] == "" ? "images/foto/no-images.png" : "foto/".$rowA["kkf"] ?>" width="88" class="img-responsive img-rounded" />
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        -->
                                     </div>
                                         
                                         <div class="col-md-8">
@@ -537,22 +513,5 @@ $rowA = mysql_fetch_array($sqlA);
             }
         }
     });
-
-    $('#fileToUpload').filestyle();
-    $('#fileToUpload').change(function(){
-        var file = $('#fileToUpload').val();
-        var exts = ['jpg','jpeg'];
-        if ( file ) {
-            var get_ext = file.split('.');
-            get_ext = get_ext.reverse();
-            if ( $.inArray ( get_ext[0].toLowerCase(), exts ) > -1 ){
-                return true;
-            }
-            else
-            {
-                alert('Hanya boleh jpg ');
-                $('#fileToUpload').filestyle('clear');
-            }
-        }
-    });
+    
 </script>

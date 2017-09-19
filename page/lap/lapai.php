@@ -3,18 +3,15 @@
         $key     = (tglformataction($_POST['tglAwal'])) ? tglformataction($_POST['tglAwal']) : tglformataction($_GET['tglAwal']);
         $key2     = (tglformataction($_POST['tglAkhir'])) ? tglformataction($_POST['tglAkhir']) : tglformataction($_GET['tglAkhir']);
 
-        if (! $key=="" && !$key2==""){ $q = " anggarandetail.tartglmulai >= '$key' and date_sub(anggarandetail.tartglmulai, INTERVAL 1 day) <= '$key2'";  }
+        if (! $key=="" && !$key2==""){ $q = " headeranggaran.tartglmulai >= '$key' and date_sub(headeranggaran.tartglmulai, INTERVAL 1 day) <= '$key2'";  }
 
         $sql=mysql_query("SELECT
-        anggarandetail.*,
-        fungsi.fungsi,
-        pos_anggaran.kode_posanggaran,
-        pos_anggaran.posanggaran,
-        fungsi.kodefungsi
+        headeranggaran.*,
+        newdetailanggaran.*
         FROM
-        anggarandetail
-        INNER JOIN fungsi ON anggarandetail.kodefungsi = fungsi.kodefungsi
-        INNER JOIN pos_anggaran ON anggarandetail.kode_posanggaran = pos_anggaran.kode_posanggaran WHERE jenis = 'AI'
+        newdetailanggaran
+        INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
+        WHERE jenis = 'AI' AND status IN ('0','1','2','3')
         ") or die (mysql_error());
     }
 ?>
@@ -37,7 +34,7 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Laporan AI</h2>
+                    <h2>Laporan Usulan AI</h2>
                     <hr />
                 </div>
             </div>
@@ -74,7 +71,7 @@
                     <div class="col-md-12">
                         <!-- Advanced Tables -->
                         <div class="panel panel-default">
-                            <div class="panel-heading">Tabel data AI</div>
+                            <div class="panel-heading">Tabel data usulan AI</div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover" id="datatabel">
@@ -84,11 +81,10 @@
                                                 <th width="8%">Nomor PRK</th>
                                                 <th width="14%">Nama Kegiatan</th>
                                                 <th width="9%">Target Tgl Mulai</th>
-                                                <th width="10%">Tangal Pengajuan</th>
-                                                <th width="13%">Harga Material Sebelum</th>
-                                                <th width="13%">Harga Jasa Sebelum</th>
-                                                <th width="13%">Harga Material Sesudah</th>
-                                                <th width="13%">Harga Jasa Sesudah</th>
+                                                <th width="13%">Jasa (usulan)</th>
+                                                <th width="13%">Material (usulan)</th>
+                                                <th width="13%">Hrg. Satuan Material (usulan)</th>
+                                                <th width="13%">Hrg. Satuan Jasa (usulan)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -100,16 +96,15 @@
                                                         <tr>
                                                             <td><?php echo $no; ?></td>
                                                             <td><?php echo $row['noprk'];?></td>
-                                                            <td><?php echo $row['namakegiatan'];?></td>
+                                                            <td><?php echo $row['uraiankegiatan'];?></td>
                                                             <td><?php echo $row['tartglmulai'];?></td>
-                                                            <td><?php echo $row['datetime'];?></td>
-                                                            <td><?php echo $row['harsatmatbelum'];?></td>
-                                                            <td><?php echo $row['harsatjasbelum'];?></td>
-                                                            <td><?php echo $row['harsatmatsudah'];?></td>
-                                                            <td><?php echo $row['harsatjassudah'];?></td>
+                                                            <td><?php echo $row['volumejasa'];?></td>
+                                                            <td><?php echo $row['volumematerial'];?></td>
+                                                            <td><?php echo $row['hrgsatuanjasa'];?></td>
+                                                            <td><?php echo $row['hrgsatuanmaterial'];?></td>
                                                         </tr>
                                                     <?php $no++; } } else { ?>
-                                                    <tr><td colspan="9" class="text-center"><i>Tabel data AO kosong</i></td></tr>
+                                                    <tr><td colspan="9" class="text-center"><i>Tabel data AI kosong</i></td></tr>
                                                     <?php } ?>
                                         </tbody>
                                     </table>

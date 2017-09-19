@@ -7,7 +7,7 @@
     
     if(isset($_POST["submit"]))
     {
-        
+        $j      = mysql_real_escape_string(strip_tags($_POST["nokontrak"]));
         $a      = mysql_real_escape_string(strip_tags($_POST["nilaikontrak"]));
         $b      = mysql_real_escape_string(strip_tags($_POST["namavendor"])); 
         $c      = tglformataction($_POST["tglkontrak"]);
@@ -18,9 +18,9 @@
         $r      = mysql_real_escape_string(strip_tags($_POST["volumejasa"]));
         $s      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
         
-        mysql_query("INSERT INTO realisasi (koderealisasi, nilaikontrak, namavendor, tglkontrak, randomid,
+        mysql_query("INSERT INTO realisasi (koderealisasi, nokontrak, nilaikontrak, namavendor, tglkontrak, randomid,
         status) VALUES 
-        ('','$a','$b','$c','$e','9')");
+        ('','$j','$a','$b','$c','$e','9')");
         
         mysql_query ("INSERT INTO newdetailanggaran (kodedetail, hrgsatuanmaterial, volumematerial, hrgsatuanjasa, 
         volumejasa, randomid, status) VALUES ('','$o','$p','$q','$r','$s','9')");
@@ -90,6 +90,17 @@ $rowA = mysql_fetch_array($sqlA);
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-md-6"> <br />
+                                                                    <div class="col-md-4"><label>Nomor Kontrak</label></div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text"   name='nokontrak' class="form-control"  data-msg-required="Mohon masukkan nomor kontrak" placeholder="masukkan nomor kontrak" />
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                    
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
                                                                     <div class="col-md-4"><label>Nilai Kontrak</label></div>
                                                                     <div class="col-md-8">
                                                                         <input type="text"   name='nilaikontrak' class="form-control"  data-msg-required="Mohon masukkan nilai kontrak" placeholder="masukkan nilai kontrak" />

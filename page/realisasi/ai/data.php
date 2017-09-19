@@ -74,6 +74,7 @@ SELECT
                                             <th width="2%">No</th>
                                             <th width="10%">Uraian Kegiatan</th>
                                             <th width="8%">Nilai Anggaran</th>
+                                            <th width="8%">Nomor Kontrak</th>
                                             <th width="8%">Nilai Kontrak</th>
                                             <th width="8%">Vendor</th>
                                             <th width="5%">Tanggal Kontrak</th>
@@ -104,14 +105,14 @@ SELECT
                                                             INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
                                                             WHERE headeranggaran.jenis = 'AI' AND 
                                                             newdetailanggaran.status = 4 AND                                                             
-                                                            newdetailanggaran.randomid = '".$rowA['randomid']."' AND
-                                                            newdetailanggaran.tglapprove != ''
+                                                            newdetailanggaran.randomid = '".$rowA['randomid']."'
                                                         "));
                                                             echo $penetapan['penetapan'];
                                                         ?>
                                                         <br />
                                                         RAB : <?php  echo "$rowA[rab]"; ?>
-                                                        
+                                                    </td>
+                                                    <td><?php echo $rowA['nokontrak'];?></td>
                                                     <?php $sqlD = mysql_query ("SELECT * FROM realisasi where realisasi.randomid = '$rowA[randomid]'");?>
                                                     <td>
                                                         <?php 
@@ -143,7 +144,7 @@ SELECT
                                                          -->
                                                          <a href="index.php?tambah-realisasi-ai=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-plus fa-2x"></i></a>
                                                          <a href="index.php?update-realisasi-ai=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
-                                                         <a href="#" id="delete-realisasi-ai=<?php echo $row["kodedetail"]?>&delete-ang=<?php echo $row["kodeanggaran"]?>" class="delete">
+                                                         <a href="#" id="delete-realisasi-ai=<?php echo $rowA["koderealisasi"]?>&delete-ang=<?php echo $row["kodedetail"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
                                                          </a>
                                                     </td>

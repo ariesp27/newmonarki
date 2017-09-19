@@ -1,11 +1,22 @@
 <?php
-$sql = mysql_query("SELECT
-anggarandetail.*,
-realisasi.*
-FROM
-anggarandetail 
-LEFT JOIN realisasi ON anggarandetail.kodeangdetail
-WHERE jenis = 'AI' AND anggarandetail.status = '3'") or die (mysql_error());
+$sql = mysql_query("
+SELECT
+    ((volumejasa*hrgsatuanjasa)+(volumematerial*hrgsatuanmaterial)) 'rab',
+    headeranggaran.*,
+    newdetailanggaran.*,
+    realisasi.*,
+    newdetailanggaran.randomid
+    FROM
+    newdetailanggaran 
+    LEFT JOIN realisasi ON newdetailanggaran.randomid = realisasi.randomid
+    INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
+    WHERE jenis = 'AI' AND 
+    newdetailanggaran.status = '9'
+    order by newdetailanggaran.status asc;
+");
+
+
+
 ?>
 
 <div id="wrapper">
@@ -14,7 +25,7 @@ WHERE jenis = 'AI' AND anggarandetail.status = '3'") or die (mysql_error());
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Data Realisasi AI</h2>
+                        <h2>Penyerapan AI</h2>
                         <hr />
                     </div>
                 </div>
@@ -51,7 +62,7 @@ WHERE jenis = 'AI' AND anggarandetail.status = '3'") or die (mysql_error());
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             Tabel Data Realisasi AI
+                             Tabel Penyerapan AI
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -60,9 +71,10 @@ WHERE jenis = 'AI' AND anggarandetail.status = '3'") or die (mysql_error());
                                     <thead>
                                         <tr>
                                             <th width="2%">No</th>
-                                            <th width="10%">Nama Kegiatan</th>
+                                            <th width="10%">Uraian Kegiatan</th>
                                             <th width="8%">Nilai Anggaran</th>
-                                            <th width="8%">Nominal Realisasi</th>
+                                            <th width="8%">Nomor Kontrak</th>
+                                            <th width="8%">Nilai Kontrak</th>
                                             <th width="8%">Vendor</th>
                                             <th width="5%">Tanggal Kontrak</th>
                                             <th width="3%">Aksi</th>
@@ -72,24 +84,61 @@ WHERE jenis = 'AI' AND anggarandetail.status = '3'") or die (mysql_error());
                                     <?php
 
                             				$no=1;
-                                            while($row=mysql_fetch_array($sql))
-                            				{
+                                            
+                            				while($rowA=mysql_fetch_array($sql)) {
+                                            //$row=mysql_fetch_array($sqlA) 
                             				    
                             				?>
                             					<tr>
                                                     <td><?php echo $no; ?></td>
-                                                    <td><?php echo $row['namakegiatan'];?></td>
-                                                    <td><?php echo $penjumlahan = $row["volumesebelum"] * $row["harsatmatbelum"] ;?></td>
-                                                    <td><?php echo $row['nilaikontrak'];?></td>
-                                                    <?php $sql1 = mysql_query ("SELECT * FROM realisasi where koderealisasi = '$row[koderealisasi]'");?>
-                                                    <td><?php echo $row['namavendor'];?></td>
-                                                    <td><?php echo $row['tglkontrak'];?></td>
+                                                    <td><?php echo $rowA['uraiankegiatan'];?></td>
+                                                    <td>
+                                                        Penetapan : <?php 
+                                                       
+                                                        $penetapan = mysql_fetch_array(mysql_query("
+                                                            SELECT
+                                                            ((volumejasa*hrgsatuanjasa)+(volumematerial*hrgsatuanmaterial)) 'penetapan',
+                                                            newdetailanggaran.*
+                                                            FROM
+                                                            newdetailanggaran 
+                                                            INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
+                                                            WHERE headeranggaran.jenis = 'AI' AND 
+                                                            newdetailanggaran.status = 4 AND                                                             
+                                                            newdetailanggaran.randomid = '".$rowA['randomid']."'
+                                                        "));
+                                                            echo $penetapan['penetapan'];
+                                                        ?>
+                                                        <br />
+                                                        RAB : <?php  echo "$rowA[rab]"; ?>
+                                                    </td>
+                                                    <td><?php echo $rowA['nokontrak'];?></td>
+                                                    <?php $sqlD = mysql_query ("SELECT * FROM realisasi where realisasi.randomid = '$rowA[randomid]'");?>
+                                                    <td>
+                                                        <?php 
+                                                        $kontrak = mysql_fetch_array(mysql_query("SELECT * FROM realisasi
+                                                        WHERE status = '9' AND randomid = '".$rowA['randomid']."'"));
+                                                        echo $kontrak['nilaikontrak']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php 
+                                                        $vendor = mysql_fetch_array(mysql_query("SELECT * FROM realisasi
+                                                        WHERE status = '9' AND randomid = '".$rowA['randomid']."'"));
+                                                        echo $vendor['namavendor']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php 
+                                                        $tgl = mysql_fetch_array(mysql_query("SELECT * FROM realisasi
+                                                        WHERE status = '9' AND randomid = '".$rowA['randomid']."'"));
+                                                        echo $tgl['tglkontrak']; ?>
+                                                    </td>
                                                     
                                                     <td class="center">
-                                                        </a>
-                                                        <a href="index.php?tambah-realisasi-ai" type="button"><i class="fa fa-plus fa-2x"></i></a>
-                                                         <a href="index.php?update-realisasi-ai=<?php echo $row["koderealisasi"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
-                                                         <a href="#" id="delete-realisasi=<?php echo $row["koderealisasi"]?>" class="delete">
+                                                        <!--
+                                                         <a href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                                                         -->
+                                                         <a href="index.php?tambah-penyerapan-ai=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-plus fa-2x"></i></a>
+                                                         <a href="index.php?update-penyerapan-ai=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+                                                         <a href="#" id="delete-penyerapan-ai=<?php echo $row["kodepym"]?>&delete-penyerapan-ang=<?php echo $row["kodedetail"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
                                                          </a>
                                                     </td>
@@ -109,12 +158,11 @@ WHERE jenis = 'AI' AND anggarandetail.status = '3'") or die (mysql_error());
         </div>
        </div>
     </div>
-<!--
 <script>
  $(document).on('click','.detail',function(e){
     e.preventDefault();
     $("#myModal1").modal('show');
-    $.post('page/ai/detail.php',
+    $.post('page/penyerapan/ai/detail.php',
     {id:$(this).attr('data-id')},
     function(html){
     $(".modal-body").html(html);
@@ -129,7 +177,7 @@ WHERE jenis = 'AI' AND anggarandetail.status = '3'") or die (mysql_error());
       
        <div class="modal-header bg-primary">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Detail Data Anggaran Investasi</h4>
+            <h4 class="modal-title">Detail Penyerapan AI</h4>
        </div>
       <div class="modal-body"></div>
       
@@ -138,7 +186,7 @@ WHERE jenis = 'AI' AND anggarandetail.status = '3'") or die (mysql_error());
     </div>
   </div>
 </div>
-</div> -->
+</div>
 <!-- confirm dell -->
 <script src="assets/confirmdell/js/script.js"></script>
 <!-- DATA TABLE SCRIPTS -->

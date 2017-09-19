@@ -13,7 +13,7 @@ if ($_GET['act']=='excel') {
 	header("Pragma: no-cache");
 	header("Cache-control: private");
 	header("Content-Type: application/vnd.ms-excel; name='excel'");
-	header("Content-disposition: attachment; filename=laporanAI.xls");
+	header("Content-disposition: attachment; filename=laporan_usulan_AI.xls");
 
 }
 else
@@ -36,7 +36,7 @@ echo '
 .style2 {font-family: Arial !important; font-size:12px !important; text-align: center !important; background-color: #ffd9b3 !important;}
 
 </style>
-<title>Laporan AI</title>
+<title>Laporan Usulan AI</title>
 <body>
     <table width="98%"  border="0">
         <tr>
@@ -44,19 +44,15 @@ echo '
                 <fieldset>
                      <center>
 						<legend class="style4">
-							<b>History AI
+							<b>History Usulan AI
 							<?php
 								$sql=mysql_query("SELECT
-                                anggarandetail.*,
-                                fungsi.fungsi,
-                                pos_anggaran.kode_posanggaran,
-                                pos_anggaran.posanggaran,
-                                fungsi.kodefungsi
-                                FROM
-                                anggarandetail
-                                INNER JOIN fungsi ON anggarandetail.kodefungsi = fungsi.kodefungsi
-                                INNER JOIN pos_anggaran ON anggarandetail.kode_posanggaran = pos_anggaran.kode_posanggaran WHERE jenis = 'AI'
-                                ") or die (mysql_error()); 
+                                    headeranggaran.*,
+                                    newdetailanggaran.*
+                                    FROM
+                                    newdetailanggaran
+                                    INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
+                                    WHERE jenis = 'AI' AND status IN ('0','1','2','3')") or die (mysql_error()); 
                             ?> 
                                 </legend></center>
                     <br>
@@ -67,11 +63,10 @@ echo '
                             <th width="8%">Nomor PRK</th>
                             <th width="14%">Nama Kegiatan</th>
                             <th width="9%">Target Tgl Mulai</th>
-                            <th width="10%">Tangal Pengajuan</th>
-                            <th width="13%">Harga Material Sebelum</th>
-                            <th width="13%">Harga Jasa Sebelum</th>
-                            <th width="13%">Harga Material Sesudah</th>
-                            <th width="13%">Harga Jasa Sesudah</th>
+                            <th width="13%">Jasa (usulan)</th>
+                            <th width="13%">Material (usulan)</th>
+                            <th width="13%">Hrg. Satuan Material (usulan)</th>
+                            <th width="13%">Hrg. Satuan Jasa (usulan)</th>
                         </tr>
                         <?php
                             if(mysql_num_rows($sql) > 0){
@@ -82,13 +77,12 @@ echo '
                                 <tr class="style1">
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $row['noprk'];?></td>
-                                    <td><?php echo $row['namakegiatan'];?></td>
+                                    <td><?php echo $row['uraiankegiatan'];?></td>
                                     <td><?php echo $row['tartglmulai'];?></td>
-                                    <td><?php echo $row['datetime'];?></td>
-                                    <td><?php echo $row['harsatmatbelum'];?></td>
-                                    <td><?php echo $row['harsatjasbelum'];?></td>
-                                    <td><?php echo $row['harsatmatsudah'];?></td>
-                                    <td><?php echo $row['harsatjassudah'];?></td>
+                                    <td><?php echo $row['volumejasa'];?></td>
+                                    <td><?php echo $row['volumematerial'];?></td>
+                                    <td><?php echo $row['hrgsatuanjasa'];?></td>
+                                    <td><?php echo $row['hrgsatuanmaterial'];?></td>
                                 </tr>
                         <?php $no++; } } else { ?>
                         <tr><td colspan="9" class="text-center"><i>Tabel data AI kosong</i></td></tr>

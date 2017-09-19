@@ -79,7 +79,7 @@ if(isset($_POST['kode'])) {
                                     <tr >
                                         
                                         <td><?php echo $no; ?></td>
-                                        <td><?php echo ($permintaan['uraiankegiatan']); ?></td>
+                                        <td><?php echo $permintaan['uraiankegiatan']; ?></td>
                                         <td><?php echo $permintaan['noprk']; ?></td>
                                         <td><?php echo $permintaan['volumejasa']; ?></td>
                                         <td><?php echo $permintaan['volumematerial']; ?></td>
@@ -104,7 +104,7 @@ if(isset($_POST['kode'])) {
                                            <?php } ?>
                                            <?php if ($permintaan['status'] == '6') {?><a href="#" class="evaluasi" id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal"><i class="fa fa-check square" aria-hidden="true"></i></a><?php } else{echo "";}?>
                                            
-                                           <a href="#" id="del-eva-rabai=<?php echo $row["kodedetail"]?>&del-eva-rabang=<?php echo $row["kodeanggaran"]?>" class="delete">
+                                           <a href="#" id="del-eva-rabai=<?php echo $permintaan["kodedetail"]?>" class="delete">
                                             <i class="fa fa-trash-o fa-2x"></i>
                                            </a>
                                         </td>

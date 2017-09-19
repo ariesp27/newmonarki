@@ -64,22 +64,22 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-6"><?php if($rowDetail["tartglmulai"]=="0000-00-00"){ }else{  echo tglindonesia($rowDetail["tartglmulai"]); } ?></div>
           </div>
           <div class="row">
-            <div class="col-md-5"><label>Jasa Sebelum</label></div>
+            <div class="col-md-5"><label>Jasa (usulan)</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["volumejasa"]; ?></div>
           </div>
           <div class="row">
-            <div class="col-md-5"><label>Material Sebelum</label></div>
+            <div class="col-md-5"><label>Material (usulan)</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["volumematerial"]; ?></div>
           </div>
           <div class="row">
-            <div class="col-md-5"><label>Hrg Satuan Material Sebelum</label></div>
+            <div class="col-md-5"><label>Hrg Satuan Material (usulan)</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["hrgsatuanmaterial"]; ?></div>
           </div>
           <div class="row">
-            <div class="col-md-5"><label>Hrg Satuan Jasa Sebelum</label></div>
+            <div class="col-md-5"><label>Hrg Satuan Jasa (usulan)</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["hrgsatuanjasa"]; ?></div>
           </div>
