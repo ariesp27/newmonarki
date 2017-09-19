@@ -23,6 +23,7 @@ $rowDetail     = mysql_fetch_array($sqldetail);
         <p class="text-center"><?php echo $rowDetail["images"]; ?></p>
     </div> -->
     <div class="col-md-9">
+    <!--
             <div class="row">
               <div class="col-md-5"><label>Kode Anggaran</label></div>
               <div class="col-md-1"> : </div>
@@ -38,6 +39,7 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["kodefungsi"]; ?></div>
           </div>
+    -->
           <div class="row">
             <div class="col-md-5"><label>Nomor PRK</label></div>
             <div class="col-md-1"> : </div>

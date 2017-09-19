@@ -72,11 +72,11 @@ SELECT
                                         <tr>
                                             <th width="2%">No</th>
                                             <th width="10%">Uraian Kegiatan</th>
-                                            <th width="8%">Nilai Anggaran</th>
                                             <th width="8%">Nomor Kontrak</th>
                                             <th width="8%">Nilai Kontrak</th>
                                             <th width="8%">Vendor</th>
                                             <th width="5%">Tanggal Kontrak</th>
+                                            <th width="8%">Nilai Penyerapan</th>
                                             <th width="3%">Aksi</th>
                                			</tr>
                                     </thead>
@@ -92,25 +92,7 @@ SELECT
                             					<tr>
                                                     <td><?php echo $no; ?></td>
                                                     <td><?php echo $rowA['uraiankegiatan'];?></td>
-                                                    <td>
-                                                        Penetapan : <?php 
-                                                       
-                                                        $penetapan = mysql_fetch_array(mysql_query("
-                                                            SELECT
-                                                            ((volumejasa*hrgsatuanjasa)+(volumematerial*hrgsatuanmaterial)) 'penetapan',
-                                                            newdetailanggaran.*
-                                                            FROM
-                                                            newdetailanggaran 
-                                                            INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-                                                            WHERE headeranggaran.jenis = 'AI' AND 
-                                                            newdetailanggaran.status = 4 AND                                                             
-                                                            newdetailanggaran.randomid = '".$rowA['randomid']."'
-                                                        "));
-                                                            echo $penetapan['penetapan'];
-                                                        ?>
-                                                        <br />
-                                                        RAB : <?php  echo "$rowA[rab]"; ?>
-                                                    </td>
+                                                    
                                                     <td><?php echo $rowA['nokontrak'];?></td>
                                                     <?php $sqlD = mysql_query ("SELECT * FROM realisasi where realisasi.randomid = '$rowA[randomid]'");?>
                                                     <td>
@@ -130,6 +112,15 @@ SELECT
                                                         $tgl = mysql_fetch_array(mysql_query("SELECT * FROM realisasi
                                                         WHERE status = '9' AND randomid = '".$rowA['randomid']."'"));
                                                         echo $tgl['tglkontrak']; ?>
+                                                    </td>
+                                                    <td>
+                                                    <?php 
+                                                        
+                                                        $tahap = mysql_query("SELECT * FROM pembayaran
+                                                        WHERE randomid = '".$rowA['randomid']."'");
+                                                        while($rowB=mysql_fetch_array($tahap)) {
+                                                        ?>Tahap ke-<?php echo $rowB['tahap']; ?>: &nbsp;<?php echo $rowB['jmlpym']; ?><br /><?php }?>
+                                                        
                                                     </td>
                                                     
                                                     <td class="center">

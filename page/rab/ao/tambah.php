@@ -43,7 +43,7 @@
         mysql_query ("INSERT INTO newdetailanggaran (kodedetail, kodeanggaran, hrgsatuanmaterial, volumematerial, hrgsatuanjasa, 
         volumejasa, randomid, status) VALUES ('','$x','$l','$m','$n','$o','$p','5')");
       
-        header("location:index.php?data-rab-ao&suksestambah");
+        header("location:index.php?data-penetapan-ao&suksestambah");
         
 }
 $idA = mysql_real_escape_string(trim($_GET["tambah-rab-ao"]));

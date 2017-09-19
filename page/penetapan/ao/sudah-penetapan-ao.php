@@ -155,10 +155,11 @@ or die (mysql_error());
                                                             <a href="index.php?penetapan-ai=<?php echo $row["kodedetail"]?>"
                                                             type="button"><i class="fa fa-thumbs-o-up fa-2x"></i></a>
                                                         <?php } else{echo "";}?>
-                                                        
+                                                        <!--
                                                          <a href="#" id="delsdh-penetapan-ao=<?php echo $row["kodedetail"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
                                                          </a>
+                                                         -->
                                                     </td>
                             					</tr>
                             				<?php $no++; } ?>

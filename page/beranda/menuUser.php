@@ -31,15 +31,15 @@
                 </ul>
         </li>
         <li>
-            <a href="#"><i class="fa fa-folder fa-2x"></i> Usulan RAB<span class=""></span></a>
+            <a href="#"><i class="fa fa-book fa-2x"></i> RAB<span class=""></span></a>
                 <ul>
                     <li><a href="#" class="back">Main Menu</a></li>
                         <li class="nav-label">RAB</li>
                         <li>
-                            <a href="index.php?rab-ai"><i class="fa fa-folder fa-2x"></i> AI</a>
+                            <a href="index.php?rab-ai"><i class="fa fa-book fa-2x"></i> AI</a>
                         </li>
                         <li>
-                            <a href="index.php?rab-ao"><i class="fa fa-folder fa-2x"></i> AO</a>
+                            <a href="index.php?rab-ao"><i class="fa fa-book fa-2x"></i> AO</a>
                         </li>
                 </ul>
         </li>

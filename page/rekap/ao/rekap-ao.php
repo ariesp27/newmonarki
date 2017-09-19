@@ -196,6 +196,9 @@ WHERE jenis = 'AO' AND status = '3'") or die (mysql_error());
                             				<?php $no++; } ?>
                                     </tbody>
                                 </table>
+                                <strong>U : Usulan</strong><br />
+                                <strong>P : Penetapan</strong><br />
+                                <strong>R : RAB</strong><br />
                             </div>
 
                         </div>

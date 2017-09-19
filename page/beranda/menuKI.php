@@ -22,10 +22,10 @@
                     <li><a href="#" class="back">Main Menu</a></li>
                         <li class="nav-label">Penetapan Anggaran</li>
                         <li>
-                            <a href="index.php?belum-penetapan-ai"><i class="fa fa-folder fa-2x"></i> AI</a>
+                            <a href="index.php?data-penetapan-ai"><i class="fa fa-folder fa-2x"></i> AI</a>
                         </li>
                         <li>
-                            <a href="index.php?belum-penetapan-ao"><i class="fa fa-folder fa-2x"></i> AO</a>
+                            <a href="index.php?data-penetapan-ao"><i class="fa fa-folder fa-2x"></i> AO</a>
                         </li>
                         <!--
                         <li>
@@ -64,44 +64,6 @@
                     </li>
                 </ul>
         </li>
-        <li>
-            <a href="#"><i class="fa fa-folder fa-2x"></i> Pengajuan Anggaran<span class=""></span></a>
-                <ul>
-                    <li><a href="#" class="back">Main Menu</a></li>
-                        <li class="nav-label">Pengajuan</li>
-                        <li>
-                            <a href="index.php?rab-ai"><i class="fa fa-folder fa-2x"></i> RAB AI</a>
-                        </li>
-                        <li>
-                            <a href="index.php?#"><i class="fa fa-folder fa-2x"></i> RAB AO</a>
-                        </li>
-                        <li>
-                            <a href="index.php?ai"><i class="fa fa-folder fa-2x"></i> AI</a>
-                        </li>
-                        <li>
-                            <a href="index.php?ao"><i class="fa fa-folder fa-2x"></i> AO</a>
-                        </li>
-                </ul>
-        </li>
-        <li>
-            <a href="#"><i class="fa fa-archive fa-2x" aria-hidden="true"></i> Aproval Anggaran<span class=""></span></a>
-                <ul >
-                    <li><a href="#" class="back">Main Menu</a></li>
-                    <li class="nav-label">Aproval</li>
-                    <li>
-                        <a href="index.php?monitor-approve"><i class="fa fa-archive fa-2x"></i> AI</a>
-                    </li>
-                    <li>
-                        <a href="index.php?monitor-approve-ao"><i class="fa fa-archive fa-2x"></i> AO</a>
-                    </li>
-                </ul>
-        </li>
-        <li>
-            <a href="index.php?realisasi"><i class="fa fa-map-o fa-2x"></i> Realisasi</a>
-        </li>
-        <li>
-            <a href="#"><i class="fa fa-tags fa-2x"></i> Penyerapan</a>
-        </li>
         -->
         <li>
             <a href="#"><i class="fa fa-map-o fa-2x"></i> Rekap Penetapan</a>
@@ -109,10 +71,10 @@
                     <li><a href="#" class="back">Main Menu</a></li>
                     <li class="nav-label">Rekap Penetapan</li>
                     <li>
-                        <a href="index.php?sudah-penetapan-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
+                        <a href="index.php?data-penetapan-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
                     </li>
                     <li>
-                        <a href="index.php?sudah-penetapan-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
+                        <a href="index.php?data-penetapan-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
                     </li>
             </ul>
         </li>

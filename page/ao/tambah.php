@@ -89,7 +89,7 @@
                         
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-8"> </br>
+                                        <div class="col-md-10"> </br>
                                                 <div class="col-md-4"><label>Nomor PRK</label></div>
                                                 <div class="col-md-8">
                                                     <input type="text"   name='noprk' class="form-control"  data-msg-required="Mohon masukkan nomor PRK" placeholder="masukkan nomor PRK" />
@@ -100,7 +100,7 @@
                                 
                                <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-8"> 
+                                        <div class="col-md-10"> 
                                             <div class="col-md-4"><label>Pos Anggaran</label></div>
                                             <div class="col-md-8">
                                                 <?php $sql = mysql_query("SELECT * FROM pos_anggaran") or die (mysql_error()); ?>
@@ -117,7 +117,7 @@
                                 
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-10">
                                                 <div class="col-md-4"><label>Fungsi</label></div>
                                                 <div class="col-md-8">
                                                     <?php $sql = mysql_query("SELECT * FROM fungsi") or die (mysql_error()); ?>
@@ -134,7 +134,7 @@
                                 
                                 <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-8"> 
+                                    <div class="col-md-10"> 
                                                 <div class="col-md-4"><label>Satuan</label></div>
                                                 <div class="col-md-8">
                                                     <?php $sql = mysql_query("SELECT * FROM satuan") or die (mysql_error()); ?>
@@ -151,7 +151,7 @@
                             
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-10">
                                                 <div class="col-md-4"><label>Uraian Kegiatan</label></div>
                                                 <div class="col-md-8">
                                                     <textarea name="uraiankegiatan" cols="22" rows="5" class="form-control"  data-msg-required="Mohon masukkan uraian kegiatan" placeholder="masukkan uraian kegiatan"></textarea>
@@ -162,7 +162,7 @@
                           
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-10">
                                                 <div class="col-md-4"><label>Durasi</label></div>
                                                 <div class="col-md-8">
                                                     <input type="text"   name='durasi' class="form-control"  data-msg-required="Mohon masukkan durasi" placeholder="masukkan durasi" />
@@ -173,7 +173,7 @@
                             
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-10">
                                                 <div class="col-md-4"><label>Target Tgl Mulai</label></div>
                                                 <div class="col-md-8">
                                                     <input  type="text" onKeyPress="return isNumberKeyTgl(event)" class="form-control" id="datepicker" name="tartglmulai" placeholder="masukkan target tanggal mulai" />
@@ -188,7 +188,7 @@
                             
                               <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-8"><br />
+                                    <div class="col-md-10"><br />
                                                 <div class="col-md-4"><label>Prioritas</label></div>
                                                 <div class="col-md-8">
                                                     <input type="text"   name='prioritas' class="form-control"  data-msg-required="Mohon masukkan prioritas " placeholder="masukkan prioritas " />
@@ -199,7 +199,7 @@
                             
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-10">
                                                 <div class="col-md-4"><label>Harga Satuan Material</label></div>
                                                 <div class="col-md-8">
                                                     <input type="text"   name='hrgsatuanmaterial' class="form-control"  data-msg-required="Mohon masukkan Harga satuan material " placeholder="masukkan Harga satuan material " />
@@ -210,7 +210,7 @@
                             
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-10">
                                                 <div class="col-md-4"><label>Volume Material</label></div>
                                                 <div class="col-md-8">
                                                     <input type="text"   name='volumematerial' class="form-control"  data-msg-required="Mohon masukkan Volume material " placeholder="masukkan Volume material " />
@@ -221,7 +221,7 @@
                             
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-10">
                                                 <div class="col-md-4"><label>Harga Satuan Jasa</label></div>
                                                 <div class="col-md-8">
                                                     <input type="text"   name='hrgsatuanjasa' class="form-control"  data-msg-required="Mohon masukkan Harga satuan jasa " placeholder="masukkan Harga satuan jasa " />
@@ -232,7 +232,7 @@
                             
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-10">
                                                 <div class="col-md-4"><label>Volume Jasa</label></div>
                                                 <div class="col-md-8">
                                                     <input type="text"   name='volumejasa' class="form-control"  data-msg-required="Mohon masukkan Volume jasa " placeholder="masukkan Volume jasa " />

@@ -82,20 +82,20 @@ or die (mysql_error());
                                                     <td><?php echo $row['uraiankegiatan'];?></td>
                                                     <td><?php echo $row['noprk'];?></td>
                                                     <td align="left">
-                                                        U: <?php echo "Rp ".number_format($row['volumejasa'],0,'','.'); ?>
+                                                        U: <?php echo $row['volumejasa']; ?>
                                                         <br />
                                                         P: <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
-                                                        echo "Rp ".number_format( $penetapan['volumejasa'],0,'','.'); ?>
+                                                        echo $penetapan['volumejasa']; ?>
                                                     </td>
                                                     <td align="left">
-                                                        U: <?php echo "Rp ".number_format($row['volumematerial'],0,'','.'); ?>
+                                                        U: <?php echo $row['volumematerial']; ?>
                                                         <br />
                                                         P: <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
-                                                        echo "Rp ".number_format( $penetapan['volumematerial'],0,'','.'); ?>
+                                                        echo $penetapan['volumematerial']; ?>
                                                     </td>
                                                     <td align="left">
                                                         U: <?php echo "Rp ".number_format($row['hrgsatuanmaterial'],0,'','.'); ?>
@@ -149,10 +149,13 @@ or die (mysql_error());
                                                             <i class="glyphicon glyphicon-zoom-in fa-2x"></i></a>
                                                         <?php } else{echo "";}?>
                                                         
-                                                        <?php if ($row['status'] == '3') {?>
-                                                            <a href="index.php?penetapan-ai=<?php echo $row["kodedetail"]?>"
-                                                            type="button"><i class="fa fa-thumbs-o-up fa-2x"></i></a>
-                                                        <?php } else{echo "";}?>
+                                                        <?php 
+                                                            $sqlA = mysql_query("SELECT * FROM newdetailanggaran WHERE randomid = '".$row['randomid']."' ORDER BY status DESC");
+                                                            $rowA = mysql_fetch_array($sqlA);
+                                                                if ($rowA['status'] == '3') { ?>
+                                                                <a href="index.php?penetapan-ai=<?php echo $row["kodedetail"]?>"
+                                                                type="button"><i class="fa fa-thumbs-o-up fa-2x"></i></a>
+                                                        <?php } ?>
                                                         
                                                          <a href="#" id="delblm-penetapan-ai=<?php echo $row["kodedetail"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
@@ -161,7 +164,11 @@ or die (mysql_error());
                             					</tr>
                             				<?php $no++; } ?>
                                     </tbody>
+                                    
                                 </table>
+                                    <strong>U : Usulan</strong><br />
+                                    <strong>P : Penetapan</strong><br />
+                                    <strong>R : RAB</strong><br />
                             </div>
 
                         </div>

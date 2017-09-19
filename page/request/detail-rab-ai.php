@@ -12,7 +12,7 @@ disburst.*
 FROM newdetailanggaran
 INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
 INNER JOIN disburst ON newdetailanggaran.randomid = disburst.randomid 
-WHERE status = '5' AND newdetailanggaran.kodedetail = '$detail'");
+WHERE status = '6' AND newdetailanggaran.kodedetail = '$detail'");
 
 $rowDetail     = mysql_fetch_array($sqldetail);
 
@@ -45,6 +45,7 @@ WHERE status IN ('5','6','7','8') AND newdetailanggaran.randomid = '$rowDetail[r
         <p class="text-center"><?php echo $rowDetail["images"]; ?></p>
     </div> -->
     <div class="col-md-9">
+    <!--
             <div class="row">
               <div class="col-md-5"><label>Kode Anggaran</label></div>
               <div class="col-md-1"> : </div>
@@ -60,6 +61,7 @@ WHERE status IN ('5','6','7','8') AND newdetailanggaran.randomid = '$rowDetail[r
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["kodefungsi"]; ?></div>
           </div>
+    -->
           <div class="row">
             <div class="col-md-5"><label>Nomor PRK</label></div>
             <div class="col-md-1"> : </div>

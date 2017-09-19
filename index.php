@@ -80,7 +80,25 @@ $( "" ).click(function( eventObject ) {
 
              <li class="dropdown">
                     <a  title="Panel Pengaturan Akun" class="dropdown-toggle putih" data-toggle="dropdown" href="#">
-                        <strong style="padding: 2px 0;"><?php echo $_SESSION["nama"];?></strong> &nbsp;
+                        <strong style="padding: 2px 0;">
+                        <?php 
+                            if ($_SESSION['jenisuser'] == 'app') {
+                                $row = mysql_fetch_array(mysql_query("SELECT master.app.* FROM master.app WHERE master.app.kodeapp = $_SESSION[kodeapp]"));
+                                if ($_SESSION['level'] == 'manajer') {
+                                    ?>Manajer <?php echo $row['namaapp'];
+                                } 
+                                else if  ($_SESSION['level'] == 'asman') {
+                                    ?>Assman <?php echo $row['namaapp'];
+                                }
+                                else {
+                                    ?>Admin <?php echo $row['namaapp'];
+                                }
+                            }
+                            else {
+                                ?>Admin Kantor Induk<?php 
+                            }
+                        ?>
+                        </strong> &nbsp;
                     </a>
                     <!--
                     <ul class="dropdown-menu dropdown-user">
@@ -141,21 +159,17 @@ $( "" ).click(function( eventObject ) {
             else if (isset($_GET["form-monitorevaluasi-ao"])) require_once("page/evaluasi/ao/pro-updated-form-ao.php");
             else if (isset($_GET["detail-evaluasi-ao"])) require_once("page/evaluasi/ao/detail-ao.php");
             //proses penetapan KI
-            else if (isset($_GET["belum-penetapan-ai"])){include "page/penetapan/ai/belum-penetapan-ai.php";}
+            else if (isset($_GET["data-penetapan-ai"])){include "page/penetapan/ai/belum-penetapan-ai.php";}
             else if (isset($_GET["penetapan-ai"])){include "page/penetapan/ai/penetapan.php";}
-            else if (isset($_GET["sudah-penetapan-ai"])){include "page/penetapan/ai/sudah-penetapan-ai.php";}
-            else if (isset($_GET["belum-penetapan-ao"])){include "page/penetapan/ao/belum-penetapan-ao.php";}
+            else if (isset($_GET["data-penetapan-ao"])){include "page/penetapan/ao/belum-penetapan-ao.php";}
             else if (isset($_GET["penetapan-ao"])){include "page/penetapan/ao/penetapan-ao.php";}
-            else if (isset($_GET["sudah-penetapan-ao"])){include "page/penetapan/ao/sudah-penetapan-ao.php";}
             //input RAB user
             else if (isset($_GET["rab-ai"])){include "page/rab/ai/data-penetapan.php";}
             else if (isset($_GET["tambah-rab-ai"])){include "page/rab/ai/tambah.php";}
             else if (isset($_GET["update-rab-ai"])){include "page/rab/ai/update.php";}
-            else if (isset($_GET["data-rab-ai"])){include "page/rab/ai/data-rab-ai.php";}
             else if (isset($_GET["rab-ao"])){include "page/rab/ao/data-penetapan-ao.php";}
             else if (isset($_GET["tambah-rab-ao"])){include "page/rab/ao/tambah.php";}
             else if (isset($_GET["update-rab-ao"])){include "page/rab/ao/update.php";}
-            else if (isset($_GET["data-rab-ao"])){include "page/rab/ao/data-rab-ao.php";}
             //approve RAB mapp
             else if (isset($_GET["monitor-rab-ai"])) require_once("page/request/pro-approve-rab.php");
             else if (isset($_GET["approve-rab"])) require_once("page/request/form-app-rab.php");

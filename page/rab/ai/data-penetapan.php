@@ -187,8 +187,12 @@ WHERE jenis = 'AI' AND status = '3'") or die (mysql_error());
                                                          <a href="#" class="detail" data-id="<?php echo $row["kodedetail"]; ?>" role="button" data-toggle="modal">
                                                             <i class="glyphicon glyphicon-zoom-in fa-2x"></i>
                                                          </a>
+                                                         <?php 
+                                                                $sqlA = mysql_query("SELECT * FROM newdetailanggaran WHERE randomid = '".$row['randomid']."' ORDER BY status DESC");
+                                                                $rowA = mysql_fetch_array($sqlA);
+                                                         if ($rowA['status'] == '4') {?>
                                                          <a href="index.php?tambah-rab-ai=<?php echo $row["randomid"]?>" type="button"><i class="fa fa-plus fa-2x"></i></a>
-                                                         
+                                                         <?php } ?>
                                                          <a href="index.php?update-rab-ai=<?php echo $row["randomid"]?>&status=5" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
                                                          <a href="#" id="delete-rab-ai=<?php echo $row["kodedetail"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
@@ -198,6 +202,9 @@ WHERE jenis = 'AI' AND status = '3'") or die (mysql_error());
                             				<?php $no++; } ?>
                                     </tbody>
                                 </table>
+                                <strong> U : Usulan</strong><br />
+                                <strong> P : Penetapan</strong><br />
+                                <strong> R : RAB</strong><br />
                             </div>
 
                         </div>

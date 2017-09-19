@@ -24,6 +24,7 @@ $rowDetail     = mysql_fetch_array($sqldetail);
         <p class="text-center"><?php echo $rowDetail["images"]; ?></p>
     </div> -->
     <div class="col-md-9">
+    <!--
             <div class="row">
               <div class="col-md-5"><label>Kode Anggaran</label></div>
               <div class="col-md-1"> : </div>
@@ -39,6 +40,7 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["kodefungsi"]; ?></div>
           </div>
+    -->
           <div class="row">
             <div class="col-md-5"><label>Nomor PRK</label></div>
             <div class="col-md-1"> : </div>
@@ -84,94 +86,6 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["hrgsatuanjasa"]; ?></div>
           </div>
-          <!--
-          <div class="row">
-            <div class="col-md-5"><label>Satuan Sesudah</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["satuansesudah"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Volume Sesudah</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["volumesesudah"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Harga Satuan Material Sesudah</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["harsatmatsudah"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Harga Satuan Jasa Sesudah</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["harsatjassudah"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Realisasi</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["realisasi"]; ?></div>
-          </div>
-          
-          <div class="row">
-            <div class="col-md-5"><label>Disburst Januari</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["jan"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Disburst Februari</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["feb"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Disburst Maret</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["mar"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Disbursi April</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["apr"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Disbursi Mei</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["mei"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Disbursi Juni</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["jun"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Disbursi Juli</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["jul"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Disbursi Agustus</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["agu"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Disbursi September</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["sep"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Disburst Oktober</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["okt"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Disburst November</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["nov"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Disburst Desember</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["des"]; ?></div>
-          </div>
-          -->
           <div class="row">
             <div class="col-md-5"><label>Status</label></div>
             <div class="col-md-1"> : </div>
@@ -187,11 +101,6 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-5"><label>Edit by</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["editby"]; ?></div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"><label>Date Time</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php if($rowDetail["datetime"]=="0000-00-00"){ }else{  echo tglindonesia($rowDetail["datetime"]); } ?></div>
           </div>
           -->
     </div>

@@ -26,7 +26,7 @@
         mysql_query ("INSERT INTO newdetailanggaran (kodedetail, kodeanggaran, hrgsatuanmaterial, volumematerial, hrgsatuanjasa, 
         volumejasa, randomid, status) VALUES ('','$x','$l','$m','$n','$o','$p','4')");
       
-        header("location:index.php?sudah-penetapan-ao&suksestambah");
+        header("location:index.php?data-penetapan-ao&suksestambah");
         
 }
 $idA = (int)mysql_real_escape_string(trim($_GET["penetapan-ao"]));
@@ -237,7 +237,7 @@ $rowA = mysql_fetch_array($sqlA);
                                             <div class="col-md-9">
                                                 <div class="col-md-4"><label>Usulan Jasa</label></div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" name="volumejasa" type="text"  data-rule-required="true" value="<?php echo $rowA["volumejasa"]; ?>" data-msg-required="Mohon masukkan volume jasa." placeholder="masukkan volume jasa" />
+                                                    <input class="form-control" name="volumejasa" type="text" disabled="" data-rule-required="true" value="<?php echo $rowA["volumejasa"]; ?>" data-msg-required="Mohon masukkan volume jasa." placeholder="masukkan volume jasa" />
                                                 </div>
                                             </div>
                                             </div>
@@ -248,7 +248,7 @@ $rowA = mysql_fetch_array($sqlA);
                                             <div class="col-md-9">
                                                 <div class="col-md-4"><label>Usulan Material</label></div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" name="volumematerial" type="text"  data-rule-required="true" value="<?php echo $rowA["volumematerial"]; ?>" data-msg-required="Mohon masukkan volume material." placeholder="masukkan voluem material" />
+                                                    <input class="form-control" name="volumematerial" type="text" disabled="" data-rule-required="true" value="<?php echo $rowA["volumematerial"]; ?>" data-msg-required="Mohon masukkan volume material." placeholder="masukkan voluem material" />
                                                 </div>
                                             </div>
                                             </div>
@@ -290,7 +290,7 @@ $rowA = mysql_fetch_array($sqlA);
                                                 <div class="col-lg-6"></div>
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     <button type="submit" name="submit" class="btn btn-large btn-success">Simpan</button>
-                                                    <a href="index.php?belum-penetapan-ao" class="btn btn-large btn-warning">Kembali</a>
+                                                    <a href="index.php?data-penetapan-ao" class="btn btn-large btn-warning">Kembali</a>
                                             </div>
                                         
                                 
