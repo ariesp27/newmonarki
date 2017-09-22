@@ -77,14 +77,20 @@ if(isset($_POST['kode'])) {
                                     <tr >
                                         
                                         <td><?php echo $no; ?></td>
-                                        <td><?php echo ($permintaan['uraiankegiatan']); ?></td>
+                                        <td><?php echo $permintaan['uraiankegiatan']; ?></td>
                                         <td><?php echo $permintaan['noprk']; ?></td>
                                         <td><?php echo $permintaan['volumejasa']; ?></td>
                                         <td><?php echo $permintaan['volumematerial']; ?></td>
-                                        <td><?php echo $permintaan['hrgsatuanjasa']; ?></td>
-                                        <td><?php echo $permintaan['hrgsatuanmaterial']; ?></td>
-                                        <td><?php echo $permintaan['volumematerial']*$permintaan['hrgsatuanmaterial'];?></td>
-                                        <td><?php echo $permintaan['volumejasa']*$permintaan['hrgsatuanjasa'];?></td>
+                                        <td><?php echo "Rp ".number_format ($permintaan['hrgsatuanjasa']); ?></td>
+                                        <td><?php echo "Rp ".number_format ($permintaan['hrgsatuanmaterial']); ?></td>
+                                        <td>
+                                            <?php $a = $permintaan['volumematerial']*$permintaan['hrgsatuanmaterial'];
+                                            echo "Rp ". number_format($a); ?>
+                                        </td>
+                                        <td>
+                                            <?php $b = $permintaan['volumejasa']*$permintaan['hrgsatuanjasa'];
+                                            echo "Rp ". number_format($b); ?>
+                                        </td>
 										<td>
                                             <?php if ($permintaan['status'] == '1') {echo "Belum evaluasi";}
                                             else if ($permintaan['status'] == '3') {echo "Terevaluasi";}
@@ -93,9 +99,11 @@ if(isset($_POST['kode'])) {
                                         
                                         <td hidden="status" align="center"><strong><?php echo strtoupper($permintaan["status"]); ?></strong></td>
                                         <td align="center">
-                                           <a href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                                           <?php if ($permintaan['status'] == '1') {?><a href="#" class="evaluasi" id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal"><i class="fa fa-check square" aria-hidden="true"></i></a><?php } else{echo "";}?>
-                                           <a href="#" id="delete-evaluasi-ai=<?php echo $permintaan["kodedetail"]?>" class="delete">
+                                           <a title="detail" href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                                           <?php if ($permintaan['status'] == '1') {?><a title="evaluasi" href="#" class="evaluasi" id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal"><i class="fa fa-check square" aria-hidden="true"></i></a><?php } else{echo "";}?>
+                                           <?php $delete = mysql_query("SELECT * FROM newdetailanggaran WHERE status = '3' AND randomid = '".$permintaan['randomid']."'");
+                                           $rowC = mysql_fetch_array($delete);?>
+                                           <a title="delete" href="#" id="delete-evaluasi-ai=<?php echo $rowC["kodedetail"]?>" class="delete">
                                             <i class="fa fa-trash-o fa-2x"></i>
                                            </a>
                                         </td>

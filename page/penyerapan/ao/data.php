@@ -72,11 +72,11 @@ SELECT
                                         <tr>
                                             <th width="2%">No</th>
                                             <th width="10%">Uraian Kegiatan</th>
-                                            <th width="8%">Nilai Anggaran</th>
                                             <th width="8%">Nomor Kontrak</th>
                                             <th width="8%">Nilai Kontrak</th>
                                             <th width="8%">Vendor</th>
                                             <th width="5%">Tanggal Kontrak</th>
+                                            <th width="8%">Nilai Penyerapan</th>
                                             <th width="3%">Aksi</th>
                                			</tr>
                                     </thead>
@@ -92,32 +92,14 @@ SELECT
                             					<tr>
                                                     <td><?php echo $no; ?></td>
                                                     <td><?php echo $rowA['uraiankegiatan'];?></td>
-                                                    <td>
-                                                        Penetapan : <?php 
-                                                       
-                                                        $penetapan = mysql_fetch_array(mysql_query("
-                                                            SELECT
-                                                            ((volumejasa*hrgsatuanjasa)+(volumematerial*hrgsatuanmaterial)) 'penetapan',
-                                                            newdetailanggaran.*
-                                                            FROM
-                                                            newdetailanggaran 
-                                                            INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-                                                            WHERE headeranggaran.jenis = 'AO' AND 
-                                                            newdetailanggaran.status = 4 AND                                                             
-                                                            newdetailanggaran.randomid = '".$rowA['randomid']."'
-                                                        "));
-                                                            echo $penetapan['penetapan'];
-                                                        ?>
-                                                        <br />
-                                                        RAB : <?php  echo "$rowA[rab]"; ?>
-                                                    </td>
+                                                    
                                                     <td><?php echo $rowA['nokontrak'];?></td>
                                                     <?php $sqlD = mysql_query ("SELECT * FROM realisasi where realisasi.randomid = '$rowA[randomid]'");?>
                                                     <td>
                                                         <?php 
                                                         $kontrak = mysql_fetch_array(mysql_query("SELECT * FROM realisasi
                                                         WHERE status = '9' AND randomid = '".$rowA['randomid']."'"));
-                                                        echo $kontrak['nilaikontrak']; ?>
+                                                        echo "Rp ".number_format($kontrak['nilaikontrak']); ?>
                                                     </td>
                                                     <td>
                                                         <?php 
@@ -131,14 +113,25 @@ SELECT
                                                         WHERE status = '9' AND randomid = '".$rowA['randomid']."'"));
                                                         echo $tgl['tglkontrak']; ?>
                                                     </td>
+                                                    <td>
+                                                    <?php 
+                                                        
+                                                        $tahap = mysql_query("SELECT * FROM pembayaran
+                                                        WHERE randomid = '".$rowA['randomid']."'");
+                                                        while($rowB=mysql_fetch_array($tahap)) {
+                                                        ?>Tahap ke-<?php echo "Rp ".number_format($rowB['tahap']); ?>: &nbsp;<?php echo "Rp ".number_format($rowB['jmlpym']); ?><br /><?php }?>
+                                                        
+                                                    </td>
                                                     
                                                     <td class="center">
                                                         <!--
                                                          <a href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
                                                          -->
-                                                         <a href="index.php?tambah-penyerapan-ao=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-plus fa-2x"></i></a>
-                                                         <a href="index.php?update-penyerapan-ao=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
-                                                         <a href="#" id="delete-penyerapan-ao=<?php echo $row["kodepym"]?>&delete-penyerapan-ango=<?php echo $row["kodedetail"]?>" class="delete">
+                                                         <a title="tambah" href="index.php?tambah-penyerapan-ao=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-plus fa-2x"></i></a>
+                                                         <a title="update" href="index.php?update-penyerapan-ao=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+                                                         <?php $delete = mysql_query("SELECT * FROM pembayaran WHERE randomid = '".$rowA['randomid']."'");
+                                                         $rowC = mysql_fetch_array($delete);?>
+                                                         <a title="delete" href="#" id="delete-penyerapan-ao=<?php echo $rowC["kodepym"]?>&delete-detail-ao=<?php echo $rowA["kodedetail"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
                                                          </a>
                                                     </td>
@@ -162,7 +155,7 @@ SELECT
  $(document).on('click','.detail',function(e){
     e.preventDefault();
     $("#myModal1").modal('show');
-    $.post('page/penyerapan/ai/detail.php',
+    $.post('page/penyerapan/ao/detail.php',
     {id:$(this).attr('data-id')},
     function(html){
     $(".modal-body").html(html);

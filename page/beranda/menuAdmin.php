@@ -98,19 +98,19 @@
                         <li class="nav-label"> Laporan Realisasi</li>
                         <li>
                             <li>
-                                <a href="#"><i class="fa fa-file-text fa-2x"></i>  AI</a>
+                                <a href="index.php?lap-realisasi-ai"><i class="fa fa-file-text fa-2x"></i>  AI</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-file-text fa-2x"></i>  AO</a>
+                                <a href="index.php?lap-realisasi-ao"><i class="fa fa-file-text fa-2x"></i>  AO</a>
                             </li>
                         </li>
                         <li class="nav-label"> Laporan Penyerapan</li>
                         <li>
                             <li>
-                                <a href="#"><i class="fa fa-file-text fa-2x"></i>  AI</a>
+                                <a href="index.php?lap-serapan-ai"><i class="fa fa-file-text fa-2x"></i>  AI</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-file-text fa-2x"></i>  AO</a>
+                                <a href="index.php?lap-serapan-ao"><i class="fa fa-file-text fa-2x"></i>  AO</a>
                             </li>
                          </li>
                 </ul>

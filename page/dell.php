@@ -58,38 +58,26 @@ else if(isset($_GET["delblm-penetapan-ao"])){
     mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idD'") or die(mysql_error());
     header("location:../index.php?belum-penetapan-ao&sukseshapus");
 }
-else if(isset($_GET["delsdh-penetapan-ai"])){
-    $idD = mysql_real_escape_string(trim($_GET["delsdh-penetapan-ai"]));
-    
-    mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idD'") or die(mysql_error());
-    header("location:../index.php?sudah-penetapan-ai&sukseshapus");
-}
-else if(isset($_GET["delsdh-penetapan-ao"])){
-    $idD = mysql_real_escape_string(trim($_GET["delsdh-penetapan-ao"]));
-    
-    mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idD'") or die(mysql_error());
-    header("location:../index.php?sudah-penetapan-ao&sukseshapus");
-}
 else if(isset($_GET["delete-rab-ai"])){
     $idD = mysql_real_escape_string(trim($_GET["delete-rab-ai"]));
     
     mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idD'") or die(mysql_error());
-    header("location:../index.php?data-rab-ai&sukseshapus");
+    header("location:../index.php?rab-ai&sukseshapus");
 }
 else if(isset($_GET["delete-rab-ao"])){
     $idD = mysql_real_escape_string(trim($_GET["delete-rab-ao"]));
     
     mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idD'") or die(mysql_error());
-    header("location:../index.php?data-rab-ao&sukseshapus");
+    header("location:../index.php?rab-ao&sukseshapus");
 }
-else if(isset($_GET["delete-apprab-ai"])){
-    $idD = mysql_real_escape_string(trim($_GET["delete-apprab-ai"]));
+else if(isset($_GET["del-apprab-ai"])){
+    $idD = mysql_real_escape_string(trim($_GET["del-apprab-ai"]));
     
     mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idD'") or die(mysql_error());
     header("location:../index.php?monitor-rab-ai&sukseshapus");
 }
-else if(isset($_GET["delete-apprab-ao"])){
-    $idD = mysql_real_escape_string(trim($_GET["delete-apprab-ao"]));
+else if(isset($_GET["del-apprab-ao"])){
+    $idD = mysql_real_escape_string(trim($_GET["del-apprab-ao"]));
     
     mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idD'") or die(mysql_error());
     header("location:../index.php?monitor-rab-ao&sukseshapus");
@@ -124,18 +112,18 @@ else if(isset($_GET["delete-realisasi-ao"])){
 }
 else if(isset($_GET["delete-penyerapan-ai"])){
     $idD = mysql_real_escape_string(trim($_GET["delete-penyerapan-ai"]));
-    $idE = mysql_real_escape_string(trim($_GET["delete-penyerapan-ang"]));
+    $idE = mysql_real_escape_string(trim($_GET["delete-detail-ai"]));
 
     mysql_query("DELETE FROM pembayaran WHERE kodepym ='$idD'") or die(mysql_error());
-    mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idE'") or die(mysql_error());
+    mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idD'") or die(mysql_error());
     header("location:../index.php?penyerapan&sukseshapus");
 }
 else if(isset($_GET["delete-penyerapan-ao"])){
     $idD = mysql_real_escape_string(trim($_GET["delete-penyerapan-ao"]));
-    $idE = mysql_real_escape_string(trim($_GET["delete-penyerapan-ango"]));
+    $idE = mysql_real_escape_string(trim($_GET["delete-detail-ao"]));
 
     mysql_query("DELETE FROM pembayaran WHERE kodepym ='$idD'") or die(mysql_error());
-    mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idE'") or die(mysql_error());
+    mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idD'") or die(mysql_error());
     header("location:../index.php?penyerapan-ao&sukseshapus");
 }
 else if(isset($_GET["delete-fungsi"])){

@@ -71,8 +71,8 @@ $sql = mysql_query("SELECT * from fungsi ORDER BY kodefungsi asc ") or die (mysq
                                                     <td><?php echo $row['fungsi'];?></td>
 
                                                     <td class="center">
-                                                        <a href="index.php?update-fungsi=<?php echo $row["kodefungsi"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
-                                                         <a href="#" id="delete-fungsi=<?php echo $row["kodefungsi"]?>" class="delete">
+                                                        <a title="update" href="index.php?update-fungsi=<?php echo $row["kodefungsi"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+                                                         <a title="delete" href="#" id="delete-fungsi=<?php echo $row["kodefungsi"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
                                                          </a>
                                                     </td>

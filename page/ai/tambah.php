@@ -211,7 +211,7 @@
                                     <div class="col-md-10">
                                                 <div class="col-md-4"><label>Harga Satuan Material</label></div>
                                                 <div class="col-md-8">
-                                                    <input type="text"   name='hrgsatuanmaterial' class="form-control"  data-msg-required="Mohon masukkan Harga satuan material " placeholder="masukkan Harga satuan material " />
+                                                    <input type="text"   name='hrgsatuanmaterial' class="form-control"  onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Harga satuan material " placeholder="masukkan Harga satuan material " />
                                                 </div>
                                     </div>
                                 </div>
@@ -222,7 +222,7 @@
                                     <div class="col-md-10">
                                                 <div class="col-md-4"><label>Volume Material</label></div>
                                                 <div class="col-md-8">
-                                                    <input type="text"   name='volumematerial' class="form-control"  data-msg-required="Mohon masukkan Volume material " placeholder="masukkan Volume material " />
+                                                    <input type="text"   name='volumematerial' class="form-control"  onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Volume material " placeholder="masukkan Volume material " />
                                                 </div>
                                     </div>
                                 </div>
@@ -233,7 +233,7 @@
                                     <div class="col-md-10">
                                                 <div class="col-md-4"><label>Harga Satuan Jasa</label></div>
                                                 <div class="col-md-8">
-                                                    <input type="text"   name='hrgsatuanjasa' class="form-control"  data-msg-required="Mohon masukkan Harga satuan jasa " placeholder="masukkan Harga satuan jasa " />
+                                                    <input type="text"   name='hrgsatuanjasa' class="form-control" onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Harga satuan jasa " placeholder="masukkan Harga satuan jasa " />
                                                 </div>
                                     </div>
                                 </div>
@@ -244,7 +244,7 @@
                                     <div class="col-md-10">
                                                 <div class="col-md-4"><label>Volume Jasa</label></div>
                                                 <div class="col-md-8">
-                                                    <input type="text"   name='volumejasa' class="form-control"  data-msg-required="Mohon masukkan Volume jasa " placeholder="masukkan Volume jasa " />
+                                                    <input type="text"   name='volumejasa' class="form-control" onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Volume jasa " placeholder="masukkan Volume jasa " />
                                                 </div>
                                     </div>
                                 </div>
@@ -255,7 +255,7 @@
                                     <div class="col-md-10"><br />
                                         <div class="col-md-4"><label>KKO</label></div>
                                             <div class="col-md-8">
-                                                <input type="file" name="uploadkko" id="uploadkko"/>
+                                                <input type="file" name="uploadkko" id="uploadkko" onchange="checkextension()"/>
                                             </div>
                                     </div>
                                 </div>
@@ -266,7 +266,7 @@
                                     <div class="col-md-10">
                                         <div class="col-md-4"><label>KKF</label></div>
                                             <div class="col-md-8">
-                                                <input type="file" name="uploadkkf" id="uploadkkf"/>
+                                                <input type="file" name="uploadkkf" id="uploadkkf" onchange="checkextension2()"/>
                                             </div>
                                     </div>
                                 </div>
@@ -297,41 +297,67 @@
     });
 </script>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="assets/validasi/jquery.validate.min.js"></script>
 <script type="text/javascript">
-    $('#validate-me-plz').validate({
-        rules: {
-            field: {
-                required: true,
-                date: true
-            },
-            alamat: {
-                required: true
-            }
-        },
-        messages: {
-            alamat: {
-                required: "Mohon masukkan data AI"
-            }
+$('#input01').filestyle();
+  $('#validasi').validate({
+      rules: {
+        field: {
+          required: true,
+          date: true
         }
-    });
-
-    $('#fileToUpload').filestyle();
-    $('#fileToUpload').change(function(){
-        var file = $('#fileToUpload').val();
-        var exts = ['jpg','jpeg'];
-        if ( file ) {
-            var get_ext = file.split('.');
-            get_ext = get_ext.reverse();
-            if ( $.inArray ( get_ext[0].toLowerCase(), exts ) > -1 ){
-                return true;
-            }
-            else
-            {
-                alert('Hanya boleh jpg ');
-                $('#fileToUpload').filestyle('clear');
-            }
-        }
+      }
     });
 </script>
+
+<script>
+//style upload
+$('#input01').filestyle();
+
+function checkextension() {
+  var file = document.querySelector("#uploadkko");
+  
+  if ( /\.(doc)$/i.test(file.files[0].name) === false ) { 
+    //alert("maaf file harus .pdf!");
+    if ( /\.(pdf)$/i.test(file.files[0].name) === false ) { 
+            $('#myModal').modal('show') 
+            eraseText() 
+        }
+    
+    }
+}
+function checkextension2() {
+  var file = document.querySelector("#uploadkkf");
+  
+  if ( /\.(doc)$/i.test(file.files[0].name) === false ) { 
+    //alert("maaf file harus .pdf!");
+    if ( /\.(pdf)$/i.test(file.files[0].name) === false ) { 
+            $('#myModal').modal('show') 
+            eraseText2() 
+        }
+    
+    }
+}
+function eraseText2() {
+    document.getElementById("uploadkkf").value = "";
+}
+function eraseText() {
+    document.getElementById("uploadkko").value = "";
+}
+</script>
+
+<!-- Modal Popup upload-->
+    <div class="modal fade " id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content " style="margin-top:100px; border-radius: 0px;">
+          <div class="modal-header bg-warning">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" style="text-align:center; ">File upload hanya .pdf & .doc</h4>
+          </div>
+
+          <div class="modal-footer bg-warning" style="margin:0px; border-top:0px; ">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          </div>
+        </div>
+      </div>
+    </div>

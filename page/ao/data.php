@@ -57,7 +57,7 @@ OR jenis = 'AO' AND status = '3'
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="datatabel">
+                                <table class="table table-striped table-bordered table-hover" id="datatabel1">
                                     <thead>
                                         <tr>
                                             <th class="text-center" width="2%">No</th>
@@ -85,10 +85,16 @@ OR jenis = 'AO' AND status = '3'
                                                     <td><?php echo $row['noprk'];?></td>
                                                     <td class="text-center"><?php echo $row['volumejasa'];?></td>
                                                     <td class="text-center"><?php echo $row['volumematerial'];?></td>
-                                                    <td><?php echo $row['hrgsatuanmaterial'];?></td>
-                                                    <td><?php echo $row['hrgsatuanjasa'];?></td>
-                                                    <td><?php echo $row['volumematerial']*$row['hrgsatuanmaterial'];?></td>
-                                                    <td><?php echo $row['volumejasa']*$row['hrgsatuanjasa'];?></td>
+                                                     <td><?php echo "Rp ".number_format($row['hrgsatuanmaterial']);?></td>
+                                                    <td><?php echo "Rp ".number_format($row['hrgsatuanjasa']);?></td>
+                                                    <td>
+                                                        <?php $a = $row['volumematerial']*$row['hrgsatuanmaterial'];
+                                                        echo "Rp ". number_format($a); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php $b = $row['volumejasa']*$row['hrgsatuanjasa'];
+                                                        echo "Rp ". number_format($b); ?>
+                                                    </td>
                                                     <td>
                                                     <?php if ($row['status'] == '0') {echo "Usulan";}
                                                     else if ($row['status'] == '1') {echo "Approve";}
@@ -96,14 +102,12 @@ OR jenis = 'AO' AND status = '3'
                                                     else if ($row['status'] == '3') {echo "Terevaluasi";}
                                                     ?></td>
                                                     <td class="center">
-                                                        <a href="#" class="detail" data-id="<?php echo $row["kodedetail"]; ?>" role="button" data-toggle="modal">
+                                                         <a title="detail" href="#" class="detail" data-id="<?php echo $row["kodedetail"]; ?>" role="button" data-toggle="modal">
                                                             <i class="glyphicon glyphicon-zoom-in fa-2x"></i>
-                                                        </a>
-                                                         <a href="index.php?update-ao=<?php echo $row["randomid"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
-                                                         <!--
-                                                         <a href="index.php?penetapan-ai=<?php echo $row["kodedetail"]?>" type="button"><i class="fa fa-thumbs-o-up fa-2x"></i></a>
-                                                         -->
-                                                         <a href="#" id="delete-ao=<?php echo $row["kodedetail"]?>&delete-ango=<?php echo $row["kodeanggaran"]?>" class="delete">
+                                                         </a>
+                                                         <a title="update" href="index.php?update-ao=<?php echo $row["randomid"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+                                                         
+                                                         <a title="delete" href="#" id="delete-ao=<?php echo $row["kodedetail"]?>&delete-ango=<?php echo $row["kodeanggaran"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
                                                          </a>
                                                     </td>
@@ -160,7 +164,7 @@ OR jenis = 'AO' AND status = '3'
     <script src="assets/datatables/dataTables.bootstrap.js"></script>
     <script>
     $(document).ready( function () {
-      $('#datatabel').dataTable( {
+      $('#datatabel1').dataTable( {
         "paging":   true,
         "ordering": false,
         "bInfo": false,

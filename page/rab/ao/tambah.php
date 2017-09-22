@@ -43,10 +43,10 @@
         mysql_query ("INSERT INTO newdetailanggaran (kodedetail, kodeanggaran, hrgsatuanmaterial, volumematerial, hrgsatuanjasa, 
         volumejasa, randomid, status) VALUES ('','$x','$l','$m','$n','$o','$p','5')");
       
-        header("location:index.php?data-penetapan-ao&suksestambah");
+        header("location:index.php?rab-ao&suksestambah");
         
 }
-$idA = mysql_real_escape_string(trim($_GET["tambah-rab-ao"]));
+$idA = mysql_real_escape_string(trim($_GET["tambah-rab-ai"]));
 $sqlA= mysql_query("SELECT 
 newdetailanggaran.*, 
 headeranggaran.*
@@ -327,6 +327,30 @@ $rowA = mysql_fetch_array($sqlA);
                                             </div>
                                             </div>
                                         </div>
+                                        
+                                        <!--
+                                        <div class="form-group">
+                                            <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="col-md-4"><label>KKO</label></div>
+                                                <div class="col-md-8">
+                                                <img src="<?php echo $rowA["kko"] == "" ? "images/foto/no-images.png" : "foto/".$rowA["kko"] ?>" width="88" class="img-responsive img-rounded" />
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="col-md-4"><label>KKF</label></div>
+                                                <div class="col-md-8">
+                                                <img src="<?php echo $rowA["kkf"] == "" ? "images/foto/no-images.png" : "foto/".$rowA["kkf"] ?>" width="88" class="img-responsive img-rounded" />
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        -->
                                     </div>
                                         
                                         <div class="col-md-8">
@@ -513,5 +537,22 @@ $rowA = mysql_fetch_array($sqlA);
             }
         }
     });
-    
+
+    $('#fileToUpload').filestyle();
+    $('#fileToUpload').change(function(){
+        var file = $('#fileToUpload').val();
+        var exts = ['jpg','jpeg'];
+        if ( file ) {
+            var get_ext = file.split('.');
+            get_ext = get_ext.reverse();
+            if ( $.inArray ( get_ext[0].toLowerCase(), exts ) > -1 ){
+                return true;
+            }
+            else
+            {
+                alert('Hanya boleh jpg ');
+                $('#fileToUpload').filestyle('clear');
+            }
+        }
+    });
 </script>

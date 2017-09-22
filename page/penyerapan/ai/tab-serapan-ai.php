@@ -93,7 +93,7 @@ $rowB = mysql_fetch_array($sqlB);
                             				?>
                             					<tr>
                                                     <td><?php echo $no; ?></td>
-                                                    <td><?php echo $rowA["jmlpym"];?></td>
+                                                    <td><?php echo "Rp ".number_format ($rowA["jmlpym"]);?></td>
                                                     <td><?php echo $rowA["tahap"];?></td>
                                                     <td><?php echo $rowA["tglinput"];?></td>   
                             					</tr>

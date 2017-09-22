@@ -10,7 +10,8 @@ newdetailanggaran.*,
 headeranggaran.*
 FROM newdetailanggaran
 INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-WHERE status = '3' AND newdetailanggaran.kodedetail = '$detail'");
+WHERE status = '4' AND newdetailanggaran.randomid = '$detail'
+order by newdetailanggaran.status asc");
 
 $rowDetail     = mysql_fetch_array($sqldetail);
 
@@ -33,7 +34,7 @@ newdetailanggaran.*,
 headeranggaran.*
 FROM newdetailanggaran
 INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-WHERE status = '6' AND newdetailanggaran.randomid = '$rowDetail[randomid]'");
+WHERE status IN ('5','6','7','8') AND newdetailanggaran.randomid = '$rowDetail[randomid]'");
 ?>
 <div class="row">
     
@@ -158,7 +159,10 @@ WHERE status = '6' AND newdetailanggaran.randomid = '$rowDetail[randomid]'");
                                                     <td><?php echo $row['volumejasa']*$row['hrgsatuanjasa'];?></td>
                                                     <td>
                                                     <?php if ($row['status'] == '4') {echo "Penetapan";}
+                                                    else if ($row['status'] == '5') {echo "RAB";}
                                                     else if ($row['status'] == '6') {echo "Approve (RAB)";}
+                                                    else if ($row['status'] == '7') {echo "Reject (RAB)";}
+                                                    else if ($row['status'] == '8') {echo "Evaluasi (RAB)";}
                                                     ?></td>
                                                 </tr>
         <?php $no++; } ?>

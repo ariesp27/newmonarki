@@ -72,9 +72,9 @@ SELECT
                                         <tr>
                                             <th width="2%">No</th>
                                             <th width="10%">Uraian Kegiatan</th>
-                                            <th width="8%">Nomor Kontrak</th>
-                                            <th width="8%">Nilai Kontrak</th>
-                                            <th width="8%">Vendor</th>
+                                            <th width="6%">Nomor Kontrak</th>
+                                            <th width="6%">Nilai Kontrak</th>
+                                            <th width="6%">Vendor</th>
                                             <th width="5%">Tanggal Kontrak</th>
                                             <th width="8%">Nilai Penyerapan</th>
                                             <th width="3%">Aksi</th>
@@ -99,7 +99,7 @@ SELECT
                                                         <?php 
                                                         $kontrak = mysql_fetch_array(mysql_query("SELECT * FROM realisasi
                                                         WHERE status = '9' AND randomid = '".$rowA['randomid']."'"));
-                                                        echo $kontrak['nilaikontrak']; ?>
+                                                        echo "Rp ".number_format($kontrak['nilaikontrak']); ?>
                                                     </td>
                                                     <td>
                                                         <?php 
@@ -119,7 +119,7 @@ SELECT
                                                         $tahap = mysql_query("SELECT * FROM pembayaran
                                                         WHERE randomid = '".$rowA['randomid']."'");
                                                         while($rowB=mysql_fetch_array($tahap)) {
-                                                        ?>Tahap ke-<?php echo $rowB['tahap']; ?>: &nbsp;<?php echo $rowB['jmlpym']; ?><br /><?php }?>
+                                                        ?>Tahap ke-<?php echo "Rp ".number_format($rowB['tahap']); ?>: &nbsp;<?php echo "Rp ".number_format($rowB['jmlpym']); ?><br /><?php }?>
                                                         
                                                     </td>
                                                     
@@ -127,9 +127,11 @@ SELECT
                                                         <!--
                                                          <a href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
                                                          -->
-                                                         <a href="index.php?tambah-penyerapan-ai=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-plus fa-2x"></i></a>
-                                                         <a href="index.php?update-penyerapan-ai=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
-                                                         <a href="#" id="delete-penyerapan-ai=<?php echo $row["kodepym"]?>&delete-penyerapan-ang=<?php echo $row["kodedetail"]?>" class="delete">
+                                                         <a title="tambah" href="index.php?tambah-penyerapan-ai=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-plus fa-2x"></i></a>
+                                                         <a title="update" href="index.php?update-penyerapan-ai=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+                                                         <?php $delete = mysql_query("SELECT * FROM pembayaran WHERE randomid = '".$rowA['randomid']."'");
+                                                         $rowC = mysql_fetch_array($delete);?>
+                                                         <a title="delete" href="#" id="delete-penyerapan-ai=<?php echo $rowC["kodepym"]?>&delete-detail-ai=<?php echo $rowA["kodedetail"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
                                                          </a>
                                                     </td>

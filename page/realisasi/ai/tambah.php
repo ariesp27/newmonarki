@@ -87,9 +87,21 @@ $rowA = mysql_fetch_array($sqlA);
                     <table class="table table-striped text-center" >
                     <form id="validate-me-plz" name="form1" enctype="multipart/form-data" role="form" action="" method="post">
                     <input type="hidden" name="kodedetail" value="<?php echo $idA; ?>" />
+                    
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-md-6"> <br />
+                                                                    <div class="col-md-4"><label>Uraian Kegiatan</label></div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" disabled=""  name='uraiankegiatan'  value="<?php echo $rowA['uraiankegiatan'];?>"class="form-control"  data-msg-required="Mohon masukkan uraian kegiatan" placeholder="masukkan uraian kegiatan" />
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
                                                                     <div class="col-md-4"><label>Nomor Kontrak</label></div>
                                                                     <div class="col-md-8">
                                                                         <input type="text"   name='nokontrak' class="form-control"  data-msg-required="Mohon masukkan nomor kontrak" placeholder="masukkan nomor kontrak" />
@@ -127,6 +139,17 @@ $rowA = mysql_fetch_array($sqlA);
                                                                     <div class="col-md-8">
                                                                         <input  type="text" onKeyPress="return isNumberKeyTgl(event)" class="form-control" id="datepicker" name="tglkontrak" placeholder="masukkan tanggal kontrak" />
                                                                     </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                        <div class="col-md-8">
+                                                        <button type="submit" name="submit" class="btn btn-large btn-success">Simpan</button>
+                                                        <a href="index.php?realisasi" class="btn btn-large btn-warning">Kembali</a>
+                                                        </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -191,11 +214,7 @@ $rowA = mysql_fetch_array($sqlA);
                                                     </div>
                                                 </div>
                             
-                                            <div class="row">
-                                            <div class="col-md-1"></div>
-                                                <button type="submit" name="submit" class="btn btn-large btn-success">Simpan</button>
-                                                <a href="index.php?realisasi" class="btn btn-large btn-warning">Kembali</a>
-                                            </div>
+                                            
                     </form>
                     </table>
                 </div> 

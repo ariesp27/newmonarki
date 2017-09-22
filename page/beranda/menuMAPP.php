@@ -76,44 +76,26 @@
                     <li><a href="#" class="back">Main Menu</a></li>
                     <li class="nav-label">Rekap Penetapan</li>
                     <li>
-                        <a href="index.php?sudah-penetapan-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
+                        <a href="index.php?data-penetapan-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
                     </li>
                     <li>
-                        <a href="index.php?sudah-penetapan-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
+                        <a href="index.php?data-penetapan-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
                     </li>
             </ul>
         </li>
         <li>
-            <a href="#"><i class="fa fa-map-o fa-2x"></i> Rekap RAB</a>
+            <a href="#"><i class="fa fa-map-o fa-2x"></i> Rekap Anggaran</a>
             <ul>
                     <li><a href="#" class="back">Main Menu</a></li>
                     <li class="nav-label">Rekap Penetapan</li>
                     <li>
-                        <a href="index.php?data-rab-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
+                        <a href="index.php?rab-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
                     </li>
                     <li>
-                        <a href="index.php?data-rab-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
+                        <a href="index.php?rab-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
                     </li>
             </ul>
         </li>
-        <!--
-        <li>
-            <a href="#"><i class="fa fa-map-o fa-2x"></i> Realisasi Anggaran</a>
-            <ul>
-                    <li><a href="#" class="back">Main Menu</a></li>
-                    <li class="nav-label">Realisasi</li>
-                    <li>
-                        <a href="index.php?realisasi"><i class="fa fa-map-o fa-2x"></i> AI</a>
-                    </li>
-                    <li>
-                        <a href="index.php?realisasi-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
-                    </li>
-            </ul>
-        </li>
-        <li>
-            <a href="#"><i class="fa fa-tags fa-2x"></i> Penyerapan Anggaran</a>
-        </li>
-        -->
         <li>
             <a href="#"><i class="fa fa-file-text fa-2x" aria-hidden="true"></i> Laporan<span class=""></span></a>
                 <ul >
@@ -130,19 +112,19 @@
                         <li class="nav-label"> Laporan Realisasi</li>
                         <li>
                             <li>
-                                <a href="#"><i class="fa fa-file-text fa-2x"></i>  AI</a>
+                                <a href="lap-realisasi-ai"><i class="fa fa-file-text fa-2x"></i>  AI</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-file-text fa-2x"></i>  AO</a>
+                                <a href="lap-realisasi-ao"><i class="fa fa-file-text fa-2x"></i>  AO</a>
                             </li>
                         </li>
                         <li class="nav-label"> Laporan Penyerapan</li>
                         <li>
                             <li>
-                                <a href="#"><i class="fa fa-file-text fa-2x"></i>  AI</a>
+                                <a href="lap-serapan-ai"><i class="fa fa-file-text fa-2x"></i>  AI</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-file-text fa-2x"></i>  AO</a>
+                                <a href="lap-serapan-ao"><i class="fa fa-file-text fa-2x"></i>  AO</a>
                             </li>
                          </li>
                 </ul>

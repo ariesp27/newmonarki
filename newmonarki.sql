@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 19 Sep 2017 pada 09.10
+-- Generation Time: 22 Sep 2017 pada 13.13
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -112,12 +112,10 @@ CREATE TABLE `disburst` (
 --
 
 INSERT INTO `disburst` (`kodedisburst`, `kodeanggaran`, `jan`, `feb`, `mar`, `apr`, `mei`, `jun`, `jul`, `agu`, `sep`, `okt`, `nov`, `des`, `randomid`) VALUES
-(3, 0, 2500, 3000, 3000, 3000, 3000, 3000, 2500, 2500, 2500, 2500, 2500, 2500, 'orGxL5ZgQ7'),
-(4, 0, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 3500, 'BKZYQ7ahEF'),
-(7, 0, 45500, 45500, 45500, 45500, 45500, 45500, 45500, 45500, 45500, 45500, 45500, 45500, 'am9j7X5Fyn'),
-(8, 0, 65000, 65000, 65000, 65000, 65000, 65000, 65000, 65000, 65000, 65000, 65000, 65000, 'ola6WNCcPb'),
-(12, 0, 160000, 160000, 160000, 160000, 160000, 160000, 160000, 160000, 160000, 160000, 160000, 160000, 'zSrJYDeUg4'),
-(16, 0, 8900, 8900, 8900, 8900, 8900, 8900, 8900, 8900, 8900, 8900, 8900, 8900, 'l1OtVTP64E');
+(17, 0, 225000, 225000, 225000, 225000, 225000, 225000, 225000, 225000, 225000, 225000, 225000, 225000, 'XhN1ums5U4'),
+(19, 0, 125000, 125000, 125000, 125000, 125000, 125000, 125000, 125000, 125000, 125000, 125000, 125000, 'odfBz7VJYe'),
+(20, 0, 155000, 155000, 155000, 155000, 155000, 155000, 155000, 155000, 155000, 155000, 155000, 155000, 'b5Lp64DzfR'),
+(21, 0, 78000, 78000, 78000, 78000, 78000, 78000, 78000, 78000, 78000, 78000, 78000, 78000, 'b5Lp64DzfR');
 
 -- --------------------------------------------------------
 
@@ -167,11 +165,11 @@ CREATE TABLE `headeranggaran` (
 --
 
 INSERT INTO `headeranggaran` (`kodeanggaran`, `noprk`, `kode_posanggaran`, `kodefungsi`, `kodesatuan`, `uraiankegiatan`, `durasi`, `tartglmulai`, `prioritas`, `kko`, `kkf`, `jenis`, `randomid`, `image`, `kodeapp`) VALUES
-(55, '20170907', 1, 1, 4, 'Pengadaan notebook div ADM', '1 jam', '2017-10-02', 1, '', '', 'AI', 'orGxL5ZgQ7', '', 0),
-(56, '20170907', 2, 2, 1, 'Perbaikan gedung PLN TJBT', '1 jam', '2017-10-02', 1, '', '', 'AO', 'l1OtVTP64E', '', 0),
-(59, '20170908', 1, 1, 4, 'Pembelian alat kebersihan ', '1 jam', '2017-10-02', 1, '', '', 'AI', 'BKZYQ7ahEF', '', 0),
-(60, '20170909', 2, 2, 10, 'Pengadaan kendaraan dinas ', '1 jam', '2017-10-02', 1, '', '', 'AO', 'ola6WNCcPb', '', 0),
-(61, '123', 1, 1, 16, 'Pengadaan CCTV div HUMAS', '1 jam', '2017-10-02', 1, '1504963700_273.', '1504963700_101.', 'AI', 'am9j7X5Fyn', '', 0);
+(64, '190917', 1, 1, 3, 'Pengadaan Server Vicon (revisi)', '6 bulan', '2017-10-02', 1, '', '', 'AI', 'XhN1ums5U4', '', 0),
+(66, '200917', 1, 1, 3, 'Pengadaan lisensi Citrix', '6 bulan', '2017-10-02', 1, '1505882618_307.', '1505882618_428.', 'AI', 'b5Lp64DzfR', '', 0),
+(67, '112233', 1, 1, 19, 'Pengadaan kendaraan operasional', '3 bulan', '2017-11-01', 1, '', '', 'AO', 'NGz0AHf9qZ', '', 0),
+(68, '445566', 2, 2, 10, 'Pembangunan gedung PLN TJBT', '5 bulan', '2017-11-01', 1, '', '', 'AO', 'xNXWz91QSD', '', 0),
+(69, '1122', 1, 1, 16, 'test penambahan app', '1 bulan', '2017-09-22', 1, '', '', 'AO', '8B9WLD6OZl', '', 5);
 
 -- --------------------------------------------------------
 
@@ -197,27 +195,19 @@ CREATE TABLE `newdetailanggaran` (
 --
 
 INSERT INTO `newdetailanggaran` (`kodedetail`, `kodeanggaran`, `volumejasa`, `volumematerial`, `hrgsatuanjasa`, `hrgsatuanmaterial`, `alasan`, `status`, `tglapprove`, `randomid`) VALUES
-(73, 0, 15, 15, 100000, 100000, ' sudah di evaluasi', 3, '2017-09-08 02:18:31', 'orGxL5ZgQ7'),
-(74, 0, 15, 15, 450000, 550000, ' Sudah di evaluasi', 3, '2017-09-07 03:02:19', 'l1OtVTP64E'),
-(75, 0, 15, 10, 250000, 300000, '', 4, '2017-09-15 02:16:22', 'orGxL5ZgQ7'),
-(76, 0, 15, 15, 460000, 510000, '', 4, '0000-00-00 00:00:00', 'l1OtVTP64E'),
-(81, 0, 12, 12, 210000, 250000, ' RAB ini sudah selesai di evaluasi', 8, '2017-09-15 02:16:26', 'orGxL5ZgQ7'),
-(84, 0, 5, 5, 150000, 250000, ' anggaran ini sudah di evaluasi', 3, '2017-09-08 06:42:43', 'BKZYQ7ahEF'),
-(89, 0, 4, 4, 133000, 211000, '', 4, '2017-09-19 02:10:55', 'BKZYQ7ahEF'),
-(92, 0, 15, 20, 500000, 750000, ' anggaran ini sudah di evaluasi', 3, '2017-09-09 07:38:55', 'ola6WNCcPb'),
-(93, 0, 15, 15, 1500000, 1200000, ' ', 3, '2017-09-18 09:38:41', 'am9j7X5Fyn'),
-(94, 0, 12, 12, 1250000, 1150000, '', 4, '2017-09-18 09:38:54', 'am9j7X5Fyn'),
-(95, 0, 15, 15, 450000, 650000, '', 4, '0000-00-00 00:00:00', 'ola6WNCcPb'),
-(97, 0, 8, 8, 950000, 950000, ' RAB ini sudah di evaluasi', 8, '2017-09-18 09:39:10', 'am9j7X5Fyn'),
-(98, 0, 10, 10, 350000, 650000, ' RAB ini sudah di evaluasi', 8, '2017-09-10 13:36:12', 'ola6WNCcPb'),
-(108, 0, 12, 12, 210000, 250000, '', 9, NULL, 'orGxL5ZgQ7'),
-(111, 0, 4, 4, 12150000, 5500000, '', 4, '2017-09-18 07:55:12', 'zSrJYDeUg4'),
-(113, 0, 4, 4, 12150000, 5500000, '', 5, '2017-09-18 07:55:12', 'zSrJYDeUg4'),
-(114, 0, 4, 4, 125000, 215000, ' rab ini sudah di evaluasi', 8, '2017-09-19 01:09:06', 'BKZYQ7ahEF'),
-(117, 0, 8, 8, 425000, 450000, ' rab ini sudah di evaluasi', 8, '2017-09-19 01:11:52', 'l1OtVTP64E'),
-(118, 0, 4, 4, 125000, 215000, '', 9, NULL, 'BKZYQ7ahEF'),
-(119, 0, 8, 8, 950000, 950000, '', 9, NULL, 'am9j7X5Fyn'),
-(121, 0, 8, 8, 425000, 450000, '', 9, NULL, 'l1OtVTP64E');
+(122, 0, 5, 9, 15000000, 25000000, ' anggaran ini sudah terevaluasi', 3, '2017-09-20 03:35:23', 'XhN1ums5U4'),
+(124, 0, 4, 8, 14000000, 24000000, '', 4, '2017-09-20 03:35:25', 'XhN1ums5U4'),
+(125, 0, 3, 7, 12500000, 22500000, ' RAB ini sudah di evaluasi', 8, '2017-09-20 03:35:26', 'XhN1ums5U4'),
+(126, 0, 1, 1, 12500000, 22500000, '', 9, NULL, 'XhN1ums5U4'),
+(135, 0, 5, 5, 3500000, 6500000, ' terevaluasi', 3, '2017-09-20 04:44:39', 'b5Lp64DzfR'),
+(136, 0, 5, 5, 3500000, 5500000, '', 4, NULL, 'b5Lp64DzfR'),
+(137, 0, 4, 4, 2000000, 4500000, ' RAB ini sudah di evaluasi', 8, '2017-09-22 09:07:12', 'b5Lp64DzfR'),
+(138, 0, 4, 4, 2000000, 4500000, '', 9, NULL, 'b5Lp64DzfR'),
+(139, 0, 6, 6, 3500000, 70000000, ' usulan ini sudah terevaluasi', 3, '2017-09-22 09:46:58', 'NGz0AHf9qZ'),
+(140, 0, 5, 1, 2500000, 35000000, '  usulan ini sudah terevaluasi', 3, '2017-09-22 09:47:08', 'xNXWz91QSD'),
+(143, 0, 6, 6, 3250000, 54500000, '', 4, NULL, 'NGz0AHf9qZ'),
+(144, 0, 5, 1, 2250000, 32500000, '', 4, NULL, 'xNXWz91QSD'),
+(145, 0, 2, 2, 2500, 1000, '', 0, NULL, '8B9WLD6OZl');
 
 -- --------------------------------------------------------
 
@@ -240,11 +230,12 @@ CREATE TABLE `pembayaran` (
 --
 
 INSERT INTO `pembayaran` (`kodepym`, `koderealisasi`, `tglpym`, `jmlpym`, `tahap`, `tglinput`, `randomid`) VALUES
-(18, NULL, '2017-09-18', 125000, 1, '2017-09-14', 'orGxL5ZgQ7'),
-(19, NULL, '2017-09-18', 125000, 2, '2017-09-15', 'orGxL5ZgQ7'),
-(20, NULL, '2017-09-19', 200000, 3, '2017-09-16', 'orGxL5ZgQ7'),
-(21, NULL, '2017-09-19', 1160100, 1, '2017-09-19', 'BKZYQ7ahEF'),
-(22, NULL, '2017-09-19', 64500, 1, '2017-09-19', 'l1OtVTP64E');
+(33, NULL, '2017-09-22', 3150000, 1, '2017-09-22', 'XhN1ums5U4'),
+(34, NULL, '2017-09-23', 3150000, 2, '2017-09-23', 'XhN1ums5U4'),
+(35, NULL, '2017-09-24', 3150000, 3, '2017-09-24', 'XhN1ums5U4'),
+(36, NULL, '2017-11-01', 2350000, 1, '2017-11-01', 'b5Lp64DzfR'),
+(37, NULL, '2017-11-02', 2350000, 2, '2017-11-02', 'b5Lp64DzfR'),
+(38, NULL, '2017-11-03', 2350000, 3, '2017-11-03', 'b5Lp64DzfR');
 
 -- --------------------------------------------------------
 
@@ -287,9 +278,8 @@ CREATE TABLE `realisasi` (
 --
 
 INSERT INTO `realisasi` (`koderealisasi`, `kodedetail`, `nokontrak`, `nilaikontrak`, `namavendor`, `tglkontrak`, `status`, `randomid`) VALUES
-(5, 0, '54326', 4250000, 'PT. SKPM', '2017-09-15', 9, 'orGxL5ZgQ7'),
-(6, 0, '979', 1150000, 'PT. PMM', '2017-09-19', 9, 'BKZYQ7ahEF'),
-(7, 0, '474', 6450000, 'PT. KZL', '2017-09-19', 9, 'l1OtVTP64E');
+(8, 0, '01/KNTRK/09/17', 31500000, 'PT. SKPM', '2017-12-25', 9, 'XhN1ums5U4'),
+(10, 0, '20170922', 23500000, 'PT. PAJA', '2017-09-22', 9, 'b5Lp64DzfR');
 
 -- --------------------------------------------------------
 
@@ -436,7 +426,7 @@ ALTER TABLE `anggarandetail`
 -- AUTO_INCREMENT for table `disburst`
 --
 ALTER TABLE `disburst`
-  MODIFY `kodedisburst` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `kodedisburst` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `fungsi`
 --
@@ -446,17 +436,17 @@ ALTER TABLE `fungsi`
 -- AUTO_INCREMENT for table `headeranggaran`
 --
 ALTER TABLE `headeranggaran`
-  MODIFY `kodeanggaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `kodeanggaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 --
 -- AUTO_INCREMENT for table `newdetailanggaran`
 --
 ALTER TABLE `newdetailanggaran`
-  MODIFY `kodedetail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `kodedetail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `kodepym` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `kodepym` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT for table `pos_anggaran`
 --
@@ -466,7 +456,7 @@ ALTER TABLE `pos_anggaran`
 -- AUTO_INCREMENT for table `realisasi`
 --
 ALTER TABLE `realisasi`
-  MODIFY `koderealisasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `koderealisasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `satuan`
 --

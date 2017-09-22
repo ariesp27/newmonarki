@@ -18,20 +18,6 @@
         </li>
         <!--
         <li>
-            <a href="#"><i class="fa fa-folder fa-2x"></i> Penetapan Anggaran<span class=""></span></a>
-                <ul>
-                    <li><a href="#" class="back">Main Menu</a></li>
-                        <li class="nav-label">Penetapan Anggaran</li>
-                        <li>
-                            <a href="index.php?sudah-penetapan-ai"><i class="fa fa-folder fa-2x"></i> AI</a>
-                        </li>
-                        <li>
-                            <a href="index.php?sudah-penetapan-ao"><i class="fa fa-folder fa-2x"></i> AO</a>
-                        </li>
-                </ul>
-        </li>
-        
-        <li>
             <a href="#"><i class="fa fa-database fa-2x" aria-hidden="true"></i> Data Master<span class=""></span></a>
                 <ul >
                     <li><a href="#" class="back">Main Menu</a></li>
@@ -109,23 +95,23 @@
                     <li><a href="#" class="back">Main Menu</a></li>
                     <li class="nav-label">Rekap Penetapan</li>
                     <li>
-                        <a href="index.php?sudah-penetapan-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
+                        <a href="index.php?data-penetapan-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
                     </li>
                     <li>
-                        <a href="index.php?sudah-penetapan-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
+                        <a href="index.php?data-penetapan-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
                     </li>
             </ul>
         </li>
         <li>
-            <a href="#"><i class="fa fa-map-o fa-2x"></i> Rekap RAB</a>
+            <a href="#"><i class="fa fa-map-o fa-2x"></i> Rekap Anggaran</a>
             <ul>
                     <li><a href="#" class="back">Main Menu</a></li>
                     <li class="nav-label">Rekap RAB</li>
                     <li>
-                        <a href="index.php?monitor-eva-rabai"><i class="fa fa-map-o fa-2x"></i> AI</a>
+                        <a href="index.php?data-rekap-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
                     </li>
                     <li>
-                        <a href="index.php?monitor-eva-rabao"><i class="fa fa-map-o fa-2x"></i> AO</a>
+                        <a href="index.php?data-rekap-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
                     </li>
             </ul>
         </li>

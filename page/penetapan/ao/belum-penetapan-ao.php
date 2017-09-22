@@ -98,39 +98,43 @@ or die (mysql_error());
                                                         echo $penetapan['volumematerial']; ?>
                                                     </td>
                                                     <td align="left">
-                                                        U: <?php echo "Rp ".number_format($row['hrgsatuanmaterial'],0,'','.'); ?>
+                                                        U: <?php echo "Rp ".number_format($row['hrgsatuanmaterial']); ?>
                                                         <br />
                                                         P: <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
-                                                        echo "Rp ".number_format( $penetapan['hrgsatuanmaterial'],0,'','.'); ?>
+                                                        echo "Rp ".number_format( $penetapan['hrgsatuanmaterial']); ?>
                                                     </td>
                                                     
                                                     <td align="left">
-                                                        U: <?php echo "Rp ".number_format($row['hrgsatuanjasa'],0,'','.'); ?>
+                                                        U: <?php echo "Rp ".number_format($row['hrgsatuanjasa']); ?>
                                                         <br />
                                                         P: <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
-                                                        echo "Rp ".number_format( $penetapan['hrgsatuanjasa'],0,'','.'); ?>
+                                                        echo "Rp ".number_format( $penetapan['hrgsatuanjasa']); ?>
                                                     </td>
                                                     
                                                     <td align="left">
-                                                        U: <?php echo "Rp ".$row['volumematerial']*$row['hrgsatuanmaterial']; ?>
+                                                        U: <?php $a = $row['volumematerial']*$row['hrgsatuanmaterial'];
+                                                        echo "Rp ". number_format($a); ?>
                                                         <br />
                                                         P: <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
-                                                        echo "Rp ".$penetapan['volumematerial']*$penetapan['hrgsatuanmaterial']; ?>
+                                                        $b = $penetapan['volumematerial']*$penetapan['hrgsatuanmaterial'];
+                                                        echo "Rp ". number_format($b);?>
                                                     </td>
                                                     
                                                     <td align="left">
-                                                        U: <?php echo "Rp ".$row['volumejasa']*$row['hrgsatuanjasa']; ?>
+                                                        U: <?php $c = $row['volumejasa']*$row['hrgsatuanjasa'];
+                                                        echo "Rp ". number_format($c); ?>
                                                         <br />
                                                         P: <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
-                                                        echo "Rp ".$penetapan['volumejasa']*$penetapan['hrgsatuanjasa']; ?>
+                                                        $d = $penetapan['volumejasa']*$penetapan['hrgsatuanjasa'];
+                                                        echo "Rp ". number_format($d); ?>
                                                     </td>
                                                     
                                                 <!--     
@@ -142,10 +146,10 @@ or die (mysql_error());
                                                     <td class="center">
                                                     
                                                         <?php if ($row['status'] == '3') {?>
-                                                            <a href="#" class="detail" data-id="<?php echo $row["kodedetail"]; ?>" role="button" data-toggle="modal">
+                                                            <a title="detail" href="#" class="detail" data-id="<?php echo $row["kodedetail"]; ?>" role="button" data-toggle="modal">
                                                             <i class="glyphicon glyphicon-zoom-in fa-2x"></i></a>   
                                                         <?php } else if ($row['status'] == '4') {?>
-                                                            <a href="#" class="detailtetapan" data-id="<?php echo $row["kodedetail"]; ?>" role="button" data-toggle="modal">
+                                                            <a title="detail" href="#" class="detailtetapan" data-id="<?php echo $row["kodedetail"]; ?>" role="button" data-toggle="modal">
                                                             <i class="glyphicon glyphicon-zoom-in fa-2x"></i></a>
                                                         <?php } else{echo "";}?>
                                                         
@@ -153,21 +157,23 @@ or die (mysql_error());
                                                             $sqlA = mysql_query("SELECT * FROM newdetailanggaran WHERE randomid = '".$row['randomid']."' ORDER BY status DESC");
                                                             $rowA = mysql_fetch_array($sqlA);
                                                                 if ($rowA['status'] == '3') { ?>
-                                                                <a href="index.php?penetapan-ao=<?php echo $row["kodedetail"]?>"
+                                                                <a title="penetapan" href="index.php?penetapan-ao=<?php echo $row["kodedetail"]?>"
                                                                 type="button"><i class="fa fa-thumbs-o-up fa-2x"></i></a>
                                                         <?php } ?>
-                                                        
-                                                         <a href="#" id="delblm-penetapan-ao=<?php echo $row["kodedetail"]?>" class="delete">
+                                                        <?php $delete = mysql_query("SELECT * FROM newdetailanggaran WHERE status = '4' AND randomid = '".$row['randomid']."'");
+                                                        $rowC = mysql_fetch_array($delete);?>
+                                                         <a title="delete" href="#" id="delblm-penetapan-ao=<?php echo $rowC["kodedetail"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
                                                          </a>
                                                     </td>
                             					</tr>
                             				<?php $no++; } ?>
                                     </tbody>
+                                    
                                 </table>
-                                <strong>U : Usulan</strong><br />
-                                <strong>P : Penetapan</strong><br />
-                                <strong>R : RAB</strong><br />
+                                    <strong>U : Usulan</strong><br />
+                                    <strong>P : Penetapan</strong><br />
+                                    <strong>R : RAB</strong><br />
                             </div>
 
                         </div>

@@ -108,10 +108,6 @@ WHERE jenis = 'AO' AND status = '3'") or die (mysql_error());
                                                         WHERE status IN ('5','6','7','8') AND randomid = '".$row['randomid']."'"));
                                                         echo $rab['volumematerial']; ?>
                                                     </td>
-                                                    <!--
-                                                    <td class="text-center"><?php echo $row['volumejasa'];?></td>
-                                                    <td class="text-center"><?php echo $row['volumematerial'];?></td>
-                                                    -->
                                                     <td>
                                                         U : <?php echo "Rp ".number_format($row['hrgsatuanmaterial'],0,'','.'); ?>
                                                         <br />
@@ -181,7 +177,7 @@ WHERE jenis = 'AO' AND status = '3'") or die (mysql_error());
                                                     
                                                     ?></td> -->
                                                     <td class="center">
-                                                         <a href="#" class="detail-fixrab" data-id="<?php echo $row["kodedetail"]; ?>" role="button" data-toggle="modal">
+                                                         <a title="detail" href="#" class="detail-fixrab" data-id="<?php echo $row["kodedetail"]; ?>" role="button" data-toggle="modal">
                                                             <i class="glyphicon glyphicon-zoom-in fa-2x"></i>
                                                          </a>
                                                          <!--
@@ -215,7 +211,7 @@ WHERE jenis = 'AO' AND status = '3'") or die (mysql_error());
  $(document).on('click','.detail-fixrab',function(e){
     e.preventDefault();
     $("#myModal1").modal('show');
-    $.post('page/rab/ai/fix-detail-rabai.php',
+    $.post('page/rab/ao/fix-detail-rabao.php',
     {id:$(this).attr('data-id')},
     function(html){
     $(".modal-body").html(html);
@@ -231,7 +227,7 @@ WHERE jenis = 'AO' AND status = '3'") or die (mysql_error());
       <!-- dialog body -->
        <div class="modal-header bg-primary">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title text-center">Detail Rekap RAB AI</h4>
+            <h4 class="modal-title text-center">Detail Rekap RAB AO</h4>
        </div>
       <div class="modal-body"></div>
       <!-- dialog buttons -->

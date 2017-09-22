@@ -108,10 +108,6 @@ WHERE jenis = 'AI' AND status = '3'") or die (mysql_error());
                                                         WHERE status IN ('5','6','7','8') AND randomid = '".$row['randomid']."'"));
                                                         echo $rab['volumematerial']; ?>
                                                     </td>
-                                                    <!--
-                                                    <td class="text-center"><?php echo $row['volumejasa'];?></td>
-                                                    <td class="text-center"><?php echo $row['volumematerial'];?></td>
-                                                    -->
                                                     <td>
                                                         U : <?php echo "Rp ".number_format($row['hrgsatuanmaterial'],0,'','.'); ?>
                                                         <br />
@@ -181,7 +177,7 @@ WHERE jenis = 'AI' AND status = '3'") or die (mysql_error());
                                                     
                                                     ?></td> -->
                                                     <td class="center">
-                                                         <a href="#" class="detail-fixrab" data-id="<?php echo $row["kodedetail"]; ?>" role="button" data-toggle="modal">
+                                                         <a title="detail" href="#" class="detail-fixrab" data-id="<?php echo $row["kodedetail"]; ?>" role="button" data-toggle="modal">
                                                             <i class="glyphicon glyphicon-zoom-in fa-2x"></i>
                                                          </a>
                                                          <!--

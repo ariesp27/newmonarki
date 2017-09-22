@@ -27,8 +27,8 @@
         
         
         mysql_query("INSERT INTO headeranggaran (kodeanggaran, noprk, kode_posanggaran, kodefungsi, kodesatuan, 
-        uraiankegiatan, durasi, tartglmulai, prioritas, jenis, randomid)
-        VALUES ('','$a','$b','$c','$d','$e','$f','$g','$h','AO','$number')");
+        uraiankegiatan, durasi, tartglmulai, prioritas, jenis, randomid, kodeapp)
+        VALUES ('','$a','$b','$c','$d','$e','$f','$g','$h','AO','$number','$_SESSION[kodeapp]')");
         
         mysql_query ("INSERT INTO newdetailanggaran (kodedetail, kodeanggaran, hrgsatuanmaterial, volumematerial, hrgsatuanjasa, 
         volumejasa, randomid) VALUES ('','$x','$l','$m','$n','$o','$number')");

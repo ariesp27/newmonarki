@@ -20,5 +20,6 @@
 <link href="assets/menu-level/main.css" rel="stylesheet" type="text/css">
 <script src="assets/menu-level/source/js/vendor/modernizr.js"></script>
 <script src="assets/menu-level/source/js/main.js"></script>
-
+<script src="assets/highchart/code/highcharts.js"></script>
+<script src="assets/highchart/code/modules/exporting.js"></script>
 <?php } ?>

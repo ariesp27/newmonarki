@@ -71,8 +71,8 @@ $sql = mysql_query("SELECT * from pos_anggaran ORDER BY kode_posanggaran asc ") 
                                                     <td><?php echo $row['posanggaran'];?></td>
 
                                                     <td class="center">
-                                                        <a href="index.php?update-pos-anggaran=<?php echo $row["kode_posanggaran"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
-                                                         <a href="#" id="delete-pos-anggaran=<?php echo $row["kode_posanggaran"]?>" class="delete">
+                                                        <a title="update" href="index.php?update-pos-anggaran=<?php echo $row["kode_posanggaran"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+                                                         <a title="delete" href="#" id="delete-pos-anggaran=<?php echo $row["kode_posanggaran"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
                                                          </a>
                                                     </td>
