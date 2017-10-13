@@ -2,14 +2,12 @@
 $sql = mysql_query("SELECT
     headeranggaran.*,
     newdetailanggaran.*,
-    realisasi.*,
     newdetailanggaran.randomid
-    FROM
-    newdetailanggaran 
-    LEFT JOIN realisasi ON newdetailanggaran.randomid = realisasi.randomid
+    FROM newdetailanggaran 
     INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-    WHERE jenis = 'AI' AND 
-    newdetailanggaran.status = '4';") or die (mysql_error());
+    WHERE headeranggaran.kodeapp = '6' AND newdetailanggaran.status = '4' 
+    AND headeranggaran.jenis = 'AI'
+    ") or die (mysql_error());
 ?>
 
 <div id="wrapper">
@@ -53,20 +51,27 @@ $sql = mysql_query("SELECT
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="datatabel">
+                                <table class="table table-striped table-bordered table-hover" id="datatabel1">
                                     <thead>
                                         <tr>
                                             <th class="text-center" width="1%">No</th>
                                             <th class="text-center" width="4%">Uraian Kegiatan</th>
-                                            <th class="text-center" width="1%">Nomor PRK</th>
+                                            <th class="text-center" width="2%">Tgl Usulan</th>
+                                            <th class="text-center" width="1%">No. Usulan</th>
+                                            <!--
                                             <th class="text-center" width="2%">Vol. Jasa </th>
                                             <th class="text-center" width="2%">Vol. Material </th>
-                                            <th class="text-center" width="3%">Hrg. Satuan Meterial </th>
                                             <th class="text-center" width="3%">Hrg. Satuan Jasa </th>
+                                            <th class="text-center" width="3%">Hrg. Satuan Meterial </th>
+                                            -->
+                                            <th class="text-center" width="1%">No. Purchase Request</th>
+                                            <th class="text-center" width="1%">No. WBS</th>
+                                            <th class="text-center" width="3%">Jml. Biaya Jasa</th> 
                                             <th class="text-center" width="3%">Jml. Biaya Material</th>
-                                            <th class="text-center" width="3%">Jml. Biaya Jasa</th> <!--
-                                            <th width="3%">Status</th> -->
-                    						<th class="text-center" width="1%">Aksi</th>
+                                            <!--
+                                            <th class="text-center" width="3%">Status</th> 
+                                            -->
+                    						<th class="text-center" width="2%">Aksi</th>
                                			</tr>
                                     </thead>
                                     <tbody>
@@ -78,9 +83,10 @@ $sql = mysql_query("SELECT
                             					<tr>
                                                     <td class="text-center"><?php echo $no; ?></td>
                                                     <td><?php echo $row['uraiankegiatan'];?></td>
-                                                    <td><?php echo $row['noprk'];?></td>
-                                                    
-                                                    <td>
+                                                    <td class="text-center"><?php echo tglindonesia($row['tartglmulai']);?></td>
+                                                    <td class="text-center"><?php echo $row['nousulan'];?></td>
+                                                    <!--
+                                                    <td class="text-center">
                                                         U : <?php
                                                         $usulan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '3' AND randomid = '".$row['randomid']."'"));
@@ -96,7 +102,7 @@ $sql = mysql_query("SELECT
                                                         WHERE status IN ('5','6','7','8') AND randomid = '".$row['randomid']."'"));
                                                         echo $rab['volumejasa']; ?>
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         U : <?php
                                                         $usulan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '3' AND randomid = '".$row['randomid']."'"));
@@ -144,6 +150,9 @@ $sql = mysql_query("SELECT
                                                         WHERE status IN ('5','6','7','8') AND randomid = '".$row['randomid']."'"));
                                                         echo "Rp ".number_format( $rab['hrgsatuanmaterial']); ?>
                                                     </td>
+                                                    -->
+                                                    <td class="text-center"><?php echo $row['nopr'];?></td>
+                                                    <td class="text-center"><?php echo $row['kodewbs'];?></td>
                                                     <td>
                                                         U : <?php
                                                         $usulan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
@@ -183,13 +192,15 @@ $sql = mysql_query("SELECT
                                                         echo "Rp ". number_format($f); ?>
                                                     </td>
                                                     <!--
-                                                    <td>
-                                                    <?php if ($row['status'] == '4') {echo "Penetapan";}
-                                                    else if ($row['status'] == '5') {echo "RAB";}
-                                                    else if ($row['status'] == '6') {echo "Approve(RAB)";}
-                                                    else if ($row['status'] == '7') {echo "Reject (RAB)";}
-                                                    
-                                                    ?></td> -->
+                                                    <td class="text-center">
+                                                        <?php 
+                                                            if ($row['status'] == '4') {echo "Penetapan";}
+                                                            else if ($row['status'] == '5') {echo "RAB";}
+                                                            else if ($row['status'] == '6') {echo "Approve(RAB)";}
+                                                            else if ($row['status'] == '7') {echo "Reject (RAB)";}
+                                                        ?>
+                                                    </td>
+                                                    -->
                                                     <td class="text-center">
                                                          <a title="detail" href="#" class="detail" data-id="<?php echo $row["randomid"]; ?>" role="button" data-toggle="modal">
                                                             <i class="glyphicon glyphicon-zoom-in fa-2x"></i>
@@ -203,7 +214,7 @@ $sql = mysql_query("SELECT
                                                          <a title="update" href="index.php?update-rab-ai=<?php echo $row["randomid"]?>&status=5" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
                                                          
                                                          <?php $delete = mysql_query("SELECT * FROM newdetailanggaran WHERE status = '5' AND randomid = '".$row['randomid']."'");
-                                                         $rowC = mysql_fetch_array($delete);?>
+                                                                $rowC = mysql_fetch_array($delete);?>
                                                          <a title="delete" href="#" id="delete-rab-ai=<?php echo $rowC["kodedetail"]?>" class="delete">
                                                             <i class="fa fa-trash-o fa-2x"></i>
                                                          </a>
@@ -265,7 +276,7 @@ $sql = mysql_query("SELECT
     <script src="assets/datatables/dataTables.bootstrap.js"></script>
     <script>
     $(document).ready( function () {
-      $('#datatabel').dataTable( {
+      $('#datatabel1').dataTable( {
         "paging":   true,
         "ordering": false,
         "bInfo": false,

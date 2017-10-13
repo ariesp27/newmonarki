@@ -30,9 +30,7 @@ $sqlA= mysql_query("SELECT
 newdetailanggaran.*, 
 headeranggaran.*
 FROM newdetailanggaran
-INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
-INNER JOIN fungsi ON headeranggaran.kodefungsi = fungsi.kodefungsi
-INNER JOIN pos_anggaran ON headeranggaran.kode_posanggaran = pos_anggaran.kode_posanggaran
+INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
 INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan WHERE newdetailanggaran.randomid = '$idA'") or die (mysql_error());
 if(mysql_num_rows($sqlA)==0);
 $rowA = mysql_fetch_array($sqlA); 
@@ -82,7 +80,7 @@ $rowA = mysql_fetch_array($sqlA);
                                 <div class="col-lg-6">
                                         <div class="form-group">
                                             <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-10">
                                                 <div class="col-md-4"><label>Nomor PRK</label></div>
                                                 <div class="col-md-8">
                                                     <input class="form-control" name="noprk" type="text" data-rule-required="true" value="<?php echo $rowA["noprk"]; ?>" data-msg-required="Mohon masukkan nomor PRK." placeholder="masukkan nomor PRK" />
@@ -90,7 +88,7 @@ $rowA = mysql_fetch_array($sqlA);
                                             </div>
                                             </div>
                                         </div>
-                                        
+                                        <!--
                                         <div class="form-group">
                                             <div class="row">
                                             <div class="col-md-9">
@@ -124,10 +122,10 @@ $rowA = mysql_fetch_array($sqlA);
                                             </div>
                                             </div>
                                         </div>
-                                        
+                                        -->
                                         <div class="form-group">
                                             <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-10">
                                                 <div class="col-md-4"> <label>Satuan</label></div>
                                                 <div class="col-md-8">
                                                     <?php $sqlA = mysql_query("SELECT * FROM satuan") or die (mysql_error()); ?>
@@ -144,10 +142,10 @@ $rowA = mysql_fetch_array($sqlA);
                                         
                                         <div class="form-group">
                                             <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-10">
                                                 <div class="col-md-4"><label>Uraian Kegiatan</label></div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" name="uraiankegiatan" type="text" data-rule-required="true" value="<?php echo $rowA["uraiankegiatan"]; ?>" data-msg-required="Mohon masukkan uraian kegiatan." placeholder="masukkan uraian kegiatan" />
+                                                    <textarea class="form-control" id="uraiankegiatan"  name="uraiankegiatan" rows="5" cols="22" type="text" value="<?php  ?>" placeholder="masukkan uraian kegiatan" data-rule-required="true" data-msg-required="Mohon masukkan uraian kegiatan"><?php echo $rowA["uraiankeiatan"] ;?></textarea>
                                                 </div>
                                             </div>
                                             </div>
@@ -155,7 +153,7 @@ $rowA = mysql_fetch_array($sqlA);
                                         
                                         <div class="form-group">
                                             <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-10">
                                                 <div class="col-md-4"><label>Durasi</label></div>
                                                 <div class="col-md-8">
                                                     <input class="form-control" name="durasi" type="text" data-rule-required="true" value="<?php echo $rowA["durasi"]; ?>" data-msg-required="Mohon masukkan durasi." placeholder="masukkan durasi" />
@@ -166,7 +164,7 @@ $rowA = mysql_fetch_array($sqlA);
                                         
                                         <div class="form-group">
                                             <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-10">
                                                 <div class="col-md-4"><label>Tanggal Mulai</label></div>
                                                 <div class="col-md-8">
                                                     <input  type="text" onKeyPress="return isNumberKeyTgl(event)" class="form-control" id="datepicker" name="tartglmulai" value="<?php if($rowA["tartglmulai"]=="0000-00-00"){}else{ echo format_tgl($rowA["tartglmulai"]); } ?>" data-rule-required="true" data-rule-date="true" data-msg-date="format yang benar dd/mm/yyyy" data-msg-required="mohon masukkan data Target tanggal mulai." placeholder="masukkan Target tanggal mulai" /></div>
@@ -179,7 +177,7 @@ $rowA = mysql_fetch_array($sqlA);
                                         
                                         <div class="form-group">
                                             <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-10">
                                                 <div class="col-md-4"><label>Prioritas</label></div>
                                                 <div class="col-md-8">
                                                     <input class="form-control" name="prioritas" type="text" data-rule-required="true" value="<?php echo $rowA["prioritas"]; ?>" data-msg-required="Mohon masukkan prioritas." placeholder="masukkan prioritas" />
@@ -190,10 +188,10 @@ $rowA = mysql_fetch_array($sqlA);
                                         
                                         <div class="form-group">
                                             <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-10">
                                                 <div class="col-md-4"><label>Harga Satuan Material</label></div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" name="hrgsatuanmaterial" type="text" data-rule-required="true" value="<?php echo $rowA["hrgsatuanmaterial"]; ?>" data-msg-required="Mohon masukkan harga satuan material." placeholder="masukkan harga satuan material" />
+                                                    <input class="form-control" name="hrgsatuanmaterial" onKeyPress="return isNumberKey(event)" type="text" data-rule-required="true" value="<?php echo $rowA["hrgsatuanmaterial"]; ?>" data-msg-required="Mohon masukkan harga satuan material." placeholder="masukkan harga satuan material" />
                                                 </div>
                                             </div>
                                             </div>
@@ -201,10 +199,10 @@ $rowA = mysql_fetch_array($sqlA);
                                         
                                         <div class="form-group">
                                             <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-10">
                                                 <div class="col-md-4"><label>Harga Satuan Jasa</label></div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" name="hrgsatuanjasa" type="text" data-rule-required="true" value="<?php echo $rowA["hrgsatuanjasa"]; ?>" data-msg-required="Mohon masukkan harga satuan jasa." placeholder="masukkan harga satuan jasa" />
+                                                    <input class="form-control" name="hrgsatuanjasa" onKeyPress="return isNumberKey(event)" type="text" data-rule-required="true" value="<?php echo $rowA["hrgsatuanjasa"]; ?>" data-msg-required="Mohon masukkan harga satuan jasa." placeholder="masukkan harga satuan jasa" />
                                                 </div>
                                             </div>
                                             </div>
@@ -212,10 +210,10 @@ $rowA = mysql_fetch_array($sqlA);
                                         
                                         <div class="form-group">
                                             <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-10">
                                                 <div class="col-md-4"><label>Volume Jasa</label></div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" name="volumejasa" type="text" data-rule-required="true" value="<?php echo $rowA["volumejasa"]; ?>" data-msg-required="Mohon masukkan volume jasa." placeholder="masukkan volume jasa" />
+                                                    <input class="form-control" name="volumejasa" type="text" onKeyPress="return isNumberKey(event)" data-rule-required="true" value="<?php echo $rowA["volumejasa"]; ?>" data-msg-required="Mohon masukkan volume jasa." placeholder="masukkan volume jasa" />
                                                 </div>
                                             </div>
                                             </div>
@@ -223,10 +221,10 @@ $rowA = mysql_fetch_array($sqlA);
                                         
                                         <div class="form-group">
                                             <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-10">
                                                 <div class="col-md-4"><label>Volume Material</label></div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" name="volumematerial" type="text" data-rule-required="true" value="<?php echo $rowA["volumematerial"]; ?>" data-msg-required="Mohon masukkan volume material." placeholder="masukkan volume material" />
+                                                    <input class="form-control" name="volumematerial" type="text" onKeyPress="return isNumberKey(event)" data-rule-required="true" value="<?php echo $rowA["volumematerial"]; ?>" data-msg-required="Mohon masukkan volume material." placeholder="masukkan volume material" />
                                                 </div>
                                             </div>
                                             </div>

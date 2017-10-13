@@ -9,10 +9,9 @@ $sqldetail = mysql_query("SELECT
 newdetailanggaran.*, 
 headeranggaran.*
 FROM newdetailanggaran
-INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
-INNER JOIN fungsi ON headeranggaran.kodefungsi = fungsi.kodefungsi
-INNER JOIN pos_anggaran ON headeranggaran.kode_posanggaran = pos_anggaran.kode_posanggaran
-INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan WHERE newdetailanggaran.kodedetail = '$detail'") or die (mysql_error());
+INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
+INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan 
+WHERE newdetailanggaran.kodedetail = '$detail'") or die (mysql_error());
 
 $rowDetail     = mysql_fetch_array($sqldetail);
 ?>

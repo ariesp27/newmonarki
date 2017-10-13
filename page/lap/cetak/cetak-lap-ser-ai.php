@@ -1,4 +1,7 @@
 <?php
+    ob_start();
+	session_start();
+    
     include "../../../config/koneksi.php";
     include "../../../config/utility.php";
 
@@ -22,13 +25,14 @@
         newdetailanggaran
         INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
         INNER JOIN pembayaran ON newdetailanggaran.randomid = pembayaran.randomid 
-        WHERE jenis = 'AI' AND newdetailanggaran.status = '9'
+        WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND newdetailanggaran.status = '9'
+        AND headeranggaran.jenis = 'AI' 
     ") or die (mysql_error());
 ?>
 
-<h2>Laporan Realisasi AI</h2>
+<h2>Laporan Penyerapan AI</h2>
 <br /><br />
-<h3>History Realisasi AI</h3>
+<h3>History Penyerapan AI</h3>
 <table border="1" >
     <thead>
         <tr>
@@ -39,9 +43,8 @@
             <th class="text-center" width="8%">Hrg. Satuan Material (RAB)</th>
             <th class="text-center" width="8%">Hrg. Satuan Jasa (RAB)</th>
             <th class="text-center" width="4%">Tanggal Pembayaran </th>
+            <th class="text-center" width="4%">Tahap</th>
             <th class="text-center" width="6%">Jumlah Pembayaran</th>
-            <th class="text-center" width="4%">Tanggal Input </th>
-            
         </tr>
     </thead>
     <tbody>
@@ -56,14 +59,15 @@
             <td><?php echo $row['uraiankegiatan'];?></td>
             <td><?php echo $row['volumejasa'];?></td>
             <td><?php echo $row['volumematerial'];?></td>
-            <td><?php echo $row['hrgsatuanjasa'];?></td>
-            <td><?php echo $row['hrgsatuanmaterial'];?></td>
-            <td><?php echo $row['tglpym'];?></td>
-            <td><?php echo $row['jmlpym'];?></td>
-            <td><?php echo $row['tglinput'];?></td>
+            <td><?php echo "Rp ".number_format($row['hrgsatuanjasa']);?></td>
+            <td><?php echo "Rp ".number_format($row['hrgsatuanmaterial']);?></td>
+            <td><?php echo tglindonesia($row['tglpym']);?></td>
+            <td><?php echo $row['tahap'];?></td>
+            <td><?php echo "Rp ".number_format($row['jmlpym']);?></td>
         </tr>
         <?php $no++; } } else { ?>
         <tr><td colspan="9" class="text-center"><i>Tabel penyerapan AI kosong</i></td></tr>
         <?php } ?>
     </tbody>
 </table>
+<?php ob_end_flush(); ?>

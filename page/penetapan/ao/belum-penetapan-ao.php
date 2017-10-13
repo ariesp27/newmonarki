@@ -4,8 +4,6 @@ newdetailanggaran.*,
 headeranggaran.*
 FROM newdetailanggaran
 INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
-INNER JOIN fungsi ON headeranggaran.kodefungsi = fungsi.kodefungsi
-INNER JOIN pos_anggaran ON headeranggaran.kode_posanggaran = pos_anggaran.kode_posanggaran
 INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan
 WHERE jenis = 'AO' AND status = '3'")
 or die (mysql_error());
@@ -53,7 +51,7 @@ or die (mysql_error());
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <br />
-                                <table class="table table-striped table-bordered table-hover" id="datatabel">
+                                <table class="table table-striped table-bordered table-hover" id="datatabel1">
                                     <thead>
                                         <tr>
                                             <th width="2%">No</th>
@@ -65,6 +63,7 @@ or die (mysql_error());
                                             <th width="5%">Hrg Satuan Jasa </th>
                                             <th width="5%">Jml. Biaya Material</th>
                                             <th width="4%">Jml. Biaya Jasa</th> 
+                                            <th width="4%">Unit APP</th> 
                                             <!--
                                             <th width="2%">Status</th> 
                                             -->
@@ -135,6 +134,18 @@ or die (mysql_error());
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
                                                         $d = $penetapan['volumejasa']*$penetapan['hrgsatuanjasa'];
                                                         echo "Rp ". number_format($d); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php 
+                                                            if ($row['kodeapp'] == '1') {echo "APP Bogor";}
+                                                            else if ($row['kodeapp'] == '2') {echo "APP Bandung";}
+                                                            else if ($row['kodeapp'] == '3') {echo "APP Karawang";}
+                                                            else if ($row['kodeapp'] == '4') {echo "APP Cirebon";}
+                                                            else if ($row['kodeapp'] == '5') {echo "APP Purwokerto";}
+                                                            else if ($row['kodeapp'] == '6') {echo "APP Salatiga";}
+                                                            else if ($row['kodeapp'] == '7') {echo "APP Semarang";}
+                                                            else if ($row['kodeapp'] == '99') {echo "Kantor Induk";}
+                                                        ?>
                                                     </td>
                                                     
                                                 <!--     
@@ -233,7 +244,7 @@ or die (mysql_error());
     <script src="assets/datatables/dataTables.bootstrap.js"></script>
     <script>
     $(document).ready( function () {
-      $('#datatabel').dataTable( {
+      $('#datatabel1').dataTable( {
         "paging":   true,
         "ordering": false,
         "bInfo": false,

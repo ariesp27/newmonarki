@@ -54,7 +54,8 @@ echo '
                                     newdetailanggaran
                                     INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
                                     INNER JOIN realisasi ON newdetailanggaran.randomid = realisasi.randomid 
-                                    WHERE jenis = 'AO' AND newdetailanggaran.status = '9'
+                                    WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND newdetailanggaran.status = '9'
+                                    AND headeranggaran.jenis = 'AO' 
                                     ") or die (mysql_error()); 
                             ?> 
                                 </legend></center>
@@ -80,16 +81,16 @@ echo '
                             {
                         ?>
                                 <tr class="style1">
-                                    <td><?php echo $no; ?></td>
+                                    <td class="text-center"><?php echo $no; ?></td>
                                     <td><?php echo $row['uraiankegiatan'];?></td>
-                                    <td><?php echo $row['volumejasa'];?></td>
-                                    <td><?php echo $row['volumematerial'];?></td>
-                                    <td><?php echo $row['hrgsatuanjasa'];?></td>
-                                    <td><?php echo $row['hrgsatuanmaterial'];?></td>
+                                    <td class="text-center"><?php echo $row['volumejasa'];?></td>
+                                    <td class="text-center"><?php echo $row['volumematerial'];?></td>
+                                    <td><?php echo "Rp ".number_format($row['hrgsatuanjasa']);?></td>
+                                    <td><?php echo "Rp ".number_format($row['hrgsatuanmaterial']);?></td>
                                     <td><?php echo $row['nokontrak'];?></td>
-                                    <td><?php echo $row['nilaikontrak'];?></td>
+                                    <td><?php echo "Rp ".number_format($row['nilaikontrak']);?></td>
                                     <td><?php echo $row['namavendor'];?></td>
-                                    <td><?php echo $row['tglkontrak'];?></td>
+                                    <td><?php echo tglindonesia($row['tglkontrak']);?></td>
                                     
                                 </tr>
                         <?php $no++; } } else { ?>

@@ -44,6 +44,7 @@ if(isset($_POST['kode'])) {
             <textarea id="alasan" name="alasan" cols="25" rows="5"
             placeholder="Masukan alasan"> </textarea>
     </div>
+    <br />
 </div>
     <div class="col-md-6"></div>
 	<div class="control-group">

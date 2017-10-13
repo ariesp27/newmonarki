@@ -97,7 +97,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <!--
                                <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-10"> 
@@ -131,7 +131,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                                -->
                                 <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-10"> 
@@ -202,7 +202,7 @@
                                     <div class="col-md-10">
                                                 <div class="col-md-4"><label>Harga Satuan Material</label></div>
                                                 <div class="col-md-8">
-                                                    <input type="text"   name='hrgsatuanmaterial' class="form-control"  data-msg-required="Mohon masukkan Harga satuan material " placeholder="masukkan Harga satuan material " />
+                                                    <input type="text"   name='hrgsatuanmaterial' class="form-control"  onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Harga satuan material " placeholder="masukkan Harga satuan material " />
                                                 </div>
                                     </div>
                                 </div>
@@ -213,7 +213,7 @@
                                     <div class="col-md-10">
                                                 <div class="col-md-4"><label>Volume Material</label></div>
                                                 <div class="col-md-8">
-                                                    <input type="text"   name='volumematerial' class="form-control"  data-msg-required="Mohon masukkan Volume material " placeholder="masukkan Volume material " />
+                                                    <input type="text"   name='volumematerial' class="form-control"  onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Volume material " placeholder="masukkan Volume material " />
                                                 </div>
                                     </div>
                                 </div>
@@ -224,7 +224,7 @@
                                     <div class="col-md-10">
                                                 <div class="col-md-4"><label>Harga Satuan Jasa</label></div>
                                                 <div class="col-md-8">
-                                                    <input type="text"   name='hrgsatuanjasa' class="form-control"  data-msg-required="Mohon masukkan Harga satuan jasa " placeholder="masukkan Harga satuan jasa " />
+                                                    <input type="text"   name='hrgsatuanjasa' class="form-control"  onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Harga satuan jasa " placeholder="masukkan Harga satuan jasa " />
                                                 </div>
                                     </div>
                                 </div>
@@ -235,7 +235,7 @@
                                     <div class="col-md-10">
                                                 <div class="col-md-4"><label>Volume Jasa</label></div>
                                                 <div class="col-md-8">
-                                                    <input type="text"   name='volumejasa' class="form-control"  data-msg-required="Mohon masukkan Volume jasa " placeholder="masukkan Volume jasa " />
+                                                    <input type="text"   name='volumejasa' class="form-control"  onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Volume jasa " placeholder="masukkan Volume jasa " />
                                                 </div>
                                     </div>
                                 </div>

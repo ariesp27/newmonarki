@@ -13,7 +13,8 @@
         newdetailanggaran
         INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
         INNER JOIN pembayaran ON newdetailanggaran.randomid = pembayaran.randomid 
-        WHERE jenis = 'AI' AND newdetailanggaran.status = '9'
+        WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND newdetailanggaran.status = '9'
+        AND headeranggaran.jenis = 'AI'
         ") or die (mysql_error());
     }
 ?>
@@ -43,20 +44,20 @@
             <form method="POST" action="" id="validate-cari">
                 <div class="row">
                     <div class="col-md-2"><p style="padding: 0;" class="">Periode </p></div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <input  type="text" onKeyPress="return isNumberKeyTgl(event)" value="<?php  echo $_POST["tglAwal"];?>" class="form-control" id="datepicker" name="tglAwal" data-rule-required="true" data-rule-date="true" data-msg-date="format yang benar dd/mm/yyyy" data-msg-required="mohon masukkan data Tanggal." placeholder="masukkan Tanggal" />
                     </div>
-                    <div class="col-md-1">S / D</div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">S / D</div>
+                    <div class="col-md-2">
                         <input  type="text" onKeyPress="return isNumberKeyTgl(event)" value="<?php  echo $_POST["tglAkhir"];?>" class="form-control" id="datepicker2" name="tglAkhir" data-rule-required="true" data-rule-date="true" data-msg-date="format yang benar dd/mm/yyyy" data-msg-required="mohon masukkan data Tanggal." placeholder="masukkan Tanggal" />
                     </div>
                     <div class="col-md-2">
                         <button class="btn btn-primary" type="submit" name="cari">Cari</button>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <?php if(isset($_POST["cari"])){ ?>
-                            <a href="page/lap/cetak/cetak-lap-ser-ai.php?act=excel&tglawal=<?php echo $_POST["tglawal"]; ?>&tglakhir=<?php echo $_POST["tglakhir"]; ?>"><img src="images/excel.png" /></a> &nbsp;
-                            <a href="page/lap/cetak/print-ser-ai.php?act=print&tglawal=<?php echo $_POST["tglawal"]; ?>&tglakhir=<?php echo $_POST["tglakhir"]; ?>" target="_blank"><img src="images/print.png" title="cetak dokumen" /></a>
+                            <a href="page/lap/cetak/cetak-lap-ser-ai.php?act=excel&tglawal=<?php echo $_POST["tglAwal"]; ?>&tglakhir=<?php echo $_POST["tglAkhir"]; ?>"><img src="images/excel.png" /></a> &nbsp;
+                            <a href="page/lap/cetak/print-ser-ai.php?act=print&tglawal=<?php echo $_POST["tglAwal"]; ?>&tglakhir=<?php echo $_POST["tglAkhir"]; ?>" target="_blank"><img src="images/print.png" title="cetak dokumen" /></a>
                         <?php } ?>
                     </div>
                     <!-- <div class="col-md-1">
@@ -86,8 +87,8 @@
                                                 <th class="text-center" width="8%">Hrg. Satuan Material (RAB)</th>
                                                 <th class="text-center" width="8%">Hrg. Satuan Jasa (RAB)</th>
                                                 <th class="text-center" width="4%">Tanggal Pembayaran </th>
+                                                <th class="text-center" width="4%">Tahap</th>
                                                 <th class="text-center" width="6%">Jumlah Pembayaran</th>
-                                                <th class="text-center" width="4%">Tanggal Input </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -101,14 +102,13 @@
                                                             <td><?php echo $row['uraiankegiatan'];?></td>
                                                             <td><?php echo $row['volumejasa'];?></td>
                                                             <td><?php echo $row['volumematerial'];?></td>
-                                                            <td><?php echo $row['hrgsatuanjasa'];?></td>
-                                                            <td><?php echo $row['hrgsatuanmaterial'];?></td>
-                                                            <td><?php echo $row['tglpym'];?></td>
-                                                            <td><?php echo $row['jmlpym'];?></td>
-                                                            <td><?php echo $row['tglinput'];?></td>
+                                                            <td><?php echo "Rp ".number_format($row['hrgsatuanjasa']);?></td>
+                                                            <td><?php echo "Rp ".number_format($row['hrgsatuanmaterial']);?></td>
+                                                            <td><?php echo tglindonesia($row['tglpym']);?></td>
+                                                            <td><?php echo $row['tahap'];?></td>
+                                                            <td><?php echo "Rp ".number_format($row['jmlpym']);?></td>
                                                         </tr>
                                                     <?php $no++; } } else { ?>
-                                                    <tr><td colspan="9" class="text-center"><i>Tabel penyerapan AI kosong</i></td></tr>
                                                     <?php } ?>
                                         </tbody>
                                     </table>

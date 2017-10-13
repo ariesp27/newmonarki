@@ -10,10 +10,10 @@ SELECT
     newdetailanggaran 
     LEFT JOIN realisasi ON newdetailanggaran.randomid = realisasi.randomid
     INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-    WHERE jenis = 'AO' AND 
+    WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND 
     newdetailanggaran.status = 8 AND 
     newdetailanggaran.tglapprove != ''
-    order by newdetailanggaran.status asc;
+    AND headeranggaran.jenis = 'AO'
 ");
 
 
@@ -68,17 +68,17 @@ SELECT
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <br />
-                                <table class="table table-striped table-bordered table-hover" id="datatabel">
+                                <table class="table table-striped table-bordered table-hover" id="datatabel1">
                                     <thead>
                                         <tr>
-                                            <th width="2%">No</th>
-                                            <th width="10%">Uraian Kegiatan</th>
-                                            <th width="8%">Nilai Anggaran</th>
-                                            <th width="8%">Nomor Kontrak</th>
-                                            <th width="8%">Nilai Kontrak</th>
-                                            <th width="8%">Vendor</th>
-                                            <th width="5%">Tanggal Kontrak</th>
-                                            <th width="3%">Aksi</th>
+                                            <th class="text-center" width="2%" >No</th>
+                                            <th class="text-center" width="10%">Uraian Kegiatan</th>
+                                            <th class="text-center" width="8%">Nilai Anggaran</th>
+                                            <th class="text-center" width="8%">Nomor Kontrak</th>
+                                            <th class="text-center" width="8%">Nilai Kontrak</th>
+                                            <th class="text-center" width="8%">Vendor</th>
+                                            <th class="text-center" width="5%">Tanggal Kontrak</th>
+                                            <th class="text-center" width="3%">Aksi</th>
                                			</tr>
                                     </thead>
                                     <tbody>
@@ -91,7 +91,7 @@ SELECT
                             				    
                             				?>
                             					<tr>
-                                                    <td><?php echo $no; ?></td>
+                                                    <td class="text-center"><?php echo $no; ?></td>
                                                     <td><?php echo $rowA['uraiankegiatan'];?></td>
                                                     <td>
                                                         RAB : <?php  echo "Rp ".number_format("$rowA[rab]"); ?>
@@ -122,11 +122,16 @@ SELECT
                                                     <td><?php echo $rowA['tglkontrak'];?></td>
                                                     -->
                                                     
-                                                    <td class="center">
+                                                    <td class="text-center">
                                                         <!--
                                                          <a href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
                                                          -->
+                                                         <?php 
+                                                                $sqlA = mysql_query("SELECT * FROM realisasi WHERE randomid = '".$rowA['randomid']."' ORDER BY nilaikontrak");
+                                                                $rowB = mysql_fetch_array($sqlA);
+                                                         if ($rowB['nilaikontrak'] == '') {?>
                                                          <a title="tambah" href="index.php?tambah-realisasi-ao=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-plus fa-2x"></i></a>
+                                                         <?php } ?>
                                                          <a title="update" href="index.php?update-realisasi-ao=<?php echo $rowA["randomid"]?>" type="button"><i class="fa fa-pencil-square-o fa-2x"></i></a>
                                                          <?php $delete = mysql_query("SELECT * FROM realisasi WHERE status = '9' AND randomid = '".$rowA['randomid']."'");
                                                          $rowC = mysql_fetch_array($delete);?>
@@ -186,7 +191,7 @@ SELECT
     <script src="assets/datatables/dataTables.bootstrap.js"></script>
     <script>
     $(document).ready( function () {
-      $('#datatabel').dataTable( {
+      $('#datatabel1').dataTable( {
         "paging":   true,
         "ordering": false,
         "bInfo": false,

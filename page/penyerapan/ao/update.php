@@ -9,7 +9,7 @@ if(isset($_POST["submit"])){
         $e      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
         
          mysql_query("UPDATE pembayaran SET tglpym='$a', jmlpym='$b', tahap='$c', tglinput='$d' WHERE randomid='$e'");
-         header("location:index.php?penyerapan&suksesedit");
+         header("location:index.php?penyerapan-ao&suksesedit");
 
     }
 $idA = mysql_real_escape_string(trim($_GET["update-penyerapan-ao"]));
@@ -74,7 +74,7 @@ $rowA = mysql_fetch_array($sqlA);
                                             <div class="row">
                                                 <div class="col-md-4"><label>Jumlah Pembayaran</label></div>
                                                 <div class="col-md-7">
-                                                    <input class="form-control" name="jmlpym" type="text" data-rule-required="true" value="<?php echo $rowA["jmlpym"]; ?>" data-msg-required="Mohon masukkan jumlah pembayaran." placeholder="masukkan jumlah pembayaran" />
+                                                    <input class="form-control" name="jmlpym" onKeyPress="return isNumberKey(event)" type="text" data-rule-required="true" value="<?php echo $rowA["jmlpym"]; ?>" data-msg-required="Mohon masukkan jumlah pembayaran." placeholder="masukkan jumlah pembayaran" />
                                                 </div>
                                             </div>
                                         </div>
@@ -83,7 +83,7 @@ $rowA = mysql_fetch_array($sqlA);
                                             <div class="row">
                                                 <div class="col-md-4"><label>Tahap</label></div>
                                                 <div class="col-md-7">
-                                                    <input class="form-control" name="tahap" type="text" data-rule-required="true" value="<?php echo $rowA["tahap"]; ?>" data-msg-required="Mohon masukkan tahap." placeholder="masukkan tahap" />
+                                                    <input class="form-control" name="tahap" onKeyPress="return isNumberKey(event)" type="text" data-rule-required="true" value="<?php echo $rowA["tahap"]; ?>" data-msg-required="Mohon masukkan tahap." placeholder="masukkan tahap" />
                                                 </div>
                                             </div>
                                         </div>

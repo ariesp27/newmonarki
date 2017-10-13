@@ -10,6 +10,7 @@
     include    "page/beranda/menuMAPP.php";
     include    "page/beranda/menuAssmen.php";
     include    "page/beranda/menuKI.php";
+    include    "page/beranda/menubk-ki.php";
     include     "config/koneksi.php";
     include     "config/utility.php";
 ?>
@@ -90,7 +91,9 @@ $( "" ).click(function( eventObject ) {
                                 else if  ($_SESSION['level'] == 'asman') {
                                     ?>Assman <?php echo $row['namaapp'];
                                 }
-                                else {
+                                else if ($_SESSION['level'] == 'userki'){
+                                    ?>Bid. Kontruksi <?php echo $row['namaapp'];
+                                }else {
                                     ?>Admin <?php echo $row['namaapp'];
                                 }
                             }
@@ -163,6 +166,9 @@ $( "" ).click(function( eventObject ) {
             else if (isset($_GET["penetapan-ai"])){include "page/penetapan/ai/penetapan.php";}
             else if (isset($_GET["data-penetapan-ao"])){include "page/penetapan/ao/belum-penetapan-ao.php";}
             else if (isset($_GET["penetapan-ao"])){include "page/penetapan/ao/penetapan-ao.php";}
+            //rekap penetapan usulan
+            else if (isset($_GET["rekap-usul-ai"])){include "page/rekap/ai/rekap-tetapan-ai.php";}
+            else if (isset($_GET["rekap-usul-ao"])){include "page/rekap/ao/rekap-tetapan-ao.php";}
             //input RAB user
             else if (isset($_GET["rab-ai"])){include "page/rab/ai/data-penetapan.php";}
             else if (isset($_GET["tambah-rab-ai"])){include "page/rab/ai/tambah.php";}
@@ -210,6 +216,13 @@ $( "" ).click(function( eventObject ) {
             //laporan penyerapan
             else if (isset($_GET["lap-serapan-ai"])){include "page/lap/lap-ser-ai.php";}
             else if (isset($_GET["lap-serapan-ao"])){include "page/lap/lap-ser-ao.php";}
+            //laporan KI
+            else if (isset($_GET["report-ai"])){include "page/lapki/lapai.php";}
+            else if (isset($_GET["report-ao"])){include "page/lapki/lapao.php";}
+            else if (isset($_GET["report-realisasi-ai"])){include "page/lapki/lap-rea-ai.php";}
+            else if (isset($_GET["report-realisasi-ao"])){include "page/lapki/lap-rea-ao.php";}
+            else if (isset($_GET["report-serapan-ai"])){include "page/lapki/lap-ser-ai.php";}
+            else if (isset($_GET["report-serapan-ao"])){include "page/lapki/lap-ser-ao.php";}
             
             else if (isset($_GET["password"])){include "page/changepassnew.php";}
             
@@ -240,6 +253,10 @@ $( "" ).click(function( eventObject ) {
                     else if($_SESSION["level"]=="asman")
                     {
                         echo menuAssmen();
+                    }
+                    else if($_SESSION["level"]=="userki")
+                    {
+                        echo menuBKKI();
                     }
                     else
                     {

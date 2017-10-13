@@ -75,7 +75,7 @@ $rowA = mysql_fetch_array($sqlA);
                                             <div class="row">
                                                 <div class="col-md-4"><label>Nilai Kontrak</label></div>
                                                 <div class="col-md-7">
-                                                    <input class="form-control" name="nilaikontrak" type="text" data-rule-required="true" value="<?php echo $rowA["nilaikontrak"]; ?>" data-msg-required="Mohon masukkan nilai kontrak." placeholder="masukkan nilai kontrak" />
+                                                    <input class="form-control" name="nilaikontrak" type="text" onKeyPress="return isNumberKey(event)" data-rule-required="true" value="<?php echo $rowA["nilaikontrak"]; ?>" data-msg-required="Mohon masukkan nilai kontrak." placeholder="masukkan nilai kontrak" />
                                                 </div>
                                             </div>
                                         </div>

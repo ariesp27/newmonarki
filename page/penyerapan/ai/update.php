@@ -74,7 +74,7 @@ $rowA = mysql_fetch_array($sqlA);
                                             <div class="row">
                                                 <div class="col-md-4"><label>Jumlah Pembayaran</label></div>
                                                 <div class="col-md-7">
-                                                    <input class="form-control" name="jmlpym" type="text" data-rule-required="true" value="<?php echo $rowA["jmlpym"]; ?>" data-msg-required="Mohon masukkan jumlah pembayaran." placeholder="masukkan jumlah pembayaran" />
+                                                    <input class="form-control" name="jmlpym" type="text" onKeyPress="return isNumberKey(event)" data-rule-required="true" value="<?php echo $rowA["jmlpym"]; ?>" data-msg-required="Mohon masukkan jumlah pembayaran." placeholder="masukkan jumlah pembayaran" />
                                                 </div>
                                             </div>
                                         </div>
@@ -83,7 +83,7 @@ $rowA = mysql_fetch_array($sqlA);
                                             <div class="row">
                                                 <div class="col-md-4"><label>Tahap</label></div>
                                                 <div class="col-md-7">
-                                                    <input class="form-control" name="tahap" type="text" data-rule-required="true" value="<?php echo $rowA["tahap"]; ?>" data-msg-required="Mohon masukkan tahap." placeholder="masukkan tahap" />
+                                                    <input class="form-control" name="tahap" type="text" onKeyPress="return isNumberKey(event)" data-rule-required="true" value="<?php echo $rowA["tahap"]; ?>" data-msg-required="Mohon masukkan tahap." placeholder="masukkan tahap" />
                                                 </div>
                                             </div>
                                         </div>

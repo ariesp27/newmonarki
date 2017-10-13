@@ -8,35 +8,21 @@
     
     if(isset($_POST["submit"]))
     {
-        $a      = mysql_real_escape_string(strip_tags($_POST["noprk"]));
-        $b      = mysql_real_escape_string(strip_tags($_POST["kode_posanggaran"]));
-        $c      = mysql_real_escape_string(strip_tags($_POST["kodefungsi"]));
-        $d      = mysql_real_escape_string(strip_tags($_POST["kodesatuan"]));
-        $e      = mysql_real_escape_string(strip_tags($_POST["uraiankegiatan"]));
-        $f      = mysql_real_escape_string(strip_tags($_POST["durasi"]));
-        $g      = tglformataction($_POST["tartglmulai"]);
-        $h      = mysql_real_escape_string(strip_tags($_POST["prioritas"]));
-        $x      = mysql_real_escape_string(strip_tags($_POST["kodeanggaran"]));
+        $b      = mysql_real_escape_string(strip_tags($_POST["kodewbs"]));
+        $i      = mysql_real_escape_string(strip_tags($_POST["volumejasa"]));
+        $j      = mysql_real_escape_string(strip_tags($_POST["volumematerial"]));
+        $k      = mysql_real_escape_string(strip_tags($_POST["hrgsatuanjasa"]));
         $l      = mysql_real_escape_string(strip_tags($_POST["hrgsatuanmaterial"]));
-        $m      = mysql_real_escape_string(strip_tags($_POST["volumematerial"]));
-        $n      = mysql_real_escape_string(strip_tags($_POST["hrgsatuanjasa"]));
-        $o      = mysql_real_escape_string(strip_tags($_POST["volumejasa"]));
-        $p      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
+        $m      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
+        $n      = mysql_real_escape_string(strip_tags($_POST["jenis"]));
         
-        $filekko  = $_FILES["uploadkko"]["name"];
-        $newfilekko     = time() . '_' . rand(100, 999) . '.' . end(explode(".",$filekko));
-        $file_tmp_kko = $_FILES["uploadkko"]["tmp_name"];
-        copy($file_tmp_kko,"foto/".$newfilekko);
         
-        $filekkf  = $_FILES["uploadkkf"]["name"];
-        $newfilekkf     = time() . '_' . rand(100, 999) . '.' . end(explode(".",$filekkf));
-        $file_tmp_kkf = $_FILES["uploadkkf"]["tmp_name"];
-        copy($file_tmp_kkf,"foto/".$newfilekkf);
+        mysql_query ("INSERT INTO newdetailanggaran (kodedetail, volumejasa, volumematerial, 
+        hrgsatuanjasa, hrgsatuanmaterial, randomid, status) VALUES ('','$i','$j','$k','$l','$m','4')");
         
-        mysql_query ("INSERT INTO newdetailanggaran (kodedetail, kodeanggaran, hrgsatuanmaterial, volumematerial, hrgsatuanjasa, 
-        volumejasa, randomid, status) VALUES ('','$x','$l','$m','$n','$o','$p','4')");
-      
+        mysql_query ("UPDATE headeranggaran SET kodewbs='$b', jenis='$n' where randomid='$m'");
         header("location:index.php?data-penetapan-ai&suksestambah");
+        
         
 }
 $idA = (int)mysql_real_escape_string(trim($_GET["penetapan-ai"]));
@@ -45,8 +31,6 @@ newdetailanggaran.*,
 headeranggaran.*
 FROM newdetailanggaran
 INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
-INNER JOIN fungsi ON headeranggaran.kodefungsi = fungsi.kodefungsi
-INNER JOIN pos_anggaran ON headeranggaran.kode_posanggaran = pos_anggaran.kode_posanggaran
 INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan WHERE status = '3' 
 AND kodedetail = '$idA'") or die (mysql_error());
 if(mysql_num_rows($sqlA)==0);
@@ -106,14 +90,44 @@ $rowA = mysql_fetch_array($sqlA);
                                         <div class="form-group">
                                             <div class="row">
                                             <div class="col-md-9"> <br />
-                                                <div class="col-md-4"><label>Nomor PRK</label></div>
+                                                <div class="col-md-4"><label>No. Usulan</label></div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" name="noprk" type="text" disabled="" data-rule-required="true" value="<?php echo $rowA["noprk"]; ?>" data-msg-required="Mohon masukkan nomor PRK." placeholder="masukkan nomor PRK" />
+                                                    <input class="form-control" name="nousulan" type="text" disabled="" data-rule-required="true" value="<?php echo $rowA["nousulan"]; ?>" data-msg-required="Mohon masukkan nomor usulan." placeholder="masukkan nomor usulan" />
                                                 </div>
                                             </div>
                                             </div>
                                         </div>
-                                        
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <div class="col-md-4"> <label>Pos Anggaran (WBS)</label></div>
+                                                    <div class="col-md-8">
+                                                        <?php $sqlA = mysql_query("SELECT * FROM wbs") or die (mysql_error()); ?>
+                                                        <select name="kodewbs" id="kodewbs" class="form-control"  data-msg-required="Mohon masukkan kode pos anggaran.">
+                                                            <option value="">- Pilih -</option>
+                                                            <?php while ($data = mysql_fetch_array($sqlA)) { ?>
+                                                            <option value="<?php echo $data["kodewbs"] ; ?>" <?php if ($rowA['kodewbs']==$data['kodewbs']){ ?>selected="selected"<?php } ?>><?php echo $data["namawbs"]; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                        <div class="col-md-4"><label>Jenis Angaran</label></div>
+                                                        <div class="col-md-8">
+                                                            <select name="jenis" id="jenis" class="form-control"  data-msg-required="Mohon masukkan jenis anggaran.">
+                                                                <option>- Pilih -</option>
+                                                                <option>AO</option>
+                                                                <option>AI</option>
+                                                            </select>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--
                                         <div class="form-group">
                                             <div class="row">
                                             <div class="col-md-9">
@@ -130,7 +144,6 @@ $rowA = mysql_fetch_array($sqlA);
                                             </div>
                                             </div>
                                         </div>
-                                        
                                         <div class="form-group">
                                             <div class="row">
                                             <div class="col-md-9">
@@ -147,35 +160,34 @@ $rowA = mysql_fetch_array($sqlA);
                                             </div>
                                             </div>
                                         </div>
-                                        
+                                        -->
                                         <div class="form-group">
                                             <div class="row">
-                                            <div class="col-md-9">
-                                                <div class="col-md-4"> <label>Satuan</label></div>
-                                                <div class="col-md-8">
-                                                    <?php $sqlA = mysql_query("SELECT * FROM satuan") or die (mysql_error()); ?>
-                                                    <select name="kodesatuan" id="kodesatuan" disabled="" class="form-control"  data-msg-required="Mohon masukkan kode satuan.">
-                                                        <option value="">- Pilih -</option>
-                                                        <?php while ($data = mysql_fetch_array($sqlA)) { ?>
-                                                        <option value="<?php echo $data["kodesatuan"] ; ?>" <?php if ($rowA['kodesatuan']==$data['kodesatuan']){ ?>selected="selected"<?php } ?>><?php echo $data["namasatuan"]; ?></option>
-                                                        <?php } ?>
-                                                    </select>
-                                                    </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <div class="row">
-                                            <div class="col-md-9">
-                                                <div class="col-md-4"><label>Uraian Kegiatan</label></div>
-                                                <div class="col-md-8">
-                                                    <input class="form-control" name="uraiankegiatan" type="text" disabled="" data-rule-required="true" value="<?php echo $rowA["uraiankegiatan"]; ?>" data-msg-required="Mohon masukkan uraian kegiatan." placeholder="masukkan uraian kegiatan" />
+                                                <div class="col-md-9">
+                                                    <div class="col-md-4"> <label>Satuan</label></div>
+                                                        <div class="col-md-8">
+                                                            <?php $sqlA = mysql_query("SELECT * FROM satuan") or die (mysql_error()); ?>
+                                                            <select name="kodesatuan" id="kodesatuan" disabled="" class="form-control"  data-msg-required="Mohon masukkan kode satuan.">
+                                                                <option value="">- Pilih -</option>
+                                                                <?php while ($data = mysql_fetch_array($sqlA)) { ?>
+                                                                <option value="<?php echo $data["kodesatuan"] ; ?>" <?php if ($rowA['kodesatuan']==$data['kodesatuan']){ ?>selected="selected"<?php } ?>><?php echo $data["namasatuan"]; ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <div class="col-md-4"><label>Uraian Kegiatan</label></div>
+                                                    <div class="col-md-8">
+                                                        <input class="form-control" name="uraiankegiatan" type="text" disabled="" data-rule-required="true" value="<?php echo $rowA["uraiankegiatan"]; ?>" data-msg-required="Mohon masukkan uraian kegiatan." placeholder="masukkan uraian kegiatan" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        
+                                    <!--
                                         <div class="form-group">
                                             <div class="row">
                                             <div class="col-md-9">
@@ -186,17 +198,19 @@ $rowA = mysql_fetch_array($sqlA);
                                             </div>
                                             </div>
                                         </div>
-                                
+                                    -->
                                         <div class="form-group">
                                             <div class="row">
-                                            <div class="col-md-9">
-                                                <div class="col-md-4"><label>Tanggal Mulai</label></div>
-                                                <div class="col-md-8">
-                                                    <input  type="text" disabled="" onKeyPress="return isNumberKeyTgl(event)" class="form-control" id="datepicker" name="tartglmulai" value="<?php if($rowA["tartglmulai"]=="0000-00-00"){}else{ echo format_tgl($rowA["tartglmulai"]); } ?>" data-rule-required="true" data-rule-date="true" data-msg-date="format yang benar dd/mm/yyyy" data-msg-required="mohon masukkan data Target tanggal mulai." placeholder="masukkan Target tanggal mulai" /></div>
-                                            </div>
+                                                <div class="col-md-9">
+                                                    <div class="col-md-4"><label>Bulan Mulai</label></div>
+                                                    <div class="col-md-8">
+                                                        <select name="blnmulai" id="blnmulai" class="form-control"  disabled="" data-msg-required="Mohon masukkan bulan mulai.">
+                                                            <option value="<?php echo $rowA["blnmulai"] ; ?>" <?php if ($rowA['blnmulai']==$rowA['blnmulai']){ ?>selected="selected"<?php } ?>><?php echo $rowA["blnmulai"]; ?></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        
                                         <div class="form-group">
                                             <div class="row">
                                             <div class="col-md-9"> 
@@ -207,24 +221,33 @@ $rowA = mysql_fetch_array($sqlA);
                                             </div>
                                             </div>
                                         </div>
-                                        
-                                </div>
-                                <div class="col-lg-6">
                                 
                                         <div class="form-group">
                                             <div class="row">
-                                            <div class="col-md-9"><br />
-                                                <div class="col-md-4"><label>Hrg. Satuan Material</label></div>
+                                            <div class="col-md-9">
+                                                <div class="col-md-4"><label>Volume Jasa</label></div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" name="hrgsatuanmaterial" type="text"  disabled="" data-rule-required="true" value="<?php echo $rowA["hrgsatuanmaterial"]; ?>" data-msg-required="Mohon masukkan harga satuan material." placeholder="masukkan harga satuan material" />
+                                                    <input class="form-control" name="volumejasa" type="text" disabled="" data-rule-required="true" value="<?php echo $rowA["volumejasa"]; ?>" data-msg-required="Mohon masukkan volume jasa." placeholder="masukkan volume jasa" />
+                                                </div>
                                                 </div>
                                             </div>
                                             </div>
-                                        </div>
                                         
                                         <div class="form-group">
                                             <div class="row">
                                             <div class="col-md-9">
+                                                <div class="col-md-4"><label>Volume Material</label></div>
+                                                <div class="col-md-8">
+                                                    <input class="form-control" name="volumematerial" type="text" disabled="" data-rule-required="true" value="<?php echo $rowA["volumematerial"]; ?>" data-msg-required="Mohon masukkan volume material." placeholder="masukkan volume material" />
+                                                </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                </div>
+                                <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <div class="row">
+                                            <div class="col-md-9"><br />
                                                 <div class="col-md-4"><label>Hrg. Satuan Jasa</label></div>
                                                 <div class="col-md-8">
                                                     <input class="form-control" name="hrgsatuanjasa" type="text"  disabled="" data-rule-required="true" value="<?php echo $rowA["hrgsatuanjasa"]; ?>" data-msg-required="Mohon masukkan harga satuan jasa." placeholder="masukkan harga satuan jasa" />
@@ -232,26 +255,43 @@ $rowA = mysql_fetch_array($sqlA);
                                             </div>
                                             </div>
                                         </div>
-                                        
-                                        
-                                        
                                         <div class="form-group">
                                             <div class="row">
                                             <div class="col-md-9">
-                                                <div class="col-md-4"><label>Hrg.Satuan Material Sesudah</label></div>
+                                                <div class="col-md-4"><label>Hrg. Satuan Material</label></div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" name="hrgsatuanmaterial" type="text"  data-rule-required="true"  data-msg-required="Mohon masukkan hrg satuan material sesudah." placeholder="masukkan hrg satuan material sesudah" />
+                                                    <input class="form-control" name="hrgsatuanmaterial" type="text"  disabled="" data-rule-required="true" value="<?php echo $rowA["hrgsatuanmaterial"]; ?>" data-msg-required="Mohon masukkan harga satuan material." placeholder="masukkan harga satuan material" />
                                                 </div>
                                             </div>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="col-md-4"><label>Volume Jasa Sesudah</label></div>
+                                                <div class="col-md-8">
+                                                    <input class="form-control" name="volumejasa" type="text"  data-rule-required="true"  data-msg-required="Mohon masukkan volume jasa sesudah." placeholder="masukkan volume jasa sesudah" />
+                                                </div>
+                                                </div>
+                                            </div>
+                                            </div>
                                         
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <div class="col-md-4"><label>Volume Material Sesudah</label></div>
+                                                    <div class="col-md-8">
+                                                        <input class="form-control" name="volumematerial" type="text"  data-rule-required="true"  data-msg-required="Mohon masukkan volume material sesudah." placeholder="masukkan volume material sesudah" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <div class="row">
                                             <div class="col-md-9">
                                                 <div class="col-md-4"><label>Hrg.Satuan Jasa Sesudah</label></div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" name="hrgsatuanjasa" type="text"  data-rule-required="true"  data-msg-required="Mohon masukkan hrg satuan jasa sesudah." placeholder="masukkan hrg satuan jasa sesudah" />
+                                                    <input class="form-control" name="hrgsatuanjasa" type="text" onKeyPress="return isNumberKey(event)" data-rule-required="true"  data-msg-required="Mohon masukkan hrg satuan jasa sesudah." placeholder="masukkan hrg satuan jasa sesudah" />
                                                 </div>
                                             </div>
                                             </div>
@@ -259,31 +299,37 @@ $rowA = mysql_fetch_array($sqlA);
                                         <div class="form-group">
                                             <div class="row">
                                             <div class="col-md-9">
+                                                <div class="col-md-4"><label>Hrg.Satuan Material Sesudah</label></div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" name="status" hidden="" type="hidden" disabled="" data-rule-required="true" value="<?php echo $rowA["status"]; ?>" data-msg-required="Mohon masukkan status." placeholder="masukkan status" />
+                                                    <input class="form-control" name="hrgsatuanmaterial" onKeyPress="return isNumberKey(event)" type="text"  data-rule-required="true"  data-msg-required="Mohon masukkan hrg satuan material sesudah." placeholder="masukkan hrg satuan material sesudah" />
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6"></div>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <button type="submit" name="submit" class="btn btn-large btn-success">Simpan</button>
+                                                <a href="index.php?data-penetapan-ai" class="btn btn-large btn-warning">Kembali</a>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="col-md-8">
+                                                    <input type="hidden" onKeyPress="return isNumberKeyTgl(event)" class="form-control" id="datepicker" name="tartglmulai" value="<?php if($rowA["tartglmulai"]=="0000-00-00"){}else{ echo format_tgl($rowA["tartglmulai"]); } ?>" data-rule-required="true" data-rule-date="true" data-msg-date="format yang benar dd/mm/yyyy" data-msg-required="mohon masukkan data Target tanggal mulai." placeholder="masukkan Target tanggal mulai" /></div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="col-md-8">
+                                                    <input class="form-control" name="status" type="hidden" data-rule-required="true" value="<?php echo $rowA["status"]; ?>" data-msg-required="Mohon masukkan status." placeholder="masukkan status" />
                                                 </div>
                                             </div>
                                             </div>
                                         </div>  
-                                        <div class="form-group">
-                                            <div class="row">
-                                            <div class="col-md-9">
-                                                <div class="col-md-8">
-                                                    <input class="form-control" name="volumejasa" type="hidden"  data-rule-required="true" value="<?php echo $rowA["volumejasa"]; ?>" data-msg-required="Mohon masukkan volume jasa." placeholder="masukkan volume jasa" />
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <div class="row">
-                                            <div class="col-md-9">
-                                                <div class="col-md-8">
-                                                    <input class="form-control" name="volumematerial" type="hidden"  data-rule-required="true" value="<?php echo $rowA["volumematerial"]; ?>" data-msg-required="Mohon masukkan volume material." placeholder="masukkan voluem material" />
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
                                         <div class="form-group">
                                             <div class="row">
                                             <div class="col-md-9">
@@ -293,42 +339,12 @@ $rowA = mysql_fetch_array($sqlA);
                                             </div>
                                             </div>
                                         </div>
-                                    </div>
-                                            <div class="form-group">
-                                                <div class="col-lg-6"></div>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <button type="submit" name="submit" class="btn btn-large btn-success">Simpan</button>
-                                                    <a href="index.php?data-penetapan-ai" class="btn btn-large btn-warning">Kembali</a>
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                                <div class="row">
-                                                <div class="col-md-9">
-                                                    <div class="col-md-8">
-                                                        <input class="form-control" name="volumejasa" type="hidden"  data-rule-required="true" value="<?php echo $rowA["volumejasa"]; ?>" data-msg-required="Mohon masukkan volume jasa." placeholder="masukkan volume jasa" />
-                                                    </div>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        
-                                            <div class="form-group">
-                                                <div class="row">
-                                                <div class="col-md-9">
-                                                    <div class="col-md-8">
-                                                        <input class="form-control" name="volumematerial" type="hidden"  data-rule-required="true" value="<?php echo $rowA["volumematerial"]; ?>" data-msg-required="Mohon masukkan volume material." placeholder="masukkan voluem material" />
-                                                    </div>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        
-                                
-                    </form><br />
-                    </table>
-                </div>
+                    </form>
+                </table>
             </div>
         </div>
     </div>
-</div> 
+</div>
 <script src="assets/pickday/moment.js"></script>
 <script src="assets/pickday/pikaday.js"></script>
 <script>

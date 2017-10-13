@@ -1,14 +1,43 @@
 <?php
-$sql = mysql_query("SELECT 
-newdetailanggaran.*, 
+$sql = mysql_query("SELECT
+newdetailanggaran.kodedetail,
+newdetailanggaran.volumejasa,
+newdetailanggaran.volumematerial,
+newdetailanggaran.hrgsatuanjasa,
+newdetailanggaran.hrgsatuanmaterial,
+newdetailanggaran.alasan,
+newdetailanggaran.status,
+newdetailanggaran.tglapprove,
+newdetailanggaran.randomid,
+headeranggaran.*,
+disburst.kodedisburst,
+disburst.jan,
+disburst.feb,
+disburst.mar,
+disburst.apr,
+disburst.mei,
+disburst.jun,
+disburst.jul,
+disburst.agu,
+disburst.sep,
+disburst.okt,
+disburst.nov,
+disburst.des,
+disburst.randomid
+FROM newdetailanggaran
+INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
+INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan
+INNER JOIN disburst ON newdetailanggaran.randomid = disburst.randomid
+WHERE status = '3'
+");
+
+$sqlB = mysql_query("SELECT
+newdetailanggaran.*,
 headeranggaran.*
 FROM newdetailanggaran
 INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
-INNER JOIN fungsi ON headeranggaran.kodefungsi = fungsi.kodefungsi
-INNER JOIN pos_anggaran ON headeranggaran.kode_posanggaran = pos_anggaran.kode_posanggaran
-INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan
-WHERE jenis = 'AI' AND status = '3'")
-or die (mysql_error());
+WHERE status = '4'")or die (mysql_error());
+$rowB=mysql_fetch_array($sqlB)
 ?>
 
 <div id="wrapper">
@@ -17,7 +46,7 @@ or die (mysql_error());
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Penetapan Anggaran Investasi</h2>
+                        <h2>Penetapan Usulan Anggaran</h2>
                         <hr />
                     </div>
                 </div>
@@ -48,27 +77,28 @@ or die (mysql_error());
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             Tabel Penetapan Anggaran Investasi
+                             Tabel Penetapan Usulan Anggaran
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <br />
-                                <table class="table table-striped table-bordered table-hover" id="datatabel">
+                                <table class="table table-striped table-bordered table-hover" id="datatabel1">
                                     <thead>
                                         <tr>
-                                            <th width="2%">No</th>
-                                            <th width="6%">Uraian Kegiatan</th>
-                                            <th width="2%">No. PRK</th>
-                                            <th width="2%">Vol. Jasa</th>
-                                            <th width="2%">Vol. Material</th>
-                                            <th width="5%">Hrg Satuan Meterial </th>
-                                            <th width="5%">Hrg Satuan Jasa </th>
-                                            <th width="5%">Jml. Biaya Material</th>
-                                            <th width="4%">Jml. Biaya Jasa</th> 
-                                            <!--
-                                            <th width="2%">Status</th> 
-                                            -->
-                    						<th width="1%">Aksi</th>
+                                            <th class="text-center" width="2%">No</th>
+                                            <th class="text-center" width="8%">Uraian Kegiatan</th>
+                                            <th class="text-center" width="4%">No. Usulan</th>
+                                        <!--
+                                            <th class="text-center" width="2%">Vol. Jasa</th>
+                                            <th class="text-center" width="2%">Vol. Material</th>
+                                            <th class="text-center" width="5%">Hrg Satuan Jasa </th>
+                                            <th class="text-center" width="5%">Hrg Satuan Meterial </th>
+                                        -->
+                                            <th class="text-center" width="4%">Unit APP</th> 
+                                            <th class="text-center" width="3%">Status</th> 
+                                            <th class="text-center" width="4%">Jml. Biaya Jasa</th> 
+                                            <th class="text-center" width="4%">Jml. Biaya Material</th>
+                    						<th class="text-center" width="3%">Aksi</th>
                                			</tr>
                                     </thead>
                                     <tbody>
@@ -78,10 +108,11 @@ or die (mysql_error());
                             				{
                             				?>
                             					<tr>
-                                                    <td><?php echo $no; ?></td>
+                                                    <td class="text-center"><?php echo $no; ?></td>
                                                     <td><?php echo $row['uraiankegiatan'];?></td>
-                                                    <td><?php echo $row['noprk'];?></td>
-                                                    <td align="left">
+                                                    <td class="text-center"><?php echo $row['nousulan'];?></td>
+                                                <!--
+                                                    <td class="text-center">
                                                         U: <?php echo $row['volumejasa']; ?>
                                                         <br />
                                                         P: <?php 
@@ -89,13 +120,21 @@ or die (mysql_error());
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
                                                         echo $penetapan['volumejasa']; ?>
                                                     </td>
-                                                    <td align="left">
+                                                    <td class="text-center">
                                                         U: <?php echo $row['volumematerial']; ?>
                                                         <br />
                                                         P: <?php 
                                                         $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
                                                         echo $penetapan['volumematerial']; ?>
+                                                    </td>
+                                                    <td align="left">
+                                                        U: <?php echo "Rp ".number_format($row['hrgsatuanjasa']); ?>
+                                                        <br />
+                                                        P: <?php 
+                                                        $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
+                                                        WHERE status = '4' AND randomid = '".$row['randomid']."'"));
+                                                        echo "Rp ".number_format( $penetapan['hrgsatuanjasa']); ?>
                                                     </td>
                                                     <td align="left">
                                                         U: <?php echo "Rp ".number_format($row['hrgsatuanmaterial']); ?>
@@ -105,27 +144,24 @@ or die (mysql_error());
                                                         WHERE status = '4' AND randomid = '".$row['randomid']."'"));
                                                         echo "Rp ".number_format( $penetapan['hrgsatuanmaterial']); ?>
                                                     </td>
-                                                    
-                                                    <td align="left">
-                                                        U: <?php echo "Rp ".number_format($row['hrgsatuanjasa']); ?>
-                                                        <br />
-                                                        P: <?php 
-                                                        $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
-                                                        WHERE status = '4' AND randomid = '".$row['randomid']."'"));
-                                                        echo "Rp ".number_format( $penetapan['hrgsatuanjasa']); ?>
+                                                -->
+                                                    <td class="text-center">
+                                                        <?php 
+                                                            if ($row['kodeapp'] == '1') {echo "APP Bogor";}
+                                                            else if ($row['kodeapp'] == '2') {echo "APP Bandung";}
+                                                            else if ($row['kodeapp'] == '3') {echo "APP Karawang";}
+                                                            else if ($row['kodeapp'] == '4') {echo "APP Cirebon";}
+                                                            else if ($row['kodeapp'] == '5') {echo "APP Purwokerto";}
+                                                            else if ($row['kodeapp'] == '6') {echo "APP Salatiga";}
+                                                            else if ($row['kodeapp'] == '7') {echo "APP Semarang";}
+                                                            else if ($row['kodeapp'] == '99') {echo "Kantor Induk";}
+                                                        ?>
                                                     </td>
-                                                    
-                                                    <td align="left">
-                                                        U: <?php $a = $row['volumematerial']*$row['hrgsatuanmaterial'];
-                                                        echo "Rp ". number_format($a); ?>
-                                                        <br />
-                                                        P: <?php 
-                                                        $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
-                                                        WHERE status = '4' AND randomid = '".$row['randomid']."'"));
-                                                        $b = $penetapan['volumematerial']*$penetapan['hrgsatuanmaterial'];
-                                                        echo "Rp ". number_format($b);?>
-                                                    </td>
-                                                    
+                                                  
+                                                    <td class="text-center">
+                                                    <?php if ($row['status'] == '3') {echo "Terevaluasi";}
+                                                    else if ($row['status'] == '4') {echo "Penetapan";}
+                                                    ?></td> 
                                                     <td align="left">
                                                         U: <?php $c = $row['volumejasa']*$row['hrgsatuanjasa'];
                                                         echo "Rp ". number_format($c); ?>
@@ -136,19 +172,22 @@ or die (mysql_error());
                                                         $d = $penetapan['volumejasa']*$penetapan['hrgsatuanjasa'];
                                                         echo "Rp ". number_format($d); ?>
                                                     </td>
-                                                    
-                                                <!--     
-                                                    <td>
-                                                    <?php if ($row['status'] == '3') {echo "Terevaluasi";}
-                                                    else if ($row['status'] == '4') {echo "Penetapan";}
-                                                    ?></td> 
-                                                 -->
-                                                    <td class="center">
+                                                    <td align="left">
+                                                        U: <?php $a = $row['volumematerial']*$row['hrgsatuanmaterial'];
+                                                        echo "Rp ". number_format($a); ?>
+                                                        <br />
+                                                        P: <?php 
+                                                        $penetapan = mysql_fetch_array(mysql_query("SELECT * FROM newdetailanggaran
+                                                        WHERE status = '4' AND randomid = '".$row['randomid']."'"));
+                                                        $b = $penetapan['volumematerial']*$penetapan['hrgsatuanmaterial'];
+                                                        echo "Rp ". number_format($b);?>
+                                                    </td>
+                                                    <td class="text-center">
                                                     
                                                         <?php if ($row['status'] == '3') {?>
                                                             <a title="detail" href="#" class="detail" data-id="<?php echo $row["kodedetail"]; ?>" role="button" data-toggle="modal">
                                                             <i class="glyphicon glyphicon-zoom-in fa-2x"></i></a>   
-                                                        <?php } else if ($row['status'] == '4') {?>
+                                                        <?php } else if ($rowB['status'] == '4') {?>
                                                             <a title="detail" href="#" class="detailtetapan" data-id="<?php echo $row["kodedetail"]; ?>" role="button" data-toggle="modal">
                                                             <i class="glyphicon glyphicon-zoom-in fa-2x"></i></a>
                                                         <?php } else{echo "";}?>
@@ -173,7 +212,6 @@ or die (mysql_error());
                                 </table>
                                     <strong>U : Usulan</strong><br />
                                     <strong>P : Penetapan</strong><br />
-                                    <strong>R : RAB</strong><br />
                             </div>
 
                         </div>
@@ -233,7 +271,7 @@ or die (mysql_error());
     <script src="assets/datatables/dataTables.bootstrap.js"></script>
     <script>
     $(document).ready( function () {
-      $('#datatabel').dataTable( {
+      $('#datatabel1').dataTable( {
         "paging":   true,
         "ordering": false,
         "bInfo": false,

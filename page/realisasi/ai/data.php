@@ -1,6 +1,5 @@
 <?php
-$sql = mysql_query("
-SELECT
+$sql = mysql_query("SELECT
     ((volumejasa*hrgsatuanjasa)+(volumematerial*hrgsatuanmaterial)) 'rab',
     headeranggaran.*,
     newdetailanggaran.*,
@@ -10,10 +9,10 @@ SELECT
     newdetailanggaran 
     LEFT JOIN realisasi ON newdetailanggaran.randomid = realisasi.randomid
     INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-    WHERE jenis = 'AI' AND 
+    WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND 
     newdetailanggaran.status = 8 AND 
     newdetailanggaran.tglapprove != ''
-    order by newdetailanggaran.status asc;
+    AND headeranggaran.jenis = 'AI'
 ");
 
 
@@ -68,17 +67,17 @@ SELECT
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <br />
-                                <table class="table table-striped table-bordered table-hover" id="datatabel">
+                                <table class="table table-striped table-bordered table-hover" id="datatabel1">
                                     <thead>
                                         <tr>
-                                            <th width="2%">No</th>
-                                            <th width="10%">Uraian Kegiatan</th>
-                                            <th width="8%">Nilai Anggaran</th>
-                                            <th width="8%">Nomor Kontrak</th>
-                                            <th width="8%">Nilai Kontrak</th>
-                                            <th width="8%">Vendor</th>
-                                            <th width="5%">Tanggal Kontrak</th>
-                                            <th width="3%">Aksi</th>
+                                            <th class="text-center" width="2%" >No</th>
+                                            <th class="text-center" width="10%">Uraian Kegiatan</th>
+                                            <th class="text-center" width="8%">Nilai Anggaran</th>
+                                            <th class="text-center" width="8%">Nomor Kontrak</th>
+                                            <th class="text-center" width="8%">Nilai Kontrak</th>
+                                            <th class="text-center" width="8%">Vendor</th>
+                                            <th class="text-center" width="5%">Tanggal Kontrak</th>
+                                            <th class="text-center" width="3%">Aksi</th>
                                			</tr>
                                     </thead>
                                     <tbody>
@@ -91,7 +90,7 @@ SELECT
                             				    
                             				?>
                             					<tr>
-                                                    <td><?php echo $no; ?></td>
+                                                    <td class="text-center"><?php echo $no; ?></td>
                                                     <td><?php echo $rowA['uraiankegiatan'];?></td>
                                                     <td>
                                                         RAB : <?php  echo "Rp ".number_format("$rowA[rab]"); ?>
@@ -122,7 +121,7 @@ SELECT
                                                     <td><?php echo $rowA['tglkontrak'];?></td>
                                                     -->
                                                     
-                                                    <td class="center">
+                                                    <td class="text-center">
                                                         <!--
                                                          <a href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
                                                          -->
@@ -191,7 +190,7 @@ SELECT
     <script src="assets/datatables/dataTables.bootstrap.js"></script>
     <script>
     $(document).ready( function () {
-      $('#datatabel').dataTable( {
+      $('#datatabel1').dataTable( {
         "paging":   true,
         "ordering": false,
         "bInfo": false,

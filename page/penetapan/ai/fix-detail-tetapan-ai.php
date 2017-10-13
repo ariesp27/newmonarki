@@ -77,14 +77,14 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-6"><?php echo $rowDetail["volumematerial"]; ?></div>
           </div>
           <div class="row">
-            <div class="col-md-5"><label>Harga Satuan Material Sesudah</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["hrgsatuanmaterial"]; ?></div>
-          </div>
-          <div class="row">
             <div class="col-md-5"><label>Harga Satuan Jasa Sesudah</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["hrgsatuanjasa"]; ?></div>
+          </div>
+          <div class="row">
+            <div class="col-md-5"><label>Harga Satuan Material Sesudah</label></div>
+            <div class="col-md-1"> : </div>
+            <div class="col-md-6"><?php echo $rowDetail["hrgsatuanmaterial"]; ?></div>
           </div>
           <div class="row">
             <div class="col-md-5"><label>Status</label></div>

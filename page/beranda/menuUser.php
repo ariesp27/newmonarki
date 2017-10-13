@@ -18,17 +18,9 @@
         </li>
         
         <li>
-            <a href="#"><i class="fa fa-folder fa-2x"></i> Usulan Anggaran<span class=""></span></a>
-                <ul>
-                    <li><a href="#" class="back">Main Menu</a></li>
-                        <li class="nav-label">Usulan Anggaran</li>
-                        <li>
-                            <a href="index.php?ai"><i class="fa fa-folder fa-2x"></i> AI</a>
-                        </li>
-                        <li>
-                            <a href="index.php?ao"><i class="fa fa-folder fa-2x"></i> AO</a>
-                        </li>
-                </ul>
+                <li>
+                    <a href="index.php?ai"><i class="fa fa-folder fa-2x"></i> Usulan Anggaran</a>
+                </li>
         </li>
         <li>
             <a href="#"><i class="fa fa-book fa-2x"></i> RAB<span class=""></span></a>
@@ -36,10 +28,10 @@
                     <li><a href="#" class="back">Main Menu</a></li>
                         <li class="nav-label">RAB</li>
                         <li>
-                            <a href="index.php?rab-ai"><i class="fa fa-book fa-2x"></i> AI</a>
+                            <a href="index.php?rab-ao"><i class="fa fa-book fa-2x"></i> Rutin (AO)</a>
                         </li>
                         <li>
-                            <a href="index.php?rab-ao"><i class="fa fa-book fa-2x"></i> AO</a>
+                            <a href="index.php?rab-ai"><i class="fa fa-book fa-2x"></i> Non Rutin (AI)</a>
                         </li>
                 </ul>
         </li>
@@ -77,10 +69,10 @@
                         <li class="nav-label"> Laporan Anggaran</li>
                         <li>
                             <li>
-                            <a href="index.php?lap-ai"><i class="fa fa-file-text fa-2x"></i>  AI</a>
+                            <a href="index.php?lap-ai"><i class="fa fa-file-text fa-2x"></i>  Usulan Rutin</a>
                             </li>
                             <li>
-                            <a href="index.php?lap-ao"><i class="fa fa-file-text fa-2x"></i>  AO</a>
+                            <a href="index.php?lap-ao"><i class="fa fa-file-text fa-2x"></i>  Usulan Non Rutin</a>
                             </li>
                         </li>
                         <li class="nav-label"> Laporan Realisasi</li>

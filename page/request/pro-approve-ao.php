@@ -11,7 +11,7 @@ if(isset($_POST['kode'])) {
     $alasan    = $_POST['alasan'];
     
     mysql_query("UPDATE newdetailanggaran SET status='$status', tglapprove=now(), alasan='$alasan' WHERE kodedetail = '$kode'");
-	header("location: index.php?monitor-approve-ao");
+	header("location: index.php?monitor-approve");
 }
 
 ?>
@@ -39,7 +39,7 @@ if(isset($_POST['kode'])) {
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <br />
-                                <table class="table table-striped table-bordered table-hover" id="datatable">
+                                <table class="table table-striped table-bordered table-hover" id="datatable1">
                                 <div class="col-md-12 text-center">
                                     <h4>MONITORING APPROVAL ANGGARAN OPERASI<br /></h4> 
                                     <span><em> &nbsp;Tahun Anggaran : <?php echo $d; ?> </em></span> 
@@ -61,19 +61,18 @@ if(isset($_POST['kode'])) {
                                         </tr>
                                     </thead>
                                     <?php	
-
                                         $sqlangg = mysql_query("SELECT 
                                             newdetailanggaran.*, 
                                             headeranggaran.*
                                             FROM newdetailanggaran
                                             INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-                                            WHERE jenis = 'AO'  AND status = '0' OR jenis = 'AO' AND status = '1' OR jenis = 'AO' AND status = '2'
+                                            WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND status IN ('0','1','2','3') 
+                                            AND headeranggaran.jenis = 'AO'
                                             ");
-                                        $num = mysql_num_rows($sqlangg);
-                                                
+                                        
+                                                $num = mysql_num_rows($sqlangg);
                                                 while($permintaan = mysql_fetch_array($sqlangg)) {
                                                 $no++;
-                                    
                                     ?>
                                     <tr >
                                         
@@ -97,12 +96,16 @@ if(isset($_POST['kode'])) {
                                                     if ($permintaan['status'] == '0') {echo "Usulan";}
                                                     else if ($permintaan['status'] == '1') {echo "Approve";}
                                                     else if ($permintaan['status'] == '2') {echo "Reject";}
+                                                    else if ($permintaan['status'] == '3') {echo "Terevaluasi";}
                                             ?>
                                         </td>
                                         
                                         <td hidden="status" align="center"><strong><?php echo strtoupper($permintaan["status"]); ?></strong></td>
                                         <td align="center">
-                                           <a title="detail" href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                                           
+                                           <a title="detail" href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" 
+                                            role="button" data-toggle="modal fade"><i class="fa fa-search-plus" aria-hidden="true"></i>
+                                           </a>
                                            <?php if ($permintaan['status'] == '0') {?>
                                                <a title="approve" href="#" class="approve" id="<?php echo $permintaan['kodedetail']; ?>" 
                                                role="button" data-toggle="modal"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
@@ -132,7 +135,7 @@ $(".close-alert").fadeTo(3000, 500).slideUp(2000, function(){
 <script src="assets/datatables/dataTables.bootstrap.js"></script>
 <script>
 $(document).ready( function () {
-      $('#datatable').datatable( {
+      $('#datatable1').datatable( {
         "paging":   true,
         "ordering": false,
         "bInfo": false,

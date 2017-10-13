@@ -39,7 +39,7 @@ if(isset($_POST['kode'])) {
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <br />
-                                <table class="table table-striped table-bordered table-hover" id="datatable">
+                                <table class="table table-striped table-bordered table-hover" id="datatable1">
                                 <div class="col-md-12 text-center">
                                     <h4>MONITORING EVALUASI ANGGARAN OPERASI<br /></h4> 
                                     <span><em> &nbsp;Tahun Anggaran : <?php echo $d; ?> </em></span> 
@@ -67,7 +67,9 @@ if(isset($_POST['kode'])) {
                                             headeranggaran.*
                                             FROM newdetailanggaran
                                             INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-                                            WHERE jenis = 'AO'  AND status = '1' OR jenis = 'AO' AND status = '3'");
+                                            WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND status IN ('1','3') 
+                                            AND headeranggaran.jenis = 'AO'
+                                            ");
                                         $num = mysql_num_rows($sqlangg);
                                                 
                                                 while($permintaan = mysql_fetch_array($sqlangg)) {
@@ -126,7 +128,7 @@ $(".close-alert").fadeTo(3000, 500).slideUp(2000, function(){
 <script src="assets/datatables/dataTables.bootstrap.js"></script>
 <script>
 $(document).ready( function () {
-      $('#datatable').datatable( {
+      $('#datatable1').datatable( {
         "paging":   true,
         "ordering": false,
         "bInfo": false,

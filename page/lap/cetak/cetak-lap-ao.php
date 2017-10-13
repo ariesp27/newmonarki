@@ -1,4 +1,7 @@
 <?php
+    ob_start();
+	session_start();
+    
     include "../../../config/koneksi.php";
     include "../../../config/utility.php";
 
@@ -20,7 +23,8 @@
         FROM
         newdetailanggaran
         INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
-        WHERE jenis = 'AO' AND status IN ('0','1','2','3')
+        WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND status IN ('0','1','2','3')
+        AND headeranggaran.jenis = 'AO' 
     ") or die (mysql_error());
 ?>
 
@@ -30,14 +34,14 @@
 <table border="1" >
     <thead>
         <tr>
-            <th width="2%">No</th>
-            <th width="8%">Nomor PRK</th>
-            <th width="14%">Nama Kegiatan</th>
-            <th width="9%">Target Tgl Mulai</th>
-            <th width="13%">Jasa (usulan)</th>
-            <th width="13%">Material (usulan)</th>
-            <th width="13%">Hrg. Satuan Material (usulan)</th>
-            <th width="13%">Hrg. Satuan Jasa (usulan)</th>
+            <th class="text-center" width="2%">No</th>
+            <th class="text-center" width="8%">Nomor PRK</th>
+            <th class="text-center" width="14%">Nama Kegiatan</th>
+            <th class="text-center" width="9%">Target Tgl Mulai</th>
+            <th class="text-center" width="13%">Jasa (usulan)</th>
+            <th class="text-center" width="13%">Material (usulan)</th>
+            <th class="text-center" width="13%">Hrg. Satuan Jasa (usulan)</th>
+            <th class="text-center" width="13%">Hrg. Satuan Material (usulan)</th>
         </tr>
     </thead>
     <tbody>
@@ -48,17 +52,18 @@
             {
         ?>
         <tr>
-            <td><?php echo $no; ?></td>
+            <td class="text-center"><?php echo $no; ?></td>
             <td><?php echo $row['noprk'];?></td>
             <td><?php echo $row['uraiankegiatan'];?></td>
-            <td><?php echo $row['tartglmulai'];?></td>
-            <td><?php echo $row['volumejasa'];?></td>
-            <td><?php echo $row['volumematerial'];?></td>
-            <td><?php echo $row['hrgsatuanjasa'];?></td>
-            <td><?php echo $row['hrgsatuanmaterial'];?></td>
+            <td><?php echo tglindonesia($row['tartglmulai']);?></td>
+            <td class="text-center"><?php echo $row['volumejasa'];?></td>
+            <td class="text-center"><?php echo $row['volumematerial'];?></td>
+            <td><?php echo "Rp ".number_format ($row['hrgsatuanjasa']);?></td>
+            <td><?php echo "Rp ".number_format ($row['hrgsatuanmaterial']);?></td>
         </tr>
         <?php $no++; } } else { ?>
         <tr><td colspan="9" class="text-center"><i>Tabel data AO kosong</i></td></tr>
         <?php } ?>
     </tbody>
 </table>
+<?php ob_end_flush(); ?>

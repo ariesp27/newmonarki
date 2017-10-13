@@ -10,9 +10,8 @@ SELECT
     newdetailanggaran 
     LEFT JOIN realisasi ON newdetailanggaran.randomid = realisasi.randomid
     INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-    WHERE jenis = 'AO' AND 
-    newdetailanggaran.status = '9'
-    order by newdetailanggaran.status asc;
+    WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND newdetailanggaran.status = '9'
+    AND headeranggaran.jenis = 'AO'
 ");
 
 
@@ -67,30 +66,29 @@ SELECT
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <br />
-                                <table class="table table-striped table-bordered table-hover" id="datatabel">
+                                <table class="table table-striped table-bordered table-hover" id="datatabel1">
                                     <thead>
                                         <tr>
-                                            <th width="2%">No</th>
-                                            <th width="10%">Uraian Kegiatan</th>
-                                            <th width="8%">Nomor Kontrak</th>
-                                            <th width="8%">Nilai Kontrak</th>
-                                            <th width="8%">Vendor</th>
-                                            <th width="5%">Tanggal Kontrak</th>
-                                            <th width="8%">Nilai Penyerapan</th>
-                                            <th width="3%">Aksi</th>
+                                            <th class="text-center" width="2%">No</th>
+                                            <th class="text-center" width="10%">Uraian Kegiatan</th>
+                                            <th class="text-center" width="5%">Nomor Kontrak</th>
+                                            <th class="text-center" width="6%">Nilai Kontrak</th>
+                                            <th class="text-center" width="6%">Vendor</th>
+                                            <th class="text-center" width="5%">Tanggal Kontrak</th>
+                                            <th class="text-center" width="9%">Nilai Penyerapan</th>
+                                            <th class="text-center" width="3%">Aksi</th>
                                			</tr>
                                     </thead>
                                     <tbody>
                                     <?php
 
                             				$no=1;
-                                            
                             				while($rowA=mysql_fetch_array($sql)) {
                                             //$row=mysql_fetch_array($sqlA) 
                             				    
                             				?>
                             					<tr>
-                                                    <td><?php echo $no; ?></td>
+                                                    <td class="text-center"><?php echo $no; ?></td>
                                                     <td><?php echo $rowA['uraiankegiatan'];?></td>
                                                     
                                                     <td><?php echo $rowA['nokontrak'];?></td>
@@ -123,7 +121,7 @@ SELECT
                                                         
                                                     </td>
                                                     
-                                                    <td class="center">
+                                                    <td class="text-center">
                                                         <!--
                                                          <a href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
                                                          -->
@@ -187,7 +185,7 @@ SELECT
     <script src="assets/datatables/dataTables.bootstrap.js"></script>
     <script>
     $(document).ready( function () {
-      $('#datatabel').dataTable( {
+      $('#datatabel1').dataTable( {
         "paging":   true,
         "ordering": false,
         "bInfo": false,

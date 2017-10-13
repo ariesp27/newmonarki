@@ -1,7 +1,7 @@
 <?php
 $no = 0;
 
-$sqlth = mysql_fetch_array(mysql_query("SELECT * from headeranggaran WHERE jenis = 'AI' ORDER BY 'date'"));
+$sqlth = mysql_fetch_array(mysql_query("SELECT * from headeranggaran ORDER BY 'date'"));
 $d = DATE('Y', strtotime($sqlth['tartglmulai']));
 
 if(isset($_POST['kode'])) {
@@ -13,53 +13,71 @@ if(isset($_POST['kode'])) {
     mysql_query("UPDATE newdetailanggaran SET status='$status', tglapprove=now(), alasan='$alasan' WHERE kodedetail = '$kode'");
 	header("location: index.php?monitor-approve");
 }
-
 ?>
 <br />
 <body>
 <form name="bulk_action_form" action="pro-approve-form.php" method="post" onSubmit="return delete_confirm();"/>
-          <div class="col-md-8">
-                <?php if(isset($_GET["sukseshapus"])){?>
-                    <div class="alert alert-warning close-alert">Data Berhasil Di Hapus...
-                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">&times;</button>
+<div id="wrapper">
+        <!-- /. NAV SIDE  -->
+       <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Approval Usulan Anggaran</h2>
+                        <hr />
                     </div>
-                <?php }else if(isset($_GET["suksesedit"])){ ?>
-                    <div class="alert alert-success close-alert">Data Berhasil Di Ubah...
-                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">&times;</button>
-                    </div>
-                <?php }else if(isset($_GET["suksestambah"])){?>
-                    <div class="alert alert-success close-alert" id="alertupload">Data Permintaan Berhasil Ditambah,  
-                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">&times;</button>
-                    </div>
-                <?php } ?>
-          </div>
-          
+                </div>
+                <!-- /. ROW  -->
+           <div class="row">
+                <div class="col-md-10">
+                    <?php if(isset($_GET["sukseshapus"])){?>
+                                     <div class="alert alert-success">Data Berhasil Di Hapus...
+                                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">&times;</button>
+                                     </div>
+                                     <?php }else if(isset($_GET["suksesedit"])){ ?>
+                                     <div class="alert alert-success">Data Berhasil Di Ubah...
+                                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">&times;</button>
+                                     </div>
+                                     <?php }else if(isset($_GET["suksesbalaskomen"])){ ?>
+                                     <div class="alert alert-success">Komentar Berhasil Di balas...
+                                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">&times;</button>
+                                     </div>
+                                     <?php }else if(isset($_GET["suksestambah"])){?>
+                                     <div class="alert alert-success" id="alertupload">Data  berhasil Ditambah,
+                                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">&times;</button>
+                                     </div>
+                                    <?php } ?>
+                </div>
+           </div>
+           <div class="row">
                 <div class="col-md-12">
-                        <!-- table data -->
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             Tabel Approval Usulan Anggaran
+                        </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <br />
-                                <table class="table table-striped table-bordered table-hover" id="datatable">
+                                <table class="table table-striped table-bordered table-hover" id="datatabel1">
                                 <div class="col-md-12 text-center">
-                                    <h4>MONITORING APPROVAL ANGGARAN INVESTASI<br /></h4> 
-                                    <span><em> &nbsp;Tahun Anggaran : <?php echo $d; ?> </em></span> 
+                                    <span><strong>&nbsp;Tahun Anggaran : <?php echo $d; ?> </strong></span> 
                                 </div>  
-                                
                                     <thead>
-                                        <tr >
-                                            <th width="2%">No</th>
-                                            <th width="4%">Uraian Kegiatan</th>
-                                            <th width="2%">Nomor PRK</th>
-                                            <th width="3%">Vol. Jasa (Usulan)</th>
-                                            <th width="3%">Vol. Material (Usulan)</th>
-                                            <th width="5%">Harga Satuan Meterial (Usulan)</th>
-                                            <th width="4%">Harga Satuan Jasa (Usulan)</th>
-                                            <th width="4%">Jml. Biaya Material</th>
-                                            <th width="3%">Jml. Biaya Jasa</th>
-                                            <th width="1%">Status</th>
-                    						<th width="1%">Aksi</th>
-                                        </tr>
+                                        <tr>
+                                            <th class="text-center" width="2%">No</th>
+                                            <th class="text-center" width="4%">Uraian Kegiatan</th>
+                                            <th class="text-center" width="3%">No. Usulan</th>
+                                            <th class="text-center" width="1%">Vol. Jasa (Usulan)</th>
+                                            <th class="text-center" width="1%">Vol. Material (Usulan)</th>
+                                            <th class="text-center" width="3%">Harga Satuan Jasa (Usulan)</th>
+                                            <th class="text-center" width="4%">Harga Satuan Meterial (Usulan)</th>
+                                            <th class="text-center" width="4%">Jml. Biaya Jasa</th>
+                                            <th class="text-center" width="5%">Jml. Biaya Material</th>
+                                            <th class="text-center" width="1%">Status</th>
+                    						<th class="text-center" width="2%">Aksi</th>
+                               			</tr>
                                     </thead>
+                                    <tbody>
                                     <?php	
 
                                         $sqlangg = mysql_query("SELECT 
@@ -67,61 +85,83 @@ if(isset($_POST['kode'])) {
                                             headeranggaran.*
                                             FROM newdetailanggaran
                                             INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-                                            WHERE jenis = 'AI'  AND status = '0' OR jenis = 'AI' AND status = '1' OR jenis = 'AI' AND status = '2'
+                                            WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND status IN ('0','1','2','3')
                                             ");
-                                        $num = mysql_num_rows($sqlangg);
-                                                
+                                        
+                                                $num = mysql_num_rows($sqlangg);
                                                 while($permintaan = mysql_fetch_array($sqlangg)) {
                                                 $no++;
-                                    
                                     ?>
-                                    <tr >
-                                        
-                                        <td><?php echo $no; ?></td>
-                                        <td><?php echo $permintaan['uraiankegiatan'];?></td>
-                                        <td><?php echo $permintaan['noprk'];?></td>
-                                        <td><?php echo $permintaan['volumejasa'];?></td>
-                                        <td><?php echo $permintaan['volumematerial'];?></td>
-                                        <td><?php echo "Rp ".number_format($permintaan['hrgsatuanmaterial']);?></td>
-                                        <td><?php echo "Rp ".number_format($permintaan['hrgsatuanjasa']);?></td>
-                                        <td>
-                                            <?php $a = $permintaan['volumematerial']*$permintaan['hrgsatuanmaterial'];
-                                            echo "Rp ". number_format($a); ?>
-                                        </td>
-                                        <td>
-                                            <?php $b = $permintaan['volumejasa']*$permintaan['hrgsatuanjasa'];
-                                            echo "Rp ". number_format($b); ?>
-                                        </td>
-                                        <td>
-                                            <?php   
-                                                    if ($permintaan['status'] == '0') {echo "Usulan";}
-                                                    else if ($permintaan['status'] == '1') {echo "Approve";}
-                                                    else if ($permintaan['status'] == '2') {echo "Reject";}
-                                            ?>
-                                        </td>
-                                        
-                                        <td hidden="status" align="center"><strong><?php echo strtoupper($permintaan["status"]); ?></strong></td>
-                                        <td align="center">
-                                           <a title="detail" href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" role="button" data-toggle="modal fade"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                                           <?php if ($permintaan['status'] == '0') {?>
-                                               <a title="approve" href="#" class="approve" id="<?php echo $permintaan['kodedetail']; ?>" 
-                                               role="button" data-toggle="modal"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
-                                           <?php } else{echo "";}?>
-                                           <?php $delete = mysql_query("SELECT * FROM newdetailanggaran WHERE status = '1' AND randomid = '".$permintaan['randomid']."'");
-                                           $rowC = mysql_fetch_array($delete);?>
-                                           <a title="delete" href="#" id="delete-approve-ai=<?php echo $rowC["kodedetail"]?>" class="delete">
-                                            <i class="fa fa-trash-o fa-2x"></i>
-                                           </a>
-                                        </td>
-                                    </tr>
-                                    <?php }  ?>
+                                        <tr>
+                                                    <td class="text-center"><?php echo $no; ?></td>
+                                                    <td ><?php echo $permintaan['uraiankegiatan'];?></td>
+                                                    <td class="text-center"><?php echo $permintaan['nousulan'];?></td>
+                                                    <td class="text-center"><?php echo $permintaan['volumejasa'];?></td>
+                                                    <td class="text-center"><?php echo $permintaan['volumematerial'];?></td>
+                                                    <td class="text-right"><?php echo "Rp ".number_format($permintaan['hrgsatuanjasa']);?></td>
+                                                    <td class="text-right"><?php echo "Rp ".number_format($permintaan['hrgsatuanmaterial']);?></td>
+                                                    <td class="text-right">
+                                                        <?php $b = $permintaan['volumejasa']*$permintaan['hrgsatuanjasa'];
+                                                        echo "Rp ". number_format($b); ?>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <?php $a = $permintaan['volumematerial']*$permintaan['hrgsatuanmaterial'];
+                                                        echo "Rp ". number_format($a); ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <?php   
+                                                                if ($permintaan['status'] == '0') {echo "Usulan";}
+                                                                else if ($permintaan['status'] == '1') {echo "Approve";}
+                                                                else if ($permintaan['status'] == '2') {echo "Reject";}
+                                                                else if ($permintaan['status'] == '3') {echo "Terevaluasi";}
+                                                        ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        
+                                                           <a title="detail" href="#" class="detail" data-id="<?php echo $permintaan['kodedetail']; ?>" 
+                                                            role="button" data-toggle="modal fade"><i class="glyphicon glyphicon-zoom-in fa-2x"></i>
+                                                           </a>
+                                                           
+                                                        <?php if ($permintaan['status'] == '0') {?>
+                                                           <a title="approve" href="#" class="approve" id="<?php echo $permintaan['kodedetail']; ?>" 
+                                                               role="button" data-toggle="modal"><i class="fa fa-sign-in fa-2x"></i></a>
+                                                        <?php } else{echo "";}?>
+                                                        
+                                                        <?php $del1 = mysql_query("SELECT * FROM newdetailanggaran WHERE status = '1' AND randomid = '".$permintaan['randomid']."'");
+                                                              $rowC = mysql_fetch_array($del1);?>
+                                                        <?php $del2 = mysql_query("SELECT * FROM headeranggaran WHERE randomid = '".$permintaan['randomid']."'");
+                                                              $rowD = mysql_fetch_array($del2);?>
+                                                           <a title="delete" href="#" id="delete-approve-ai=<?php echo $rowC["kodedetail"]?>&delete-ang=<?php echo $rowD["kodeanggaran"]?>" class="delete"><i class="fa fa-trash-o fa-2x"></i></a>
+                                                    </td>
+                            					</tr>
+                            				<?php }  ?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
+                    </div>
                 </div>
-                  <!--End Advanced Tables -->
-</form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- confirm dell -->
+<script src="assets/confirmdell/js/script.js"></script>
+<!-- DATA TABLE SCRIPTS -->
+    <script src="assets/datatables/jquery.dataTables.js"></script>
+    <script src="assets/datatables/dataTables.bootstrap.js"></script>
+    <script>
+    $(document).ready( function () {
+      $('#datatabel1').dataTable( {
+        "paging":   true,
+        "ordering": false,
+        "bInfo": false,
+        "dom": '<"pull-left"f><"pull-right"l>tip'
+      } );
+    } );
 
+    </script>
+</form>
 <script type="text/javascript">
 $(".close-alert").fadeTo(3000, 500).slideUp(2000, function(){
     $(".close-alert").alert('close');
@@ -131,14 +171,6 @@ $(".close-alert").fadeTo(3000, 500).slideUp(2000, function(){
 <script src="assets/datatables/jquery.dataTables.js"></script>
 <script src="assets/datatables/dataTables.bootstrap.js"></script>
 <script>
-$(document).ready( function () {
-      $('#datatable').datatable( {
-        "paging":   true,
-        "ordering": false,
-        "bInfo": false,
-        "dom": '<"top pull-left"f><"top pull-right"p>'
-      } );
-    } );
  $(document).on('click','.detail',function(e){
     e.preventDefault();
     $("#detail").modal('show');
@@ -188,7 +220,7 @@ $(document).ready( function () {
       <!-- dialog body -->
        <div class="modal-header bg-primary">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title text-center">Detail Usulan AI</h4>
+            <h4 class="modal-title text-center">Detail Usulan Anggaran</h4>
        </div>
       <div class="modal-body"></div>
       <!-- dialog buttons -->
@@ -205,7 +237,7 @@ $(document).ready( function () {
       <!-- dialog body -->
        <div class="modal-header bg-primary">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title text-center">Monitoring Status Usulan AI</h4>
+            <h4 class="modal-title text-center">Approval Usulan Anggaran</h4>
        </div>
       <div class="modal-body" style="overflow: hidden;"></div>
       <!-- dialog buttons 

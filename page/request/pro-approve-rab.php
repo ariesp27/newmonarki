@@ -39,7 +39,7 @@ if(isset($_POST['kode'])) {
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <br />
-                                <table class="table table-striped table-bordered table-hover" id="datatable">
+                                <table class="table table-striped table-bordered table-hover" id="datatable1">
                                 <div class="col-md-12 text-center">
                                     <h4>MONITORING APPROVAL RAB AI<br /></h4> 
                                     <span><em> &nbsp;Tahun Anggaran : <?php echo $d; ?> </em></span> 
@@ -57,6 +57,7 @@ if(isset($_POST['kode'])) {
                                             <th width="4%">Jml. Biaya Material</th>
                                             <th width="3%">Jml. Biaya Jasa</th>
                                             <th width="1%">Status</th>
+                                            <th width="1%">Unit APP</th>
                     						<th width="1%">Aksi</th>
                                         </tr>
                                     </thead>
@@ -67,8 +68,9 @@ if(isset($_POST['kode'])) {
                                             headeranggaran.*
                                             FROM newdetailanggaran
                                             INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid
-                                            WHERE jenis = 'AI'  AND status = '5' OR jenis = 'AI' AND status = '6'
-                                            OR jenis = 'AI' AND status = '7'");
+                                            WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND status IN ('5','6','7') 
+                                            AND headeranggaran.jenis = 'AI'
+                                            ");
                                         $num = mysql_num_rows($sqlangg);
                                                 
                                                 while($permintaan = mysql_fetch_array($sqlangg)) {
@@ -97,6 +99,17 @@ if(isset($_POST['kode'])) {
                                                     if ($permintaan['status'] == '5') {echo "Usulan (RAB)";}
                                                     else if ($permintaan['status'] == '6') {echo "Approve (RAB)";}
                                                     else if ($permintaan['status'] == '7') {echo "Reject (RAB)";}
+                                            ?>
+                                        </td>
+                                        <td><?php 
+                                                    if ($permintaan['kodeapp'] == '1') {echo "APP Bogor";}
+                                                    else if ($permintaan['kodeapp'] == '2') {echo "APP Bandung";}
+                                                    else if ($permintaan['kodeapp'] == '3') {echo "APP Karawang";}
+                                                    else if ($permintaan['kodeapp'] == '4') {echo "APP Cirebon";}
+                                                    else if ($permintaan['kodeapp'] == '5') {echo "APP Purwokerto";}
+                                                    else if ($permintaan['kodeapp'] == '6') {echo "APP Salatiga";}
+                                                    else if ($permintaan['kodeapp'] == '7') {echo "APP Semarang";}
+                                                    else if ($permintaan['kodeapp'] == '8') {echo "Kantor Induk";}
                                             ?>
                                         </td>
                                         
@@ -135,7 +148,7 @@ $(".close-alert").fadeTo(3000, 500).slideUp(2000, function(){
 <script src="assets/datatables/dataTables.bootstrap.js"></script>
 <script>
 $(document).ready( function () {
-      $('#datatable').datatable( {
+      $('#datatable1').datatable( {
         "paging":   true,
         "ordering": false,
         "bInfo": false,

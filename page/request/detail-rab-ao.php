@@ -12,7 +12,7 @@ disburst.*
 FROM newdetailanggaran
 INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
 INNER JOIN disburst ON newdetailanggaran.randomid = disburst.randomid 
-WHERE status = '5' AND newdetailanggaran.kodedetail = '$detail'");
+WHERE status = '6' AND newdetailanggaran.kodedetail = '$detail'");
 
 $rowDetail     = mysql_fetch_array($sqldetail);
 

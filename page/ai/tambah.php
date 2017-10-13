@@ -9,21 +9,29 @@
     if(isset($_POST["submit"]))
     {
         
-        $a      = mysql_real_escape_string(strip_tags($_POST["noprk"]));
-        $b      = mysql_real_escape_string(strip_tags($_POST["kode_posanggaran"]));
-        $c      = mysql_real_escape_string(strip_tags($_POST["kodefungsi"]));
-        $d      = mysql_real_escape_string(strip_tags($_POST["kodesatuan"]));
-        $e      = mysql_real_escape_string(strip_tags($_POST["uraiankegiatan"]));
-        $f      = mysql_real_escape_string(strip_tags($_POST["durasi"]));
-        $g      = tglformataction($_POST["tartglmulai"]);
-        $h      = mysql_real_escape_string(strip_tags($_POST["prioritas"]));
-        $k      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
-        $x      = mysql_real_escape_string(strip_tags($_POST["kodeanggaran"]));
-        $l      = mysql_real_escape_string(strip_tags($_POST["hrgsatuanmaterial"]));
-        $m      = mysql_real_escape_string(strip_tags($_POST["volumematerial"]));
-        $n      = mysql_real_escape_string(strip_tags($_POST["hrgsatuanjasa"]));
-        $o      = mysql_real_escape_string(strip_tags($_POST["volumejasa"]));
-        $p      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
+        $a      = mysql_real_escape_string(strip_tags($_POST["nousulan"]));
+        $b      = mysql_real_escape_string(strip_tags($_POST["kodesatuan"]));
+        $c      = mysql_real_escape_string(strip_tags($_POST["uraiankegiatan"]));
+        $f      = tglformataction($_POST["tartglmulai"]);
+        $d      = mysql_real_escape_string(strip_tags($_POST["blnmulai"]));
+        $e      = mysql_real_escape_string(strip_tags($_POST["prioritas"]));
+        $h      = mysql_real_escape_string(strip_tags($_POST["volumejasa"]));
+        $i      = mysql_real_escape_string(strip_tags($_POST["volumematerial"]));
+        $j      = mysql_real_escape_string(strip_tags($_POST["hrgsatuanjasa"]));
+        $k      = mysql_real_escape_string(strip_tags($_POST["hrgsatuanmaterial"]));
+        $l      = mysql_real_escape_string(strip_tags($_POST["mitigasi"]));
+        $n      = mysql_real_escape_string(strip_tags($_POST["jan"]));
+        $o      = mysql_real_escape_string(strip_tags($_POST["feb"]));
+        $p      = mysql_real_escape_string(strip_tags($_POST["mar"]));
+        $q      = mysql_real_escape_string(strip_tags($_POST["apr"]));
+        $r      = mysql_real_escape_string(strip_tags($_POST["mei"]));
+        $s      = mysql_real_escape_string(strip_tags($_POST["jun"]));
+        $t      = mysql_real_escape_string(strip_tags($_POST["jul"]));
+        $u      = mysql_real_escape_string(strip_tags($_POST["agu"]));
+        $v      = mysql_real_escape_string(strip_tags($_POST["sep"]));
+        $w      = mysql_real_escape_string(strip_tags($_POST["okt"]));
+        $x      = mysql_real_escape_string(strip_tags($_POST["nov"]));
+        $y      = mysql_real_escape_string(strip_tags($_POST["des"]));
         
         $filekko  = $_FILES["uploadkko"]["name"];
         $newfilekko     = time() . '_' . rand(100, 999) . '.' . end(explode(".",$filekko));
@@ -35,13 +43,17 @@
         $file_tmp_kkf = $_FILES["uploadkkf"]["tmp_name"];
         copy($file_tmp_kkf,"foto/".$newfilekkf);
         
-        mysql_query("INSERT INTO headeranggaran (kodeanggaran, noprk, kode_posanggaran, kodefungsi, kodesatuan, 
-        uraiankegiatan, durasi, tartglmulai, prioritas, jenis, kko, kkf, randomid)
-        VALUES ('','$a','$b','$c','$d','$e','$f','$g','$h','AI','$newfilekko','$newfilekkf','$number')");
+        mysql_query("INSERT INTO headeranggaran (kodeanggaran, nousulan, kodesatuan, 
+        uraiankegiatan, tartglmulai, blnmulai, prioritas, kko, kkf, mitigasi, randomid, kodeapp)
+        VALUES ('','$a','$b','$c','$f','$d','$e','$newfilekko','$newfilekkf','$l','$number','$_SESSION[kodeapp]')");
         
-        mysql_query ("INSERT INTO newdetailanggaran (kodedetail, kodeanggaran, hrgsatuanmaterial, volumematerial, hrgsatuanjasa, 
-        volumejasa, randomid) VALUES ('','$x','$l','$m','$n','$o','$number')");
+        mysql_query ("INSERT INTO newdetailanggaran (kodedetail, volumejasa, volumematerial, 
+        hrgsatuanjasa, hrgsatuanmaterial, randomid) VALUES ('','$h','$i','$j','$k','$number')");
+        
+        mysql_query ("INSERT INTO disburst (kodedisburst, jan, feb, mar, apr, mei, jun, jul, 
+        agu, sep, okt, nov, des, randomid) VALUES('','$n','$o','$p','$q','$r','$s','$t','$u','$v','$w','$x','$y','$number')") ;
         header("location:index.php?ai&suksestambah");
+        
     }
 ?>
 
@@ -71,7 +83,7 @@
         <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Tambah Anggaran Investasi</h2>
+                        <h2>Tambah Usulan Anggaran</h2>
                     </div>
                 </div>
                 <!-- /. ROW  -->
@@ -89,7 +101,7 @@
                 <hr />
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Form Tambah Anggaran Investasi
+                        Form Tambah Usulan Anggaran
                     </div> 
                     <table class="table table-striped text-center" >
                     <form id="validate-me-plz" name="form1" enctype="multipart/form-data" role="form" action="" method="post">
@@ -99,14 +111,14 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-10"> </br>
-                                                <div class="col-md-4"><label>Nomor PRK</label></div>
+                                                <div class="col-md-4"><label>No. Usulan</label></div>
                                                 <div class="col-md-8">
-                                                    <input type="text"   name='noprk' class="form-control"  data-msg-required="Mohon masukkan nomor PRK" placeholder="masukkan nomor PRK" />
+                                                    <input type="text"   name='nousulan' class="form-control"  data-msg-required="Mohon masukkan nomor PRK" placeholder="masukkan no. usulan" />
                                                 </div>
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <!--
                                <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-10"> 
@@ -140,7 +152,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                                -->
                                 <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-10"> 
@@ -168,89 +180,103 @@
                                         </div>
                                     </div>
                                 </div>
-                          
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                                <div class="col-md-4"><label>Durasi</label></div>
-                                                <div class="col-md-8">
-                                                    <input type="text"   name='durasi' class="form-control"  data-msg-required="Mohon masukkan durasi" placeholder="masukkan durasi" />
-                                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                                    <div class="col-md-4"><label>Tanggal Usulan</label></div>
+                                                    <div class="col-md-8">
+                                                        <input  type="text" onKeyPress="return isNumberKeyTgl(event)" class="form-control" id="datepicker" name="tartglmulai" placeholder="masukkan tanggal usulan" />
+                                                    </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                                <div class="col-md-4"><label>Target Tgl Mulai</label></div>
-                                                <div class="col-md-8">
-                                                    <input  type="text" onKeyPress="return isNumberKeyTgl(event)" class="form-control" id="datepicker" name="tartglmulai" placeholder="masukkan target tanggal mulai" />
-                                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                                    <div class="col-md-4"><label>Bulan Mulai</label></div>
+                                                    <div class="col-md-8">
+                                                        <select name="blnmulai" id="blnmulai" class="form-control"  data-msg-required="Mohon masukkan bulan mulai.">
+                                                            <option>- Pilih -</option>
+                                                            <option>Januari</option>
+                                                            <option>Februari</option>
+                                                            <option>Maret</option>
+                                                            <option>April</option>
+                                                            <option>Mei</option>
+                                                            <option>Juni</option>
+                                                            <option>July</option>
+                                                            <option>Agustus</option>
+                                                            <option>September</option>
+                                                            <option>Oktober</option>
+                                                            <option>November</option>
+                                                            <option>Desember</option>
+                                                        </select>
+                                                    </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            
+                                  <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                                    <div class="col-md-4"><label>Prioritas</label></div>
+                                                    <div class="col-md-8">
+                                                        <input type="text"   name='prioritas' class="form-control"  data-msg-required="Mohon masukkan prioritas " placeholder="masukkan prioritas " />
+                                                    </div>
+                                        </div>
+                                    </div>
+                                  </div> 
                           </div>
-                          
                           <div class="col-lg-6">
-                            
                               <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-10"><br />
-                                                <div class="col-md-4"><label>Prioritas</label></div>
-                                                <div class="col-md-8">
-                                                    <input type="text"   name='prioritas' class="form-control"  data-msg-required="Mohon masukkan prioritas " placeholder="masukkan prioritas " />
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-md-10"><br />
+                                                    <div class="col-md-4"><label>Volume Jasa</label></div>
+                                                    <div class="col-md-8">
+                                                        <input type="text"   name='volumejasa' class="form-control" onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Volume jasa " placeholder="masukkan Volume jasa " />
+                                                    </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div> 
-                            
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                                <div class="col-md-4"><label>Harga Satuan Material</label></div>
-                                                <div class="col-md-8">
-                                                    <input type="text"   name='hrgsatuanmaterial' class="form-control"  onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Harga satuan material " placeholder="masukkan Harga satuan material " />
-                                                </div>
+                              </div>
+                              <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                                    <div class="col-md-4"><label>Volume Material</label></div>
+                                                    <div class="col-md-8">
+                                                        <input type="text"   name='volumematerial' class="form-control"  onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Volume material " placeholder="masukkan Volume material " />
+                                                    </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                                <div class="col-md-4"><label>Volume Material</label></div>
-                                                <div class="col-md-8">
-                                                    <input type="text"   name='volumematerial' class="form-control"  onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Volume material " placeholder="masukkan Volume material " />
-                                                </div>
+                              </div>
+                              <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                                    <div class="col-md-4"><label>Harga Satuan Jasa</label></div>
+                                                    <div class="col-md-8">
+                                                        <input type="text"   name='hrgsatuanjasa' class="form-control" onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Harga satuan jasa " placeholder="masukkan Harga satuan jasa " />
+                                                    </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                                <div class="col-md-4"><label>Harga Satuan Jasa</label></div>
-                                                <div class="col-md-8">
-                                                    <input type="text"   name='hrgsatuanjasa' class="form-control" onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Harga satuan jasa " placeholder="masukkan Harga satuan jasa " />
-                                                </div>
+                              </div>
+                              <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                                    <div class="col-md-4"><label>Harga Satuan Material</label></div>
+                                                    <div class="col-md-8">
+                                                        <input type="text"   name='hrgsatuanmaterial' class="form-control"  onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Harga satuan material " placeholder="masukkan Harga satuan material " />
+                                                    </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                                <div class="col-md-4"><label>Volume Jasa</label></div>
-                                                <div class="col-md-8">
-                                                    <input type="text"   name='volumejasa' class="form-control" onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan Volume jasa " placeholder="masukkan Volume jasa " />
-                                                </div>
+                              </div>
+                              <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                                    <div class="col-md-4"><label>Mitigasi</label></div>
+                                                    <div class="col-md-8">
+                                                        <input type="text"   name='mitigasi' class="form-control"  data-msg-required="Mohon masukkan mitigasi " placeholder="masukkan mitigasi " />
+                                                    </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
+                              </div> 
+                              <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-10"><br />
                                         <div class="col-md-4"><label>KKO</label></div>
@@ -260,7 +286,6 @@
                                     </div>
                                 </div>
                               </div>
-                              
                               <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-10">
@@ -271,13 +296,138 @@
                                     </div>
                                 </div>
                               </div>
+                              
                         </div>
-                    
-                            <div class="row">
-                            <div class="col-md-1"></div>
-                                <button type="submit" name="submit" class="btn btn-large btn-success">Simpan</button>
-                                <a href="index.php?ai" class="btn btn-large btn-warning">Kembali</a>
-                            </div>
+                                <div class="col-md-8">
+                                    <h3>Disburst Anggaran</h3> <br />
+                               </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-2"><label>Januari</label></div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text"  required="required" data-format=" 0,0[.]00" name='jan' id="jan" onKeyPress="return isNumberKey(event)" /></div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-2"><label>Februari</label></div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text"  required="required" data-format=" 0,0[.]00" name='feb' id="feb" onKeyPress="return isNumberKey(event)" /></div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-2"><label>Maret</label></div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text"  required="required" data-format=" 0,0[.]00" name='mar' id="mar" onKeyPress="return isNumberKey(event)" /></div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-2"><label>April</label></div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text"  required="required" data-format=" 0,0[.]00" name='apr' id="apr" onKeyPress="return isNumberKey(event)" /></div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-2"><label>Mei</label></div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text"  required="required" data-format=" 0,0[.]00" name='mei' id="mei" onKeyPress="return isNumberKey(event)" /></div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-2"><label>Juni</label></div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text"  required="required" data-format=" 0,0[.]00" name='jun' id="jun" onKeyPress="return isNumberKey(event)" /></div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-2"><label>July</label></div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text"  required="required" data-format=" 0,0[.]00" name='jul' id="jul" onKeyPress="return isNumberKey(event)" /></div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-2"><label>Agustus</label></div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text"  required="required" data-format=" 0,0[.]00" name='agu' id="agu" onKeyPress="return isNumberKey(event)" /></div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-2"><label>September</label></div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text"  required="required" data-format=" 0,0[.]00" name='sep' id="sep" onKeyPress="return isNumberKey(event)" /></div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-2"><label>Oktober</label></div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text"  required="required" data-format=" 0,0[.]00" name='okt' id="okt" onKeyPress="return isNumberKey(event)" /></div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-2"><label>November</label></div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text"  required="required" data-format=" 0,0[.]00" name='nov' id="nov" onKeyPress="return isNumberKey(event)" /></div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-2"><label>Desember</label></div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text"  required="required" data-format=" 0,0[.]00" name='des' id="des" onKeyPress="return isNumberKey(event)" /></div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <button type="submit" name="submit" class="btn btn-large btn-success">Simpan</button>
+                                            <a href="index.php?ai" class="btn btn-large btn-warning">Kembali</a>
+                                        </div>
+                                    </div>
                     </form>
                 </table>
             </div>
@@ -296,7 +446,6 @@
         format: 'DD/MM/YYYY'
     });
 </script>
-
 <script type="text/javascript" src="assets/validasi/jquery.validate.min.js"></script>
 <script type="text/javascript">
 $('#input01').filestyle();
@@ -309,7 +458,6 @@ $('#input01').filestyle();
       }
     });
 </script>
-
 <script>
 //style upload
 $('#input01').filestyle();
@@ -317,9 +465,9 @@ $('#input01').filestyle();
 function checkextension() {
   var file = document.querySelector("#uploadkko");
   
-  if ( /\.(doc)$/i.test(file.files[0].name) === false ) { 
+  if ( /\.(docx)$/i.test(file.files[0].name) === false ) { 
     //alert("maaf file harus .pdf!");
-    if ( /\.(pdf)$/i.test(file.files[0].name) === false ) { 
+    if ( /\.(xlsx)$/i.test(file.files[0].name) === false ) { 
             $('#myModal').modal('show') 
             eraseText() 
         }
@@ -329,9 +477,9 @@ function checkextension() {
 function checkextension2() {
   var file = document.querySelector("#uploadkkf");
   
-  if ( /\.(doc)$/i.test(file.files[0].name) === false ) { 
+  if ( /\.(docx)$/i.test(file.files[0].name) === false ) { 
     //alert("maaf file harus .pdf!");
-    if ( /\.(pdf)$/i.test(file.files[0].name) === false ) { 
+    if ( /\.(xlsx)$/i.test(file.files[0].name) === false ) { 
             $('#myModal').modal('show') 
             eraseText2() 
         }
@@ -352,7 +500,7 @@ function eraseText() {
         <div class="modal-content " style="margin-top:100px; border-radius: 0px;">
           <div class="modal-header bg-warning">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" style="text-align:center; ">File upload hanya .pdf & .doc</h4>
+            <h4 class="modal-title" style="text-align:center; ">File upload hanya .xlsx & .docx</h4>
           </div>
 
           <div class="modal-footer bg-warning" style="margin:0px; border-top:0px; ">

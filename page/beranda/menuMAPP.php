@@ -45,20 +45,10 @@
         </li>
         -->
         <li>
-            <a href="#"><i class="fa fa-archive fa-2x" aria-hidden="true"></i> Aproval Anggaran<span class=""></span></a>
-                <ul >
-                    <li><a href="#" class="back">Main Menu</a></li>
-                    <li class="nav-label">Aproval Anggaran</li>
-                    <li>
-                        <a href="index.php?monitor-approve"><i class="fa fa-archive fa-2x"></i> AI</a>
-                    </li>
-                    <li>
-                        <a href="index.php?monitor-approve-ao"><i class="fa fa-archive fa-2x"></i> AO</a>
-                    </li>
-                </ul>
+            <a href="index.php?monitor-approve"><i class="fa fa-archive fa-2x" aria-hidden="true"></i> Approval Usulan<span class=""></span></a>
         </li>
         <li>
-            <a href="#"><i class="fa fa-archive fa-2x" aria-hidden="true"></i> Aproval RAB<span class=""></span></a>
+            <a href="#"><i class="fa fa-archive fa-2x" aria-hidden="true"></i> Approval RAB<span class=""></span></a>
                 <ul >
                     <li><a href="#" class="back">Main Menu</a></li>
                     <li class="nav-label">Aproval RAB</li>
@@ -76,13 +66,14 @@
                     <li><a href="#" class="back">Main Menu</a></li>
                     <li class="nav-label">Rekap Penetapan</li>
                     <li>
-                        <a href="index.php?data-penetapan-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
+                        <a href="index.php?rekap-usul-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
                     </li>
                     <li>
-                        <a href="index.php?data-penetapan-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
+                        <a href="index.php?rekap-usul-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
                     </li>
             </ul>
         </li>
+        <!--
         <li>
             <a href="#"><i class="fa fa-map-o fa-2x"></i> Rekap Anggaran</a>
             <ul>
@@ -96,6 +87,7 @@
                     </li>
             </ul>
         </li>
+        -->
         <li>
             <a href="#"><i class="fa fa-file-text fa-2x" aria-hidden="true"></i> Laporan<span class=""></span></a>
                 <ul >
@@ -103,10 +95,10 @@
                         <li class="nav-label"> Laporan Anggaran</li>
                         <li>
                             <li>
-                            <a href="index.php?lap-ai"><i class="fa fa-file-text fa-2x"></i>  AI</a>
+                            <a href="index.php?lap-ai"><i class="fa fa-file-text fa-2x"></i> Usulan Rutin</a>
                             </li>
                             <li>
-                            <a href="index.php?lap-ao"><i class="fa fa-file-text fa-2x"></i>  AO</a>
+                            <a href="index.php?lap-ao"><i class="fa fa-file-text fa-2x"></i> Usulan Non Rutin</a>
                             </li>
                         </li>
                         <li class="nav-label"> Laporan Realisasi</li>

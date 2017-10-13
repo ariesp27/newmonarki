@@ -9,9 +9,11 @@ if( ! isset($_SESSION["level"])) header("location:login.php?noakses");
 if(isset($_GET["delete-ai"])){
     $idD = mysql_real_escape_string(trim($_GET["delete-ai"]));
     $idE = mysql_real_escape_string(trim($_GET["delete-ang"]));
+    $idF = mysql_real_escape_string(trim($_GET["del-burst"]));
     
     mysql_query("DELETE FROM headeranggaran WHERE kodeanggaran ='$idE'") or die(mysql_error());
     mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idD'") or die(mysql_error());
+    mysql_query("DELETE FROM disburst WHERE kodedisburst ='$idF'") or die(mysql_error());
     header("location:../index.php?ai&sukseshapus");
 }
 else if(isset($_GET["delete-ao"])){
@@ -24,7 +26,9 @@ else if(isset($_GET["delete-ao"])){
 }
 else if(isset($_GET["delete-approve-ai"])){
     $idD = mysql_real_escape_string(trim($_GET["delete-approve-ai"]));
-        
+    $idE = mysql_real_escape_string(trim($_GET["delete-ang"]));
+    
+    mysql_query("DELETE FROM headeranggaran WHERE kodeanggaran ='$idE'") or die(mysql_error());
     mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idD'") or die(mysql_error());
     header("location:../index.php?monitor-approve&sukseshapus");
 }
@@ -36,7 +40,9 @@ else if(isset($_GET["delete-approve-ao"])){
 }
 else if(isset($_GET["delete-evaluasi-ai"])){
     $idD = mysql_real_escape_string(trim($_GET["delete-evaluasi-ai"]));
+    $idE = mysql_real_escape_string(trim($_GET["delete-ang"]));
     
+    mysql_query("DELETE FROM headeranggaran WHERE kodeanggaran ='$idE'") or die(mysql_error());
     mysql_query("DELETE FROM newdetailanggaran WHERE kodedetail ='$idD'") or die(mysql_error());
     header("location:../index.php?monitor-evaluasi-ai&sukseshapus");
 }

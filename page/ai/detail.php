@@ -32,7 +32,6 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["kodefungsi"]; ?></div>
           </div>
-    -->
           <div class="row">
             <div class="col-md-5"><label>Nomor PRK</label></div>
             <div class="col-md-1"> : </div>
@@ -43,20 +42,33 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["jenis"]; ?></div>
           </div>
+    -->
+          <div class="row">
+            <div class="col-md-5"><label>No. Usulan</label></div>
+            <div class="col-md-1"> : </div>
+            <div class="col-md-6"><?php echo $rowDetail["nousulan"]; ?></div>
+          </div>
           <div class="row">
             <div class="col-md-5"><label>Uraian Kegiatan</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["uraiankegiatan"]; ?></div>
           </div>
+    <!--
           <div class="row">
             <div class="col-md-5"><label>Durasi</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["durasi"]; ?></div>
           </div>
+    -->
           <div class="row">
-            <div class="col-md-5"><label>Target Tanggal Mulai</label></div>
+            <div class="col-md-5"><label>Tanggal Usulan</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php if($rowDetail["tartglmulai"]=="0000-00-00"){ }else{  echo tglindonesia($rowDetail["tartglmulai"]); } ?></div>
+          </div>
+          <div class="row">
+            <div class="col-md-5"><label>Bulan Mulai</label></div>
+            <div class="col-md-1"> : </div>
+            <div class="col-md-6"><?php echo $rowDetail["blnmulai"]; ?></div>
           </div>
           <div class="row">
             <div class="col-md-5"><label>Prioritas</label></div>
@@ -64,9 +76,9 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-6"><?php echo $rowDetail["prioritas"]; ?></div>
           </div>
           <div class="row">
-            <div class="col-md-5"><label>Hrg. Satuan Material</label></div>
+            <div class="col-md-5"><label>Vol. Jasa</label></div>
             <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["hrgsatuanmaterial"]; ?></div>
+            <div class="col-md-6"><?php echo $rowDetail["volumejasa"]; ?></div>
           </div>
           <div class="row">
             <div class="col-md-5"><label>Vol. Material</label></div>
@@ -79,19 +91,21 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-6"><?php echo $rowDetail["hrgsatuanjasa"]; ?></div>
           </div>
           <div class="row">
-            <div class="col-md-5"><label>Vol. Jasa</label></div>
+            <div class="col-md-5"><label>Hrg. Satuan Material</label></div>
             <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["volumejasa"]; ?></div>
+            <div class="col-md-6"><?php echo $rowDetail["hrgsatuanmaterial"]; ?></div>
           </div>
           <div class="row">
             <div class="col-md-5"><label>Status</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["status"]; ?></div>
           </div>
+    <!--
           <div class="row">
             <div class="col-md-5"><label>Alasan</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["alasan"]; ?></div>
           </div>
+    -->
     </div>
 </div>

@@ -11,7 +11,8 @@
         FROM
         newdetailanggaran
         INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
-        WHERE jenis = 'AO' AND status IN ('0','1','2','3')
+        WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND status IN ('0','1','2','3') 
+        AND headeranggaran.jenis = 'AO'
         ") or die (mysql_error());
     }
 ?>
@@ -41,20 +42,20 @@
             <form method="POST" action="" id="validate-cari">
                 <div class="row">
                     <div class="col-md-2"><p style="padding: 0;" class="">Periode </p></div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <input  type="text" onKeyPress="return isNumberKeyTgl(event)" value="<?php  echo $_POST["tglAwal"];?>" class="form-control" id="datepicker" name="tglAwal" data-rule-required="true" data-rule-date="true" data-msg-date="format yang benar dd/mm/yyyy" data-msg-required="mohon masukkan data Tanggal." placeholder="masukkan Tanggal" />
                     </div>
-                    <div class="col-md-1">S / D</div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">S / D</div>
+                    <div class="col-md-2">
                         <input  type="text" onKeyPress="return isNumberKeyTgl(event)" value="<?php  echo $_POST["tglAkhir"];?>" class="form-control" id="datepicker2" name="tglAkhir" data-rule-required="true" data-rule-date="true" data-msg-date="format yang benar dd/mm/yyyy" data-msg-required="mohon masukkan data Tanggal." placeholder="masukkan Tanggal" />
                     </div>
                     <div class="col-md-2">
                         <button class="btn btn-primary" type="submit" name="cari">Cari</button>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <?php if(isset($_POST["cari"])){ ?>
-                            <a href="page/lap/cetak/cetak-lap-ao.php?act=excel&tglawal=<?php echo $_POST["tglawal"]; ?>&tglakhir=<?php echo $_POST["tglakhir"]; ?>"><img src="images/excel.png" /></a> &nbsp;
-                            <a href="page/lap/cetak/print-ao.php?act=print&tglawal=<?php echo $_POST["tglawal"]; ?>&tglakhir=<?php echo $_POST["tglakhir"]; ?>" target="_blank"><img src="images/print.png" title="cetak dokumen" /></a>
+                            <a href="page/lap/cetak/cetak-lap-ao.php?act=excel&tglawal=<?php echo $_POST["tglAwal"]; ?>&tglakhir=<?php echo $_POST["tglAkhir"]; ?>"><img src="images/excel.png" /></a> &nbsp;
+                            <a href="page/lap/cetak/print-ao.php?act=print&tglawal=<?php echo $_POST["tglAwal"]; ?>&tglakhir=<?php echo $_POST["tglAkhir"]; ?>" target="_blank"><img src="images/print.png" title="cetak dokumen" /></a>
                         <?php } ?>
                     </div>
                     <!-- <div class="col-md-1">
@@ -77,14 +78,14 @@
                                     <table class="table table-striped table-bordered table-hover" id="datatabel">
                                         <thead>
                                             <tr>
-                                                <th width="2%">No</th>
-                                                <th width="8%">Nomor PRK</th>
-                                                <th width="14%">Nama Kegiatan</th>
-                                                <th width="9%">Target Tgl Mulai</th>
-                                                <th width="13%">Jasa (usulan)</th>
-                                                <th width="13%">Material (usulan)</th>
-                                                <th width="13%">Hrg. Satuan Material (usulan)</th>
-                                                <th width="13%">Hrg. Satuan Jasa (usulan)</th>
+                                                <th class="text-center" width="2%">No</th>
+                                                <th class="text-center" width="8%">Nomor PRK</th>
+                                                <th class="text-center" width="14%">Nama Kegiatan</th>
+                                                <th class="text-center" width="9%">Target Tgl Mulai</th>
+                                                <th class="text-center" width="13%">Jasa (usulan)</th>
+                                                <th class="text-center" width="13%">Material (usulan)</th>
+                                                <th class="text-center" width="13%">Hrg. Satuan Jasa (usulan)</th>
+                                                <th class="text-center" width="13%">Hrg. Satuan Material (usulan)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -94,17 +95,16 @@
                                                     while($row=mysql_fetch_array($sql)){
                                             ?>
                                                         <tr>
-                                                            <td><?php echo $no; ?></td>
+                                                            <td class="text-center"><?php echo $no; ?></td>
                                                             <td><?php echo $row['noprk'];?></td>
                                                             <td><?php echo $row['uraiankegiatan'];?></td>
-                                                            <td><?php echo $row['tartglmulai'];?></td>
-                                                            <td><?php echo $row['volumejasa'];?></td>
-                                                            <td><?php echo $row['volumematerial'];?></td>
-                                                            <td><?php echo $row['hrgsatuanjasa'];?></td>
-                                                            <td><?php echo $row['hrgsatuanmaterial'];?></td>
+                                                            <td><?php echo tglindonesia($row['tartglmulai']);?></td>
+                                                            <td class="text-center"><?php echo $row['volumejasa'];?></td>
+                                                            <td class="text-center"><?php echo $row['volumematerial'];?></td>
+                                                            <td><?php echo "Rp ".number_format ($row['hrgsatuanjasa']);?></td>
+                                                            <td><?php echo "Rp ".number_format ($row['hrgsatuanmaterial']);?></td>
                                                         </tr>
                                                     <?php $no++; } } else { ?>
-                                                    <tr><td colspan="9" class="text-center"><i>Tabel data AO kosong</i></td></tr>
                                                     <?php } ?>
                                         </tbody>
                                     </table>

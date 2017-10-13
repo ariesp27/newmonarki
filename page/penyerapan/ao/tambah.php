@@ -15,8 +15,8 @@
         $e      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
         
         
-        mysql_query("INSERT INTO pembayaran (kodepym, tglpym, jmlpym, tahap, tglinput, randomid) VALUES 
-        ('','$a','$b','$c','$d','$e')");
+        mysql_query("INSERT INTO pembayaran (kodepym, tglpym, jmlpym, tahap, tglinput, randomid, kodeapp) VALUES 
+        ('','$a','$b','$c','$d','$e','$_SESSION[kodeapp]')");
         header("location:index.php?tambah-penyerapan-ao=$e");
     
     }
@@ -120,7 +120,7 @@ $rowA = mysql_fetch_array($sqlA);
                                                             <div class="col-md-6">
                                                                     <div class="col-md-4"><label>Jumlah Pembayaran</label></div>
                                                                     <div class="col-md-8">
-                                                                        <input type="text"   name='jmlpym' class="form-control"  data-msg-required="Mohon masukkan jumlah pembayaran" placeholder="masukkan jumlah pembayaran" />
+                                                                        <input type="text"   name='jmlpym' class="form-control" onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan jumlah pembayaran" placeholder="masukkan jumlah pembayaran" />
                                                                     </div>
                                                             </div>
                                                         </div>
@@ -132,7 +132,7 @@ $rowA = mysql_fetch_array($sqlA);
                                                                 <div class="col-md-6">
                                                                         <div class="col-md-4"><label>Tahap</label></div>
                                                                         <div class="col-md-8">
-                                                                            <input type="text"   name='tahap' class="form-control"  data-msg-required="Mohon masukkan tahap" placeholder="masukkan tahap" />
+                                                                            <input type="text"   name='tahap' class="form-control" onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan tahap" placeholder="masukkan tahap" />
                                                                         </div>
                                                                 </div>
                                                             </div>
@@ -162,7 +162,7 @@ $rowA = mysql_fetch_array($sqlA);
                                                     <div class="row">
                                                     <div class="col-md-1"></div>
                                                         <button type="submit" name="submit" class="btn btn-large btn-success">Simpan</button>
-                                                        <a href="index.php?penyerapan" class="btn btn-large btn-warning">Kembali</a>
+                                                        <a href="index.php?penyerapan-ao" class="btn btn-large btn-warning">Kembali</a>
                                                     </div>
                     </form>
                     </table>

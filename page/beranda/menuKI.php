@@ -17,25 +17,7 @@
             <a href="index.php?dashboard"><i class="fa fa-dashboard fa-2x"></i> Beranda</a>
         </li>
         <li>
-            <a href="#"><i class="fa fa-folder fa-2x"></i> Penetapan Anggaran<span class=""></span></a>
-                <ul>
-                    <li><a href="#" class="back">Main Menu</a></li>
-                        <li class="nav-label">Penetapan Anggaran</li>
-                        <li>
-                            <a href="index.php?data-penetapan-ai"><i class="fa fa-folder fa-2x"></i> AI</a>
-                        </li>
-                        <li>
-                            <a href="index.php?data-penetapan-ao"><i class="fa fa-folder fa-2x"></i> AO</a>
-                        </li>
-                        <!--
-                        <li>
-                            <a href="index.php?sudah-penetapan-ai"><i class="fa fa-folder fa-2x"></i> TETAPAN AI</a>
-                        </li>
-                        <li>
-                            <a href="index.php?sudah-penetapan-ao"><i class="fa fa-folder fa-2x"></i> TETAPAN AO</a>
-                        </li>
-                        -->
-                </ul>
+            <a href="index.php?data-penetapan-ai"><i class="fa fa-folder fa-2x"></i> Penetapan Anggaran<span class=""></span></a>
         </li>
         <!--
         <li>
@@ -64,20 +46,21 @@
                     </li>
                 </ul>
         </li>
-        -->
+        
         <li>
             <a href="#"><i class="fa fa-map-o fa-2x"></i> Rekap Penetapan</a>
             <ul>
                     <li><a href="#" class="back">Main Menu</a></li>
                     <li class="nav-label">Rekap Penetapan</li>
                     <li>
-                        <a href="index.php?data-penetapan-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
+                        <a href="index.php?rekap-usul-ai"><i class="fa fa-map-o fa-2x"></i> AI</a>
                     </li>
                     <li>
-                        <a href="index.php?data-penetapan-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
+                        <a href="index.php?rekap-usul-ao"><i class="fa fa-map-o fa-2x"></i> AO</a>
                     </li>
             </ul>
         </li>
+        -->
         <li>
             <a href="#"><i class="fa fa-map-o fa-2x"></i> Rekap Anggaran</a>
             <ul>
@@ -98,28 +81,28 @@
                         <li class="nav-label"> Laporan Anggaran</li>
                         <li>
                             <li>
-                            <a href="index.php?lap-ai"><i class="fa fa-file-text fa-2x"></i>  AI</a>
+                            <a href="index.php?report-ai"><i class="fa fa-file-text fa-2x"></i>  Usulan Rutin</a>
                             </li>
                             <li>
-                            <a href="index.php?lap-ao"><i class="fa fa-file-text fa-2x"></i>  AO</a>
+                            <a href="index.php?report-ao"><i class="fa fa-file-text fa-2x"></i>  Usulan Non Rutin</a>
                             </li>
                         </li>
                         <li class="nav-label"> Laporan Realisasi</li>
                         <li>
                             <li>
-                                <a href="index.php?lap-realisasi-ai"><i class="fa fa-file-text fa-2x"></i>  AI</a>
+                                <a href="index.php?report-realisasi-ai"><i class="fa fa-file-text fa-2x"></i>  AI</a>
                             </li>
                             <li>
-                                <a href="index.php?lap-realisasi-ao"><i class="fa fa-file-text fa-2x"></i>  AO</a>
+                                <a href="index.php?report-realisasi-ao"><i class="fa fa-file-text fa-2x"></i>  AO</a>
                             </li>
                         </li>
                         <li class="nav-label"> Laporan Penyerapan</li>
                         <li>
                             <li>
-                                <a href="lap-serapan-ai"><i class="fa fa-file-text fa-2x"></i>  AI</a>
+                                <a href="index.php?report-serapan-ai"><i class="fa fa-file-text fa-2x"></i>  AI</a>
                             </li>
                             <li>
-                                <a href="lap-serapan-ao"><i class="fa fa-file-text fa-2x"></i>  AO</a>
+                                <a href="index.php?report-serapan-ao"><i class="fa fa-file-text fa-2x"></i>  AO</a>
                             </li>
                          </li>
                 </ul>

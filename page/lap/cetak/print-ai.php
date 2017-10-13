@@ -52,21 +52,23 @@ echo '
                                     FROM
                                     newdetailanggaran
                                     INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
-                                    WHERE jenis = 'AI' AND status IN ('0','1','2','3')") or die (mysql_error()); 
+                                    WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND status IN ('0','1','2','3')
+                                    AND headeranggaran.jenis = 'AI' 
+                                    ") or die (mysql_error()); 
                             ?> 
                                 </legend></center>
                     <br>
 
                     <table width="100%" border="1" cellpadding="1" cellspacing="0"  bordercolordark="#000000"  bordercolorlight="#FFFFFF">
                         <tr class="style9">
-                            <th width="2%">No</th>
-                            <th width="8%">Nomor PRK</th>
-                            <th width="14%">Nama Kegiatan</th>
-                            <th width="9%">Target Tgl Mulai</th>
-                            <th width="13%">Jasa (usulan)</th>
-                            <th width="13%">Material (usulan)</th>
-                            <th width="13%">Hrg. Satuan Material (usulan)</th>
-                            <th width="13%">Hrg. Satuan Jasa (usulan)</th>
+                            <th class="text-center" width="2%">No</th>
+                            <th class="text-center" width="8%">Nomor PRK</th>
+                            <th class="text-center" width="14%">Nama Kegiatan</th>
+                            <th class="text-center" width="9%">Target Tgl Mulai</th>
+                            <th class="text-center" width="13%">Jasa (usulan)</th>
+                            <th class="text-center" width="13%">Material (usulan)</th>
+                            <th class="text-center" width="13%">Hrg. Satuan Jasa (usulan)</th>
+                            <th class="text-center" width="13%">Hrg. Satuan Material (usulan)</th>
                         </tr>
                         <?php
                             if(mysql_num_rows($sql) > 0){
@@ -75,14 +77,14 @@ echo '
                             {
                         ?>
                                 <tr class="style1">
-                                    <td><?php echo $no; ?></td>
+                                    <td class="text-center"><?php echo $no; ?></td>
                                     <td><?php echo $row['noprk'];?></td>
                                     <td><?php echo $row['uraiankegiatan'];?></td>
-                                    <td><?php echo $row['tartglmulai'];?></td>
-                                    <td><?php echo $row['volumejasa'];?></td>
-                                    <td><?php echo $row['volumematerial'];?></td>
-                                    <td><?php echo $row['hrgsatuanjasa'];?></td>
-                                    <td><?php echo $row['hrgsatuanmaterial'];?></td>
+                                    <td><?php echo tglindonesia($row['tartglmulai']);?></td>
+                                    <td class="text-center"><?php echo $row['volumejasa'];?></td>
+                                    <td class="text-center"><?php echo $row['volumematerial'];?></td>
+                                    <td><?php echo "Rp ".number_format ($row['hrgsatuanjasa']);?></td>
+                                    <td><?php echo "Rp ".number_format ($row['hrgsatuanmaterial']);?></td>
                                 </tr>
                         <?php $no++; } } else { ?>
                         <tr><td colspan="9" class="text-center"><i>Tabel data AI kosong</i></td></tr>

@@ -179,8 +179,14 @@ WHERE status = '8' AND newdetailanggaran.randomid = '$rowDetail[randomid]'");
                                                     <td><?php echo $row['volumematerial'];?></td>
                                                     <td><?php echo "Rp ".number_format($row['hrgsatuanmaterial'],0,'','.'); ?></td>
                                                     <td><?php echo "Rp ".number_format($row['hrgsatuanjasa'],0,'','.'); ?></td>
-                                                    <td><?php echo $row['volumematerial']*$row['hrgsatuanmaterial'];?></td>
-                                                    <td><?php echo $row['volumejasa']*$row['hrgsatuanjasa'];?></td>
+                                                    <td>
+                                                        <?php $a = $row['volumematerial']*$row['hrgsatuanmaterial'];
+                                                        echo "Rp ". number_format($a); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php $b = $row['volumejasa']*$row['hrgsatuanjasa'];
+                                                        echo "Rp ". number_format($b); ?>
+                                                    </td>
                                                     <td>
                                                     <?php if ($row['status'] == '2') {echo "Reject";}
                                                     else if ($row['status'] == '3') {echo "Terevaluasi";}
@@ -198,8 +204,14 @@ WHERE status = '8' AND newdetailanggaran.randomid = '$rowDetail[randomid]'");
                                                     <td><?php echo $row['volumematerial'];?></td>
                                                     <td><?php echo "Rp ".number_format($row['hrgsatuanmaterial'],0,'','.'); ?></td>
                                                     <td><?php echo "Rp ".number_format($row['hrgsatuanjasa'],0,'','.'); ?></td>
-                                                    <td><?php echo $row['volumematerial']*$row['hrgsatuanmaterial'];?></td>
-                                                    <td><?php echo $row['volumejasa']*$row['hrgsatuanjasa'];?></td>
+                                                    <td>
+                                                        <?php $a = $row['volumematerial']*$row['hrgsatuanmaterial'];
+                                                        echo "Rp ". number_format($a); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php $b = $row['volumejasa']*$row['hrgsatuanjasa'];
+                                                        echo "Rp ". number_format($b); ?>
+                                                    </td>
                                                     <td>
                                                     <?php if ($row['status'] == '3') {echo "Terevaluasi";}
                                                     else if ($row['status'] == '4') {echo "Penetapan";}
@@ -217,8 +229,14 @@ WHERE status = '8' AND newdetailanggaran.randomid = '$rowDetail[randomid]'");
                                                     <td><?php echo $row['volumematerial'];?></td>
                                                     <td><?php echo "Rp ".number_format($row['hrgsatuanmaterial'],0,'','.'); ?></td>
                                                     <td><?php echo "Rp ".number_format($row['hrgsatuanjasa'],0,'','.'); ?></td>
-                                                    <td><?php echo $row['volumematerial']*$row['hrgsatuanmaterial'];?></td>
-                                                    <td><?php echo $row['volumejasa']*$row['hrgsatuanjasa'];?></td>
+                                                    <td>
+                                                        <?php $a = $row['volumematerial']*$row['hrgsatuanmaterial'];
+                                                        echo "Rp ". number_format($a); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php $b = $row['volumejasa']*$row['hrgsatuanjasa'];
+                                                        echo "Rp ". number_format($b); ?>
+                                                    </td>
                                                     <td>
                                                     <?php if ($row['status'] == '6') {echo "Approve (RAB)";}
                                                     else if ($row['status'] == '8') {echo "Tervaluasi (RAB)";}

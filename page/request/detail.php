@@ -10,9 +10,8 @@ newdetailanggaran.*,
 headeranggaran.*
 FROM newdetailanggaran
 INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
-INNER JOIN fungsi ON headeranggaran.kodefungsi = fungsi.kodefungsi
-INNER JOIN pos_anggaran ON headeranggaran.kode_posanggaran = pos_anggaran.kode_posanggaran
-INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan WHERE newdetailanggaran.kodedetail = '$detail'") or die (mysql_error());
+INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan 
+WHERE newdetailanggaran.kodedetail = '$detail'") or die (mysql_error());
 
 $rowDetail     = mysql_fetch_array($sqldetail);
 ?>
@@ -39,7 +38,6 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["kodefungsi"]; ?></div>
           </div>
-    -->
           <div class="row">
             <div class="col-md-5"><label>Nomor PRK</label></div>
             <div class="col-md-1"> : </div>
@@ -50,20 +48,39 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["jenis"]; ?></div>
           </div>
+    -->
+          <div class="row">
+            <div class="col-md-5"><label>No. Usulan</label></div>
+            <div class="col-md-1"> : </div>
+            <div class="col-md-6"><?php echo $rowDetail["nousulan"]; ?></div>
+          </div>
           <div class="row">
             <div class="col-md-5"><label>Uraian Kegiatan</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["uraiankegiatan"]; ?></div>
           </div>
+    <!--
           <div class="row">
             <div class="col-md-5"><label>Durasi</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["durasi"]; ?></div>
           </div>
+    
           <div class="row">
-            <div class="col-md-5"><label>Target Tanggal Mulai</label></div>
+            <div class="col-md-5"><label>Tanggal Usulan</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php if($rowDetail["tartglmulai"]=="0000-00-00"){ }else{  echo tglindonesia($rowDetail["tartglmulai"]); } ?></div>
+          </div>
+    -->
+          <div class="row">
+            <div class="col-md-5"><label>Bulan Mulai</label></div>
+            <div class="col-md-1"> : </div>
+            <div class="col-md-6"><?php echo $rowDetail["blnmulai"]; ?></div>
+          </div>
+          <div class="row">
+            <div class="col-md-5"><label>Prioritas</label></div>
+            <div class="col-md-1"> : </div>
+            <div class="col-md-6"><?php echo $rowDetail["prioritas"]; ?></div>
           </div>
           <div class="row">
             <div class="col-md-5"><label>Jasa (usulan)</label></div>
@@ -76,14 +93,14 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-6"><?php echo $rowDetail["volumematerial"]; ?></div>
           </div>
           <div class="row">
-            <div class="col-md-5"><label>Hrg Satuan Material (usulan)</label></div>
-            <div class="col-md-1"> : </div>
-            <div class="col-md-6"><?php echo $rowDetail["hrgsatuanmaterial"]; ?></div>
-          </div>
-          <div class="row">
             <div class="col-md-5"><label>Hrg Satuan Jasa (usulan)</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["hrgsatuanjasa"]; ?></div>
+          </div>
+          <div class="row">
+            <div class="col-md-5"><label>Hrg Satuan Material (usulan)</label></div>
+            <div class="col-md-1"> : </div>
+            <div class="col-md-6"><?php echo $rowDetail["hrgsatuanmaterial"]; ?></div>
           </div>
           <div class="row">
             <div class="col-md-5"><label>Status</label></div>
@@ -91,7 +108,7 @@ $rowDetail     = mysql_fetch_array($sqldetail);
             <div class="col-md-6"><?php echo $rowDetail["status"]; ?></div>
           </div>
           <div class="row">
-            <div class="col-md-5"><label>Alasan</label></div>
+            <div class="col-md-5"><label>Keterangan</label></div>
             <div class="col-md-1"> : </div>
             <div class="col-md-6"><?php echo $rowDetail["alasan"]; ?></div>
           </div>

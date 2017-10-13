@@ -4,11 +4,9 @@ newdetailanggaran.*,
 headeranggaran.*
 FROM newdetailanggaran
 INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
-INNER JOIN fungsi ON headeranggaran.kodefungsi = fungsi.kodefungsi
-INNER JOIN pos_anggaran ON headeranggaran.kode_posanggaran = pos_anggaran.kode_posanggaran
 INNER JOIN satuan ON headeranggaran.kodesatuan = satuan.kodesatuan
-WHERE jenis = 'AO' AND status = '0' OR jenis = 'AO' AND status = '1' OR jenis = 'AO' AND status = '2'
-OR jenis = 'AO' AND status = '3'
+WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND status IN ('0','1','2','3') 
+AND headeranggaran.jenis = 'AO'
 ") or die (mysql_error());
 ?>
 
@@ -70,7 +68,7 @@ OR jenis = 'AO' AND status = '3'
                                             <th class="text-center" width="3%">Jml. Biaya Material</th>
                                             <th class="text-center" width="2%">Jml. Biaya Jasa</th>
                                             <th class="text-center" width="1%">Status</th>
-                    						<th class="text-center" width="3%">Aksi</th>
+                    						<th class="text-center" width="2%">Aksi</th>
                                			</tr>
                                     </thead>
                                     <tbody>
@@ -80,7 +78,7 @@ OR jenis = 'AO' AND status = '3'
                             				{
                             				?>
                             					<tr>
-                                                    <td><?php echo $no; ?></td>
+                                                    <td class="text-center"><?php echo $no; ?></td>
                                                     <td><?php echo $row['uraiankegiatan'];?></td>
                                                     <td><?php echo $row['noprk'];?></td>
                                                     <td class="text-center"><?php echo $row['volumejasa'];?></td>
@@ -95,7 +93,7 @@ OR jenis = 'AO' AND status = '3'
                                                         <?php $b = $row['volumejasa']*$row['hrgsatuanjasa'];
                                                         echo "Rp ". number_format($b); ?>
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                     <?php if ($row['status'] == '0') {echo "Usulan";}
                                                     else if ($row['status'] == '1') {echo "Approve";}
                                                     else if ($row['status'] == '2') {echo "Reject";}

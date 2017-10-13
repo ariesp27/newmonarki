@@ -13,7 +13,8 @@
         newdetailanggaran
         INNER JOIN headeranggaran ON newdetailanggaran.randomid = headeranggaran.randomid 
         INNER JOIN realisasi ON newdetailanggaran.randomid = realisasi.randomid 
-        WHERE jenis = 'AO' AND newdetailanggaran.status = '9'
+        WHERE headeranggaran.kodeapp = '$_SESSION[kodeapp]' AND newdetailanggaran.status = '9'
+        AND headeranggaran.jenis = 'AO'
         ") or die (mysql_error());
     }
 ?>
@@ -43,20 +44,20 @@
             <form method="POST" action="" id="validate-cari">
                 <div class="row">
                     <div class="col-md-2"><p style="padding: 0;" class="">Periode </p></div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <input  type="text" onKeyPress="return isNumberKeyTgl(event)" value="<?php  echo $_POST["tglAwal"];?>" class="form-control" id="datepicker" name="tglAwal" data-rule-required="true" data-rule-date="true" data-msg-date="format yang benar dd/mm/yyyy" data-msg-required="mohon masukkan data Tanggal." placeholder="masukkan Tanggal" />
                     </div>
-                    <div class="col-md-1">S / D</div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">S / D</div>
+                    <div class="col-md-2">
                         <input  type="text" onKeyPress="return isNumberKeyTgl(event)" value="<?php  echo $_POST["tglAkhir"];?>" class="form-control" id="datepicker2" name="tglAkhir" data-rule-required="true" data-rule-date="true" data-msg-date="format yang benar dd/mm/yyyy" data-msg-required="mohon masukkan data Tanggal." placeholder="masukkan Tanggal" />
                     </div>
                     <div class="col-md-2">
                         <button class="btn btn-primary" type="submit" name="cari">Cari</button>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <?php if(isset($_POST["cari"])){ ?>
-                            <a href="page/lap/cetak/cetak-lap-rea-ao.php?act=excel&tglawal=<?php echo $_POST["tglawal"]; ?>&tglakhir=<?php echo $_POST["tglakhir"]; ?>"><img src="images/excel.png" /></a> &nbsp;
-                            <a href="page/lap/cetak/print-rea-ao.php?act=print&tglawal=<?php echo $_POST["tglawal"]; ?>&tglakhir=<?php echo $_POST["tglakhir"]; ?>" target="_blank"><img src="images/print.png" title="cetak dokumen" /></a>
+                            <a href="page/lap/cetak/cetak-lap-rea-ao.php?act=excel&tglawal=<?php echo $_POST["tglAwal"]; ?>&tglakhir=<?php echo $_POST["tglAkhir"]; ?>"><img src="images/excel.png" /></a> &nbsp;
+                            <a href="page/lap/cetak/print-rea-ao.php?act=print&tglawal=<?php echo $_POST["tglAwal"]; ?>&tglakhir=<?php echo $_POST["tglAkhir"]; ?>" target="_blank"><img src="images/print.png" title="cetak dokumen" /></a>
                         <?php } ?>
                     </div>
                     <!-- <div class="col-md-1">
@@ -98,19 +99,18 @@
                                                     while($row=mysql_fetch_array($sql)){
                                             ?>
                                                         <tr>
-                                                            <td><?php echo $no; ?></td>
+                                                            <td class="text-center"><?php echo $no; ?></td>
                                                             <td><?php echo $row['uraiankegiatan'];?></td>
-                                                            <td><?php echo $row['volumejasa'];?></td>
-                                                            <td><?php echo $row['volumematerial'];?></td>
-                                                            <td><?php echo $row['hrgsatuanjasa'];?></td>
-                                                            <td><?php echo $row['hrgsatuanmaterial'];?></td>
+                                                            <td class="text-center"><?php echo $row['volumejasa'];?></td>
+                                                            <td class="text-center"><?php echo $row['volumematerial'];?></td>
+                                                            <td><?php echo "Rp ".number_format ($row['hrgsatuanjasa']);?></td>
+                                                            <td><?php echo "Rp ".number_format ($row['hrgsatuanmaterial']);?></td>
                                                             <td><?php echo $row['nokontrak'];?></td>
-                                                            <td><?php echo $row['nilaikontrak'];?></td>
+                                                            <td><?php echo "Rp ".number_format ($row['nilaikontrak']);?></td>
                                                             <td><?php echo $row['namavendor'];?></td>
-                                                            <td><?php echo $row['tglkontrak'];?></td>
+                                                            <td><?php echo tglindonesia($row['tglkontrak']);?></td>
                                                         </tr>
                                                     <?php $no++; } } else { ?>
-                                                    <tr><td colspan="9" class="text-center"><i>Tabel realisasi AO kosong</i></td></tr>
                                                     <?php } ?>
                                         </tbody>
                                     </table>

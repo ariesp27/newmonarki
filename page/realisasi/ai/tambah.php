@@ -19,8 +19,8 @@
         $s      = mysql_real_escape_string(strip_tags($_POST["randomid"]));
         
         mysql_query("INSERT INTO realisasi (koderealisasi, nokontrak, nilaikontrak, namavendor, tglkontrak, randomid,
-        status) VALUES 
-        ('','$j','$a','$b','$c','$e','9')");
+        status, kodeapp) VALUES 
+        ('','$j','$a','$b','$c','$e','9','$_SESSION[kodeapp]')");
         
         mysql_query ("INSERT INTO newdetailanggaran (kodedetail, hrgsatuanmaterial, volumematerial, hrgsatuanjasa, 
         volumejasa, randomid, status) VALUES ('','$o','$p','$q','$r','$s','9')");
@@ -115,7 +115,7 @@ $rowA = mysql_fetch_array($sqlA);
                                                             <div class="col-md-6">
                                                                     <div class="col-md-4"><label>Nilai Kontrak</label></div>
                                                                     <div class="col-md-8">
-                                                                        <input type="text"   name='nilaikontrak' class="form-control"  data-msg-required="Mohon masukkan nilai kontrak" placeholder="masukkan nilai kontrak" />
+                                                                        <input type="text"   name='nilaikontrak' class="form-control" onKeyPress="return isNumberKey(event)" data-msg-required="Mohon masukkan nilai kontrak" placeholder="masukkan nilai kontrak" />
                                                                     </div>
                                                             </div>
                                                         </div>

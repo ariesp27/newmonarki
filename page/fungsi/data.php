@@ -50,7 +50,7 @@ $sql = mysql_query("SELECT * from fungsi ORDER BY kodefungsi asc ") or die (mysq
                             <div class="table-responsive">
 
                                 <br />
-                                <table class="table table-striped table-bordered table-hover" id="datatabel">
+                                <table class="table table-striped table-bordered table-hover" id="datatabel1">
                                     <thead>
                                         <tr>
                                             <th width="2%">No</th>
@@ -100,7 +100,7 @@ $sql = mysql_query("SELECT * from fungsi ORDER BY kodefungsi asc ") or die (mysq
     <script src="assets/datatables/dataTables.bootstrap.js"></script>
     <script>
     $(document).ready( function () {
-      $('#datatabel').dataTable( {
+      $('#datatabel1').dataTable( {
         "paging":   true,
         "ordering": false,
         "bInfo": false,
